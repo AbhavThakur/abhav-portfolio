@@ -822,3 +822,63 @@ a {
     font-size: 2.25rem;
   }
 }
+
+/* ──── Modern Interactions ──── */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+  margin-top: 1rem;
+}
+.marquee-container::before, .marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  z-index: 2;
+}
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-card), transparent);
+}
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-card), transparent);
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+.marquee-content span {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding: 0.5rem 1rem;
+  background: var(--bg-page);
+  border-radius: 20px;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+.marquee-content span.dot {
+  background: transparent;
+  padding: 0;
+  color: var(--accent-orange);
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.click-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
