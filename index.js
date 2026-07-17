@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SCROLL REVEAL (Intersection Observer)
+   SCROLL REVEAL (Enhanced with Staggered Bouncy Animations)
    ────────────────────────────────────────────────────────────────────────── */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
@@ -21,30 +21,158 @@ function initScrollReveal() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const parent = entry.target.parentElement;
-          if (parent && (parent.classList.contains('bento-grid') || parent.classList.contains('projects-grid') || parent.classList.contains('experience-list'))) {
-            const siblings = parent.querySelectorAll('.reveal');
-            let delay = 0;
-            siblings.forEach((sibling) => {
-              if (sibling === entry.target) {
-                entry.target.style.transitionDelay = `${delay * 0.08}s`;
-              }
-              delay++;
-            });
+          const el = entry.target;
+          const parent = el.parentElement;
+
+          // Calculate stagger delay based on sibling index
+          let staggerDelay = 0;
+          if (parent) {
+            const siblings = Array.from(parent.querySelectorAll('.reveal'));
+            const index = siblings.indexOf(el);
+            staggerDelay = index * 120; // 120ms between each sibling
           }
 
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          // Project cards: scale up + slide from alternating sides
+          if (el.classList.contains('project-card')) {
+            const siblings = Array.from(parent.querySelectorAll('.project-card'));
+            const index = siblings.indexOf(el);
+            const fromLeft = index % 2 === 0;
+
+            el.animate([
+              {
+                opacity: 0,
+                transform: `translateX(${fromLeft ? '-60px' : '60px'}) translateY(40px) scale(0.85)`,
+              },
+              {
+                opacity: 1,
+                transform: 'translateX(0) translateY(0) scale(1.02)',
+                offset: 0.7,
+              },
+              {
+                opacity: 1,
+                transform: 'translateX(0) translateY(0) scale(1)',
+              }
+            ], {
+              duration: 800,
+              delay: staggerDelay,
+              easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', // Bouncy overshoot
+              fill: 'forwards',
+            });
+
+            el.style.opacity = '0'; // Hide until animation starts
+            setTimeout(() => { el.style.opacity = ''; }, staggerDelay);
+          }
+          // Timeline items: slide from left with elastic bounce
+          else if (el.classList.contains('timeline-item')) {
+            const siblings = Array.from(parent.querySelectorAll('.timeline-item'));
+            const index = siblings.indexOf(el);
+            const itemDelay = index * 200;
+
+            // Animate the node (the dot) with a pop
+            const node = el.querySelector('.timeline-node');
+            if (node) {
+              node.animate([
+                { transform: 'scale(0)', opacity: 0 },
+                { transform: 'scale(1.5)', opacity: 1, offset: 0.6 },
+                { transform: 'scale(1)', opacity: 1 },
+              ], {
+                duration: 500,
+                delay: itemDelay,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                fill: 'forwards',
+              });
+              node.style.opacity = '0';
+            }
+
+            // Animate the date label
+            const dateLbl = el.querySelector('.timeline-date');
+            if (dateLbl) {
+              dateLbl.animate([
+                { opacity: 0, transform: 'translateX(-30px)' },
+                { opacity: 1, transform: 'translateX(0)' },
+              ], {
+                duration: 600,
+                delay: itemDelay + 100,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                fill: 'forwards',
+              });
+              dateLbl.style.opacity = '0';
+            }
+
+            // Animate the content card: slide up + scale with bounce
+            const content = el.querySelector('.timeline-content');
+            if (content) {
+              content.animate([
+                { opacity: 0, transform: 'translateY(50px) scale(0.9)' },
+                { opacity: 1, transform: 'translateY(-5px) scale(1.01)', offset: 0.7 },
+                { opacity: 1, transform: 'translateY(0) scale(1)' },
+              ], {
+                duration: 700,
+                delay: itemDelay + 200,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                fill: 'forwards',
+              });
+              content.style.opacity = '0';
+            }
+          }
+          // Default: simple fade up (for section headers, bento cards, etc.)
+          else {
+            el.style.transitionDelay = `${staggerDelay}ms`;
+            el.classList.add('visible');
+          }
+
+          observer.unobserve(el);
         }
       });
     },
     {
-      threshold: 0.05,
-      rootMargin: '0px 0px -30px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -50px 0px'
     }
   );
 
   reveals.forEach((el) => observer.observe(el));
+
+  // Timeline line grow animation
+  const timelineContainer = document.querySelector('.timeline-container');
+  if (timelineContainer) {
+    const lineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('line-visible');
+            lineObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    lineObserver.observe(timelineContainer);
+  }
+
+  // Section title bounce animation
+  document.querySelectorAll('.section-title').forEach((title) => {
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.animate([
+              { opacity: 0, transform: 'translateY(30px) scale(0.9)' },
+              { opacity: 1, transform: 'translateY(-8px) scale(1.03)', offset: 0.6 },
+              { opacity: 1, transform: 'translateY(0) scale(1)' },
+            ], {
+              duration: 800,
+              easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+              fill: 'forwards',
+            });
+            titleObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    titleObserver.observe(title);
+  });
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
