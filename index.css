@@ -59,7 +59,13 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-page);
+  background-color: #fdfbf7;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(255, 230, 230, 0.8) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, rgba(230, 240, 255, 0.8) 0px, transparent 50%),
+    radial-gradient(at 30% 70%, rgba(230, 255, 240, 0.8) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(245, 230, 255, 0.8) 0px, transparent 50%);
+  background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
