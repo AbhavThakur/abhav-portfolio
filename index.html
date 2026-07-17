@@ -17,23 +17,19 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
-  <!-- Fullscreen Interactive Canvas Background -->
-  <canvas id="particleCanvas"></canvas>
-
-  <!-- Custom Cursor Elements -->
-  <div class="custom-cursor-dot"></div>
-  <div class="custom-cursor-outline"></div>
   
   <div class="site-wrapper">
     <!-- Top Navigation -->
     <header class="header">
-      <div class="logo">AT.</div>
+      <div class="logo">
+        <img src="assets/logo.png" alt="AT Logo" style="height: 40px; border-radius: 8px;">
+      </div>
       <nav class="nav">
         <a href="#about" class="nav-link cursor-hover">About</a>
         <a href="#projects" class="nav-link cursor-hover">Projects</a>
@@ -84,9 +80,14 @@
         </div>
 
         <!-- Headline Card -->
-        <div class="bento-card bento-headline headline-card tech-card" data-tilt data-tilt-max="2" data-tilt-speed="1000">
-          <h1 class="headline-text">SENIOR MOBILE<br><span class="accent-text tech-glitch" data-text="ENGINEER">ENGINEER</span></h1>
-          <p class="headline-sub tech-font">&gt;_ Building applications used by millions.</p>
+        <div class="bento-card bento-headline headline-card" data-tilt data-tilt-max="2" data-tilt-speed="1000">
+          <div style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+            <div>
+              <h1 class="headline-text" style="color: #334155;">SENIOR MOBILE<br><span class="accent-text" style="color: #FF7E67;">ENGINEER</span></h1>
+              <p class="headline-sub" style="color: #64748B;">Building friendly applications used by millions.</p>
+            </div>
+            <img src="assets/dev_cartoon.png" alt="Developer Cartoon" style="height: 180px; margin-right: -20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+          </div>
         </div>
 
         <!-- Stats Card -->
@@ -126,11 +127,14 @@
 
       <!-- ════════════ PROJECTS SECTION ════════════ -->
       <section class="section" id="projects">
-        <div class="section-header reveal">
-          <h2 class="section-title">Recent Projects</h2>
-          <p class="section-subtitle">A selection of my best work.</p>
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <img src="assets/rocket_cartoon.png" alt="Rocket Cartoon" style="height: 120px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); border-radius: 20px;">
         </div>
-
+        <div class="section-header">
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">Selected works and experiments.</p>
+        </div>
+        
         <div class="projects-grid">
           
           <!-- Project 1 -->
@@ -147,16 +151,16 @@
               <img src="assets/interview-brain.png" alt="Interview Brain Dashboard" class="project-image" loading="lazy">
             </div>
             <div class="project-tech">
-              <span>TypeScript</span> • <span>Next.js</span>
+              <span>Next.js 16</span> • <span>React 19</span> • <span>TypeScript</span>
             </div>
           </a>
 
           <!-- Project 2 -->
-          <a href="https://github.com/AbhavThakur/GrowthOS" target="_blank" class="project-card reveal cursor-hover tech-card"
+          <a href="https://github.com/AbhavThakur/GrowthOS" target="_blank" class="project-card reveal cursor-hover"
             aria-label="View GrowthOS project">
             <div class="project-top">
               <div class="project-content">
-                <h3 class="project-title tech-glitch" data-text="GrowthOS">GrowthOS</h3>
+                <h3 class="project-title">GrowthOS</h3>
                 <p class="project-desc">Operating System for Growth. Data visualizations and AI-driven insights for scaling platforms.</p>
               </div>
               <div class="project-arrow"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
@@ -165,9 +169,7 @@
               <img src="assets/growthos.png" alt="GrowthOS Dashboard" class="project-image" loading="lazy">
             </div>
             <div class="project-tech">
-              <span class="tech-tag tech-font">&gt;_ React Native</span>
-              <span class="tech-tag tech-font">TS</span>
-              <span class="tech-tag tech-font">Node</span>
+              <span>React 19</span> • <span>Vite</span> • <span>ESM</span>
             </div>
           </a>
 
@@ -185,7 +187,7 @@
               <img src="assets/caselog.png" alt="CaseLog Doctor Patient Dashboard" class="project-image" loading="lazy">
             </div>
             <div class="project-tech">
-              <span>React</span> • <span>TypeScript</span>
+              <span>React 19</span> • <span>Vite</span> • <span>TypeScript</span>
             </div>
           </a>
 
@@ -203,7 +205,7 @@
               <img src="assets/wealthos.png" alt="WealthOS Portfolio Analytics" class="project-image" loading="lazy">
             </div>
             <div class="project-tech">
-              <span>HTML/CSS/JS</span>
+              <span>React 19</span> • <span>Vite 8</span> • <span>ESM</span>
             </div>
           </a>
 
