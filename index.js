@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   PORTFOLIO INTERACTIONS (Refined Premium Animations)
+   PORTFOLIO INTERACTIONS — Playful & Premium
    ═══════════════════════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,169 +9,179 @@ document.addEventListener('DOMContentLoaded', () => {
   initMagneticButtons();
   initParticleBurst();
   initParallaxScroll();
+  initFloatingShapes();
 });
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SCROLL REVEAL (Enhanced with Staggered Bouncy Animations)
+   SCROLL REVEAL (Re-triggerable Bouncy Animations)
    ────────────────────────────────────────────────────────────────────────── */
 function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const parent = el.parentElement;
+  // ── Project Cards: Staggered flip-up with bounce ──
+  const projectCards = document.querySelectorAll('.project-card');
+  const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      if (entry.isIntersecting) {
+        const cards = Array.from(el.parentElement.querySelectorAll('.project-card'));
+        const i = cards.indexOf(el);
+        const fromLeft = i % 2 === 0;
+        const delay = i * 150;
 
-          // Calculate stagger delay based on sibling index
-          let staggerDelay = 0;
-          if (parent) {
-            const siblings = Array.from(parent.querySelectorAll('.reveal'));
-            const index = siblings.indexOf(el);
-            staggerDelay = index * 120; // 120ms between each sibling
-          }
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = `translateX(${fromLeft ? '-80px' : '80px'}) translateY(50px) scale(0.8) rotate(${fromLeft ? '-3' : '3'}deg)`;
 
-          // Project cards: scale up + slide from alternating sides
-          if (el.classList.contains('project-card')) {
-            const siblings = Array.from(parent.querySelectorAll('.project-card'));
-            const index = siblings.indexOf(el);
-            const fromLeft = index % 2 === 0;
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            el.style.transition = 'opacity 0.7s cubic-bezier(0.34,1.56,0.64,1), transform 0.7s cubic-bezier(0.34,1.56,0.64,1)';
+            el.style.opacity = '1';
+            el.style.transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
+          }, delay);
+        });
+      } else {
+        // Reset when out of view so animation replays
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(50px) scale(0.8)';
+      }
+    });
+  }, { threshold: 0.15 });
 
-            el.animate([
-              {
-                opacity: 0,
-                transform: `translateX(${fromLeft ? '-60px' : '60px'}) translateY(40px) scale(0.85)`,
-              },
-              {
-                opacity: 1,
-                transform: 'translateX(0) translateY(0) scale(1.02)',
-                offset: 0.7,
-              },
-              {
-                opacity: 1,
-                transform: 'translateX(0) translateY(0) scale(1)',
-              }
-            ], {
-              duration: 800,
-              delay: staggerDelay,
-              easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', // Bouncy overshoot
-              fill: 'forwards',
-            });
+  projectCards.forEach((card) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(50px) scale(0.8)';
+    projectObserver.observe(card);
+  });
 
-            el.style.opacity = '0'; // Hide until animation starts
-            setTimeout(() => { el.style.opacity = ''; }, staggerDelay);
-          }
-          // Timeline items: slide from left with elastic bounce
-          else if (el.classList.contains('timeline-item')) {
-            const siblings = Array.from(parent.querySelectorAll('.timeline-item'));
-            const index = siblings.indexOf(el);
-            const itemDelay = index * 200;
+  // ── Timeline Items: Cascading slide + pop ──
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      if (entry.isIntersecting) {
+        const items = Array.from(el.parentElement.querySelectorAll('.timeline-item'));
+        const i = items.indexOf(el);
+        const delay = i * 250;
 
-            // Animate the node (the dot) with a pop
-            const node = el.querySelector('.timeline-node');
-            if (node) {
-              node.animate([
-                { transform: 'scale(0)', opacity: 0 },
-                { transform: 'scale(1.5)', opacity: 1, offset: 0.6 },
-                { transform: 'scale(1)', opacity: 1 },
-              ], {
-                duration: 500,
-                delay: itemDelay,
-                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-                fill: 'forwards',
-              });
-              node.style.opacity = '0';
-            }
+        // Main container
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-40px)';
 
-            // Animate the date label
-            const dateLbl = el.querySelector('.timeline-date');
-            if (dateLbl) {
-              dateLbl.animate([
-                { opacity: 0, transform: 'translateX(-30px)' },
-                { opacity: 1, transform: 'translateX(0)' },
-              ], {
-                duration: 600,
-                delay: itemDelay + 100,
-                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-                fill: 'forwards',
-              });
-              dateLbl.style.opacity = '0';
-            }
-
-            // Animate the content card: slide up + scale with bounce
-            const content = el.querySelector('.timeline-content');
-            if (content) {
-              content.animate([
-                { opacity: 0, transform: 'translateY(50px) scale(0.9)' },
-                { opacity: 1, transform: 'translateY(-5px) scale(1.01)', offset: 0.7 },
-                { opacity: 1, transform: 'translateY(0) scale(1)' },
-              ], {
-                duration: 700,
-                delay: itemDelay + 200,
-                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-                fill: 'forwards',
-              });
-              content.style.opacity = '0';
-            }
-          }
-          // Default: simple fade up (for section headers, bento cards, etc.)
-          else {
-            el.style.transitionDelay = `${staggerDelay}ms`;
-            el.classList.add('visible');
-          }
-
-          observer.unobserve(el);
+        // Node pop
+        const node = el.querySelector('.timeline-node');
+        if (node) {
+          node.style.transition = 'none';
+          node.style.transform = 'scale(0)';
         }
-      });
-    },
-    {
-      threshold: 0.08,
-      rootMargin: '0px 0px -50px 0px'
-    }
-  );
 
-  reveals.forEach((el) => observer.observe(el));
+        // Content card
+        const content = el.querySelector('.timeline-content');
+        if (content) {
+          content.style.transition = 'none';
+          content.style.opacity = '0';
+          content.style.transform = 'translateY(30px) scale(0.92)';
+        }
 
-  // Timeline line grow animation
-  const timelineContainer = document.querySelector('.timeline-container');
-  if (timelineContainer) {
-    const lineObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('line-visible');
-            lineObserver.unobserve(entry.target);
+        requestAnimationFrame(() => {
+          // 1. Slide the whole item in
+          setTimeout(() => {
+            el.style.transition = 'opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+            el.style.opacity = '1';
+            el.style.transform = 'translateX(0)';
+          }, delay);
+
+          // 2. Pop the node
+          if (node) {
+            setTimeout(() => {
+              node.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+              node.style.transform = 'scale(1)';
+            }, delay + 200);
+          }
+
+          // 3. Bounce the content card up
+          if (content) {
+            setTimeout(() => {
+              content.style.transition = 'opacity 0.6s ease-out, transform 0.7s cubic-bezier(0.34,1.56,0.64,1)';
+              content.style.opacity = '1';
+              content.style.transform = 'translateY(0) scale(1)';
+            }, delay + 300);
           }
         });
-      },
-      { threshold: 0.1 }
-    );
+      } else {
+        // Reset for replay
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-40px)';
+        const node = el.querySelector('.timeline-node');
+        if (node) { node.style.transition = 'none'; node.style.transform = 'scale(0)'; }
+        const content = el.querySelector('.timeline-content');
+        if (content) { content.style.transition = 'none'; content.style.opacity = '0'; content.style.transform = 'translateY(30px) scale(0.92)'; }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  timelineItems.forEach((item) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(-40px)';
+    // Remove the .reveal class so it doesn't fight with our JS animations
+    item.classList.remove('reveal');
+    timelineObserver.observe(item);
+  });
+
+  // ── Timeline Line: Draw itself ──
+  const timelineContainer = document.querySelector('.timeline-container');
+  if (timelineContainer) {
+    const lineObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('line-visible');
+        } else {
+          entry.target.classList.remove('line-visible');
+        }
+      });
+    }, { threshold: 0.1 });
     lineObserver.observe(timelineContainer);
   }
 
-  // Section title bounce animation
+  // ── Generic .reveal elements (bento cards, section headers) ──
+  const genericReveals = document.querySelectorAll('.reveal:not(.project-card):not(.timeline-item)');
+  const genericObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const parent = entry.target.parentElement;
+        if (parent) {
+          const siblings = Array.from(parent.querySelectorAll('.reveal'));
+          const idx = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${idx * 100}ms`;
+        }
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  genericReveals.forEach((el) => genericObserver.observe(el));
+
+  // ── Section Title: Bouncy scale-in ──
   document.querySelectorAll('.section-title').forEach((title) => {
-    const titleObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.animate([
-              { opacity: 0, transform: 'translateY(30px) scale(0.9)' },
-              { opacity: 1, transform: 'translateY(-8px) scale(1.03)', offset: 0.6 },
-              { opacity: 1, transform: 'translateY(0) scale(1)' },
-            ], {
-              duration: 800,
-              easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-              fill: 'forwards',
-            });
-            titleObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    titleObserver.observe(title);
+    const titleObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.animate([
+            { opacity: 0, transform: 'translateY(30px) scale(0.9)' },
+            { opacity: 1, transform: 'translateY(-8px) scale(1.03)', offset: 0.6 },
+            { opacity: 1, transform: 'translateY(0) scale(1)' },
+          ], {
+            duration: 800,
+            easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            fill: 'forwards',
+          });
+          titleObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    titleObs.observe(title);
   });
 }
 
@@ -248,13 +258,10 @@ function initMagneticButtons() {
       const rect = magnet.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      
-      // The pull strength (0.3 is subtle, 0.5 is strong)
       magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
     });
 
     magnet.addEventListener('mouseleave', () => {
-      // Reset position
       magnet.style.transform = 'translate(0px, 0px)';
     });
   });
@@ -265,42 +272,55 @@ function initMagneticButtons() {
    ────────────────────────────────────────────────────────────────────────── */
 function initParticleBurst() {
   const colors = ['#FF7E67', '#4ade80', '#A78BFA', '#60A5FA', '#FCD34D'];
+  const shapes = ['circle', 'square', 'triangle'];
 
   document.addEventListener('click', (e) => {
-    // Don't spawn burst if clicking on a link to avoid weird glitches during navigation
     if (e.target.closest('a') || e.target.closest('button')) return;
     
-    for (let i = 0; i < 12; i++) {
-      createParticle(e.clientX, e.clientY, colors[Math.floor(Math.random() * colors.length)]);
+    for (let i = 0; i < 16; i++) {
+      createParticle(e.clientX, e.clientY, colors[Math.floor(Math.random() * colors.length)], shapes[Math.floor(Math.random() * shapes.length)]);
     }
   });
 
-  function createParticle(x, y, color) {
+  function createParticle(x, y, color, shape) {
     const particle = document.createElement('div');
     particle.className = 'click-particle';
     particle.style.backgroundColor = color;
     
+    if (shape === 'square') {
+      particle.style.borderRadius = '2px';
+    } else if (shape === 'triangle') {
+      particle.style.backgroundColor = 'transparent';
+      particle.style.borderLeft = `${Math.random() * 4 + 3}px solid transparent`;
+      particle.style.borderRight = `${Math.random() * 4 + 3}px solid transparent`;
+      particle.style.borderBottom = `${Math.random() * 8 + 6}px solid ${color}`;
+    }
+    
     document.body.appendChild(particle);
 
-    const size = Math.random() * 8 + 4;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
+    const size = Math.random() * 10 + 4;
+    if (shape !== 'triangle') {
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+    }
     
-    const destinationX = x + (Math.random() - 0.5) * 100;
-    const destinationY = y + (Math.random() - 0.5) * 100;
-    const rotation = Math.random() * 360;
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 80 + 50;
+    const destinationX = x + Math.cos(angle) * velocity;
+    const destinationY = y + Math.sin(angle) * velocity - 30; // slight upward bias
+    const rotation = Math.random() * 720 - 360;
     
     particle.animate([
       { 
-        transform: `translate(${x}px, ${y}px) rotate(0deg)`,
+        transform: `translate(${x}px, ${y}px) rotate(0deg) scale(1)`,
         opacity: 1 
       },
       { 
-        transform: `translate(${destinationX}px, ${destinationY}px) rotate(${rotation}deg)`,
+        transform: `translate(${destinationX}px, ${destinationY}px) rotate(${rotation}deg) scale(0)`,
         opacity: 0 
       }
     ], {
-      duration: Math.random() * 500 + 500,
+      duration: Math.random() * 600 + 400,
       easing: 'cubic-bezier(0, .9, .57, 1)'
     }).onfinish = () => particle.remove();
   }
@@ -321,4 +341,34 @@ function initParallaxScroll() {
       el.style.transform = `translateY(${yPos}px)`;
     });
   });
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   FLOATING GEOMETRIC SHAPES (Background Ambiance)
+   ────────────────────────────────────────────────────────────────────────── */
+function initFloatingShapes() {
+  const container = document.createElement('div');
+  container.className = 'floating-shapes';
+  document.body.prepend(container);
+
+  const colors = ['rgba(255,126,103,0.12)', 'rgba(167,139,250,0.12)', 'rgba(96,165,250,0.12)', 'rgba(74,222,128,0.12)', 'rgba(252,211,77,0.12)'];
+
+  for (let i = 0; i < 6; i++) {
+    const shape = document.createElement('div');
+    shape.className = 'floating-shape';
+    
+    const size = Math.random() * 80 + 40;
+    const isCircle = Math.random() > 0.5;
+    
+    shape.style.width = `${size}px`;
+    shape.style.height = `${size}px`;
+    shape.style.borderRadius = isCircle ? '50%' : `${Math.random() * 30 + 10}px`;
+    shape.style.background = colors[i % colors.length];
+    shape.style.left = `${Math.random() * 100}%`;
+    shape.style.top = `${Math.random() * 100}%`;
+    shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
+    shape.style.animationDelay = `${Math.random() * 5}s`;
+    
+    container.appendChild(shape);
+  }
 }
