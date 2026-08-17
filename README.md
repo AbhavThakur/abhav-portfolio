@@ -1,40 +1,75 @@
-# Abhav Thakur — Portfolio
+# Abhav Thakur — Senior Mobile Engineer Portfolio
 
-A modern, responsive, and highly interactive portfolio built for a Senior Mobile Engineer. The project features a tech-focused, glassmorphic aesthetic with micro-animations, 3D tilt effects, and a dynamic glowing timeline.
+An ultra-luxury, high-performance, glassmorphic portfolio for **Abhav Thakur** (Senior Mobile Engineer / SDE-2), built with pure Vanilla Web technologies (HTML5, Vanilla CSS3, Vanilla ESNext JS, Web Audio API, and HTML5 2D/3D Canvas).
 
-## 🚀 Live Demo
-*(Insert your live Vercel/GitHub Pages link here once deployed)*
+## 🚀 Live Preview
+- **Local Dev Server**: `http://localhost:4173`
+- **Online Deployment**: [https://abhavthakur.github.io](https://github.com/AbhavThakur)
 
-## ✨ Features
-- **Bento Grid Layout**: Modern, asymmetrical grid structure for maximum visual impact.
-- **Interactive Tech Aesthetic**: Cyberpunk/neon color scheme, glowing borders, and terminal-style fonts.
-- **Storytelling Timeline**: A vertically animated timeline showcasing professional experience.
-- **Responsive Design**: Flawless layout transition from 4K desktop displays down to mobile phones.
-- **No-Framework**: Built purely with HTML, CSS, and lightweight JS for optimal performance (Vanilla Web).
+---
 
-## 🛠 Tech Stack
-- **HTML5** (Semantic structure)
-- **CSS3** (CSS Variables, CSS Grid, Flexbox, Animations)
-- **Vanilla Tooling** (Tilt.js for 3D card physics)
-- **Fonts**: Space Grotesk, Inter, JetBrains Mono
+## ✨ Features & Interactive Systems
 
-## 📂 Structure
-- `index.html`: Main structure and content.
-- `index.css`: All styling, variables, and media queries.
-- `assets/`: Images and profile photos.
-- `vanilla-tilt.min.js`: 3D hover physics library.
+### 1. 🌌 Ambient Particle Cosmos & Meteor Comets
+- **85+ Glowing Constellation Nodes**: Multi-layered particles rendered with cyan, purple, and blue ambient glows.
+- **Dynamic Physics**: Gentle cursor gravity and vortex repulsion.
+- **Periodic Shooting Stars**: Realistic diagonal meteor streaks with radiant heads and translucent fading tails.
+
+### 2. 📱 Interactive Mobile App Simulator
+- **Live Device Frame**: Realistic iOS/Android smartphone frame with an interactive Dynamic Island audio wave visualizer.
+- **4 Real-Time App Demos**:
+  - **Best Buy Digital**: Live CPU latency waveform stream.
+  - **CaseLog Pro**: Real-time cardiac ECG heartbeat pulse line (`@keyframes ecgDraw`).
+  - **WealthOS**: Smooth animated stock growth curve and Sharpe ratio metrics.
+  - **Interview Brain**: Live TypeScript test runner and pulsing status indicators.
+
+### 3. 🐍 GitHub Activity Matrix Cyber Snake Game
+- **Interactive Retro Snake**: Automated neon snake navigating across a 52-week × 7-day contribution grid hunting high-activity stars.
+- **Dual Gameplay Modes**:
+  - **Autonomous Hunt Mode**: AI pathfinding across contribution dots.
+  - **Manual Play Mode**: Take direct keyboard control with Arrow keys or WASD.
+  - **Score Counter & Sparks**: Increments `Stars Eaten` with audio chimes and particle fireworks.
+
+### 4. ⚡ Core Skills Matrix with Animated Shimmer Bars
+- **Liquid Shimmer Beam**: Moving light beam (`@keyframes barShimmer`) flowing continuously along skill bars.
+- **Glowing Leading-Edge Bulbs**: Pulsing glowing nodes at the tip of each progress bar.
+- **Scroll-Triggered Count-Up**: Percentages smoothly ease from `0%` to target values upon scrolling into view.
+
+### 5. 🎛️ Terminal CLI & Command Palette (`⌘K` / `Ctrl+K`)
+- **Built-in Developer Terminal**: Commands include `about`, `skills`, `projects`, `experience`, `snake`, `matrix`, `benchmark` (2M JIT ops/sec), `particles`, and `sudo hire abhav`.
+- **Command Palette (`⌘K`)**: Instant keyboard navigation, project modal launchers, theme switcher, and sound toggle.
+- **Cyberpunk Matrix Rain**: Fullscreen Matrix data stream toggleable via CLI or shortcut.
+
+---
+
+## 🛠️ Tech Stack
+- **Structure**: Semantic HTML5 with microdata & SEO meta tags.
+- **Styles**: Vanilla CSS3 (Custom Properties, Glassmorphism, Specular Glows, `@keyframes`).
+- **Logic**: Vanilla ESNext JavaScript (No heavy frameworks, 60 FPS performance).
+- **Sound**: Web Audio API Synthesizer (Zero audio file downloads, pure mathematical wave generation).
+
+---
 
 ## ⚙️ How to Run Locally
-Since this is a static site without a build step, simply open `index.html` in your browser. For a better experience (to avoid CORS issues if you add APIs later), run a local server:
-```bash
-# Using Python
-python -m http.server 3000
 
-# Using Node (if installed)
-npx serve
+```bash
+# Clone the repository
+git clone https://github.com/AbhavThakur/portfolio.git
+cd portfolio
+
+# Run with Python
+python3 -m http.server 4173
+
+# Or with Node
+npx serve .
 ```
-Then visit `http://localhost:3000`.
+
+Visit `http://localhost:4173` in your browser.
+
+---
 
 ## 👨‍💻 Author
 **Abhav Thakur**  
-[LinkedIn](https://linkedin.com/in/abhavthakur) • [GitHub](https://github.com/AbhavThakur)
+- **GitHub**: [github.com/AbhavThakur](https://github.com/AbhavThakur)  
+- **Email**: [abhav.thakur25@gmail.com](mailto:abhav.thakur25@gmail.com)  
+- **Location**: Bengaluru, India

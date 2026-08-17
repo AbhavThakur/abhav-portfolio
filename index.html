@@ -1,227 +1,1063 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abhav Thakur — Senior Mobile Engineer</title>
-  <meta name="description" content="Portfolio of Abhav Thakur — Impact-driven Senior Mobile Engineer building apps used by millions.">
-  <meta name="keywords" content="Abhav Thakur, React Native, Mobile Developer, Full Stack Developer, Portfolio">
+  <title>Abhav Thakur — Senior Mobile Engineer & Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Abhav Thakur — Impact-driven Senior Mobile Engineer (SDE-2) specializing in React Native, Full Stack Web, and High-Performance Mobile Architectures.">
+  <meta name="keywords" content="Abhav Thakur, Senior Mobile Engineer, SDE-2, React Native, React 19, Next.js, Full Stack, Mobile Developer, Bengaluru, Best Buy Digital">
   <meta name="author" content="Abhav Thakur">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Abhav Thakur — Senior Mobile Engineer">
-  <meta property="og:description" content="Impact-driven React Native Engineer. Building mobile apps used by millions.">
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abhavthakur.github.io/portfolio/">
+  <meta property="og:title" content="Abhav Thakur — Senior Mobile Engineer">
+  <meta property="og:description" content="Impact-driven Senior Mobile Engineer building digital products used by millions. React Native, TypeScript, Full Stack.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/49407768?v=4">
 
-  <!-- Fonts -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abhav Thakur — Senior Mobile Engineer">
+  <meta name="twitter:description" content="Impact-driven Senior Mobile Engineer building digital products used by millions. React Native, TypeScript, Full Stack.">
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/49407768?v=4">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abhav Thakur",
+    "jobTitle": "Senior Mobile Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Best Buy Digital"
+    },
+    "url": "https://github.com/AbhavThakur",
+    "sameAs": [
+      "https://github.com/AbhavThakur",
+      "https://linkedin.com/in/abhavthakur"
+    ],
+    "knowsAbout": ["React Native", "TypeScript", "JavaScript", "iOS", "Android", "React.js", "Node.js", "Mobile Performance Engineering"]
+  }
+  </script>
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  
+
+  <!-- Ambient Backdrop -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+  <div class="ambient-glow ambient-glow-3"></div>
+  <div class="scroll-progress-bar" id="scroll-bar"></div>
+
   <div class="site-wrapper">
-    <!-- Top Navigation -->
+    
+    <!-- ════════════ HEADER / NAVIGATION ════════════ -->
     <header class="header">
-      <div class="logo">
-        <img src="assets/logo.png" alt="AT Logo" style="height: 40px; border-radius: 8px;">
+      <div class="header-left">
+        <a href="#about" class="logo-link" aria-label="Abhav Thakur Portfolio Home">
+          <div class="logo-avatar-wrap">
+            <img src="assets/logo.png" alt="Abhav Thakur Logo" class="logo-avatar">
+            <span class="logo-status-dot"></span>
+          </div>
+          <span class="logo-text">Abhav<span class="gradient-text">.dev</span></span>
+        </a>
       </div>
-      <nav class="nav">
-        <a href="#about" class="nav-link" data-magnetic>About</a>
-        <a href="#projects" class="nav-link" data-magnetic>Projects</a>
-        <a href="#experience" class="nav-link" data-magnetic>Experience</a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
-      <a href="#contact" class="btn btn-primary" data-magnetic>Let's Talk</a>
+
+      <div class="header-actions">
+        <!-- Command Palette Trigger -->
+        <button class="cmd-k-btn" id="open-cmd-btn" aria-label="Open Command Palette" title="Command Palette (Cmd+K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="cmd-text">Search</span>
+          <span class="kbd-shortcut">⌘K</span>
+        </button>
+
+        <!-- Sound FX Toggle Button -->
+        <button class="sound-toggle-btn muted" id="sound-toggle" aria-label="Toggle Sound Effects" title="Toggle Sound FX">
+          <svg class="icon-sound-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          <svg class="icon-sound-muted" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+
+        <!-- Direct CTA -->
+        <a href="#contact" class="btn btn-primary header-cta-btn">
+          <span>Let's Talk</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+      </div>
     </header>
 
     <main class="main-content">
+
       <!-- ════════════ BENTO HERO SECTION ════════════ -->
       <section class="bento-grid" id="about">
         
-        <!-- Profile Card -->
-        <div class="bento-card bento-profile tech-card profile-card" id="profile" data-tilt data-tilt-max="5" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.2">
-          <div class="profile-image-container">
-            <img src="assets/IMG_20220731_113921.jpg" alt="Abhav Thakur" class="profile-img" loading="lazy">
-          </div>
-          <div class="profile-info">
-            <h2 class="tech-glitch" data-text="Abhav Thakur">Abhav Thakur</h2>
-            <div class="profile-badge">
-              <span class="pulse-dot"></span> <span class="tech-font" style="margin-left: 8px;">Available for new roles</span>
+        <!-- Profile Bento Card (Left Tall) -->
+        <div class="bento-card card-profile" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.1">
+          <div>
+            <div class="profile-avatar-wrapper">
+              <img src="assets/IMG_20220731_113921.jpg" alt="Abhav Thakur" class="profile-avatar-img" loading="eager">
+              <div class="profile-verified-badge" title="Verified Senior Mobile Engineer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
             </div>
-          </div>
-          <div class="profile-details">
-            <div class="detail-item">
-              <span class="detail-icon">📍</span>
-              <span class="detail-text">Bengaluru, India</span>
+
+            <h1 class="profile-name">Abhav Thakur</h1>
+            
+            <div class="profile-status-pill">
+              <span class="pulse-dot"></span>
+              <span>Available for high-impact roles</span>
             </div>
-            <div class="detail-item">
-              <span class="detail-icon">💼</span>
-              <span class="detail-text">SDE-2 @ Best Buy</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">🎓</span>
-              <span class="detail-text">VIT University Alumnus</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">🏍️</span>
-              <span class="detail-text">Motorbiking & Running</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">🏸</span>
-              <span class="detail-text">Badminton</span>
+
+            <div class="profile-bio-list">
+              <div class="bio-item">
+                <span class="bio-item-icon">📍</span>
+                <span>Bengaluru, India</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-item-icon">💼</span>
+                <span><strong>SDE-2</strong> @ Best Buy Digital</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-item-icon">🎓</span>
+                <span>VIT University Alumnus</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-item-icon">⚡</span>
+                <span>React Native &amp; Full Stack Architecture</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-item-icon">🏍️</span>
+                <span>Motorbiking · Running · Badminton</span>
+              </div>
             </div>
           </div>
 
-          <div class="social-links">
-            <a href="https://github.com/AbhavThakur" target="_blank" aria-label="GitHub" data-magnetic><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-            <a href="https://linkedin.com/in/abhavthakur" target="_blank" aria-label="LinkedIn" data-magnetic><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-            <a href="mailto:abhav.thakur25@gmail.com" aria-label="Email" data-magnetic><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+          <div class="profile-socials">
+            <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub (@AbhavThakur)">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://linkedin.com/in/abhavthakur" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" title="LinkedIn Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="mailto:abhav.thakur25@gmail.com" aria-label="Email Abhav Thakur" title="Send Email">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
           </div>
         </div>
 
-        <!-- Headline Card -->
-        <div class="bento-card bento-headline headline-card" data-tilt data-tilt-max="2" data-tilt-speed="1000">
-          <div style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
-            <div>
-              <h1 class="headline-text" style="color: #334155;">SENIOR MOBILE<br><span class="accent-text" style="color: #FF7E67;">ENGINEER</span></h1>
-              <p class="headline-sub" style="color: #64748B;">Building friendly applications used by millions.</p>
+        <!-- Headline Bento Card (Wide Top Right) -->
+        <div class="bento-card card-headline" data-tilt data-tilt-max="3">
+          <canvas id="hero-kinetic-canvas" class="hero-kinetic-canvas"></canvas>
+          <div>
+            <div class="headline-top">
+              <span class="role-tag-pill">
+                <span>✦</span> SENIOR MOBILE ENGINEER &amp; ARCHITECT
+              </span>
+              <div class="clock-widget" id="ist-clock" title="Bengaluru Current Time (IST)">
+                <span>🇮🇳 BLR</span>
+                <span id="clock-time">--:--:--</span>
+              </div>
             </div>
-            <img src="assets/dev_cartoon.png" alt="Developer Cartoon" style="height: 180px; margin-right: -20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));" data-parallax="0.15">
+
+            <h2 class="headline-title">
+              Crafting high-impact <span class="gradient-text">mobile apps</span> &amp; modern digital systems.
+            </h2>
+
+            <p class="headline-subtitle">
+              Senior Mobile Engineer specializing in <span class="role-typing-text" id="role-text">React Native</span>, building scalable, high-performance applications used by millions across consumer retail &amp; enterprise platforms.
+            </p>
+          </div>
+
+          <div class="headline-actions">
+            <a href="#projects" class="btn btn-primary btn-large">
+              <span>Explore Projects</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
+              <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <span>GitHub Profile</span>
+            </a>
           </div>
         </div>
 
-        <!-- Stats Card -->
-        <div class="bento-card bento-stats reveal cursor-hover"
-             data-tilt data-tilt-max="5" data-tilt-speed="1000">
-          <div class="stat-item">
-            <h3 class="stat-value" data-count="5">0</h3><span class="stat-plus">+</span>
-            <p class="stat-label">Years of<br>Experience</p>
+        <!-- Key Metrics Card -->
+        <div class="bento-card card-stats" data-tilt data-tilt-max="4">
+          <div class="stat-box">
+            <div class="stat-number" data-count="5">0</div>
+            <div class="stat-title">Years Experience</div>
           </div>
-          <div class="stat-item">
-            <h3 class="stat-value" data-count="14">0</h3>
-            <p class="stat-label">Open Source<br>Projects</p>
+          <div class="stat-box">
+            <div class="stat-number" data-count="16">0</div>
+            <div class="stat-title">GitHub Repos</div>
           </div>
-          <div class="stat-item">
-            <h3 class="stat-value" data-count="48">0</h3><span class="stat-plus">+</span>
-            <p class="stat-label">Major PRs<br>Merged</p>
+          <div class="stat-box">
+            <div class="stat-number" data-count="1">0</div>
+            <div class="stat-title">M+ App Users</div>
           </div>
         </div>
 
-        <!-- Skills Card -->
-        <div class="bento-card bento-skills reveal cursor-hover"
-             data-tilt data-tilt-max="6" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.1">
-          <div class="card-icon">⚡</div>
-          <h3>Core Technologies</h3>
-          <div class="marquee-container">
-            <div class="marquee-content">
-              <span>React Native</span> <span class="dot">•</span>
-              <span>TypeScript</span> <span class="dot">•</span>
-              <span>Node.js</span> <span class="dot">•</span>
-              <span>React.js</span> <span class="dot">•</span>
-              <span>Firebase</span> <span class="dot">•</span>
-              <span>iOS/Android</span> <span class="dot">•</span>
-              <span>Performance Eng.</span> <span class="dot">•</span>
-              <!-- Duplicate for seamless scroll -->
-              <span>React Native</span> <span class="dot">•</span>
-              <span>TypeScript</span> <span class="dot">•</span>
-              <span>Node.js</span> <span class="dot">•</span>
-              <span>React.js</span> <span class="dot">•</span>
-              <span>Firebase</span> <span class="dot">•</span>
-              <span>iOS/Android</span> <span class="dot">•</span>
-              <span>Performance Eng.</span>
+        <!-- GitHub Explorer & Achievements Card -->
+        <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" class="bento-card card-github-badge" data-tilt data-tilt-max="4">
+          <div>
+            <div class="github-card-header">
+              <div class="github-user-tag">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span>@AbhavThakur</span>
+              </div>
+              <span class="gh-chip highlight">Top 5% Contributor</span>
+            </div>
+
+            <div class="github-badge-chips">
+              <span class="gh-chip">⚡ Developer Program Member</span>
+              <span class="gh-chip">❄️ Arctic Vault Contributor</span>
+              <span class="gh-chip">🦈 Pull Shark</span>
+              <span class="gh-chip">🎯 YOLO</span>
+            </div>
+          </div>
+
+          <div class="github-card-footer">
+            <span>Explore open source projects &amp; PRs</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </a>
+
+        <!-- Marquee Banner Card -->
+        <div class="bento-card card-marquee">
+          <div class="marquee-wrapper">
+            <div class="marquee-track">
+              <span class="marquee-chip">📱 React Native</span>
+              <span class="marquee-chip">🔷 TypeScript</span>
+              <span class="marquee-chip">⚡ React 19</span>
+              <span class="marquee-chip">▲ Next.js 16</span>
+              <span class="marquee-chip">🍎 iOS / Swift Bridge</span>
+              <span class="marquee-chip">🤖 Android / Kotlin Bridge</span>
+              <span class="marquee-chip">🔥 Firebase &amp; FCM</span>
+              <span class="marquee-chip">🏎️ Hermes &amp; JSI Engine</span>
+              <span class="marquee-chip">🧩 Zustand / Redux</span>
+              <span class="marquee-chip">🟢 Node.js / Express</span>
+              <span class="marquee-chip">📊 Mobile Performance Eng.</span>
+              <span class="marquee-chip">🚀 CI/CD &amp; Fastlane</span>
+              <!-- Repeated items for seamless infinite scroll -->
+              <span class="marquee-chip">📱 React Native</span>
+              <span class="marquee-chip">🔷 TypeScript</span>
+              <span class="marquee-chip">⚡ React 19</span>
+              <span class="marquee-chip">▲ Next.js 16</span>
+              <span class="marquee-chip">🍎 iOS / Swift Bridge</span>
+              <span class="marquee-chip">🤖 Android / Kotlin Bridge</span>
+              <span class="marquee-chip">🔥 Firebase &amp; FCM</span>
+              <span class="marquee-chip">🏎️ Hermes &amp; JSI Engine</span>
+              <span class="marquee-chip">🧩 Zustand / Redux</span>
+              <span class="marquee-chip">🟢 Node.js / Express</span>
+              <span class="marquee-chip">📊 Mobile Performance Eng.</span>
+              <span class="marquee-chip">🚀 CI/CD &amp; Fastlane</span>
             </div>
           </div>
         </div>
 
       </section>
 
-      <!-- ════════════ PROJECTS SECTION ════════════ -->
+      <!-- ════════════ FEATURED PROJECTS SECTION ════════════ -->
       <section class="section" id="projects">
-        <div style="text-align: center; margin-bottom: 1rem;">
-          <img src="assets/rocket_cartoon.png" alt="Rocket Cartoon" style="height: 120px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); border-radius: 20px;" data-parallax="0.2">
+        <div class="section-header reveal">
+          <span class="section-tag">Featured Works &amp; Systems</span>
+          <h2 class="section-title">Selected Projects &amp; Repositories</h2>
+          <p class="section-desc">Engineering scalable mobile architectures, AI-integrated platforms, and developer tooling.</p>
         </div>
-        <div class="section-header">
-          <h2 class="section-title">Projects</h2>
-          <p class="section-subtitle">Selected works and experiments.</p>
+
+        <!-- Filter Tabs -->
+        <div class="project-filters reveal">
+          <button class="filter-btn active" data-filter="all">All Projects (6)</button>
+          <button class="filter-btn" data-filter="mobile">Mobile &amp; Healthcare</button>
+          <button class="filter-btn" data-filter="ai-fullstack">AI &amp; Full Stack</button>
+          <button class="filter-btn" data-filter="systems">Dashboards &amp; Tools</button>
         </div>
-        
+
         <div class="projects-grid">
           
-          <!-- Project 1 -->
-          <a href="https://interview-brain-one.vercel.app/prep" target="_blank" class="project-card reveal cursor-hover"
-             data-tilt data-tilt-max="8" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.08">
-            <div class="project-top">
-              <div class="project-content">
-                <h3>Interview Brain</h3>
-                <p>AI-powered interview prep platform with coding challenges and markdown-based study material.</p>
-              </div>
-              <div class="project-arrow"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </div>
+          <!-- Project 1: Interview Brain -->
+          <div class="project-card reveal" data-category="ai-fullstack" data-project-id="interview-brain" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
             <div class="project-image-wrapper">
-              <img src="assets/interview-brain.png" alt="Interview Brain Dashboard" class="project-image" loading="lazy">
+              <img src="assets/interview-brain.png" alt="Interview Brain AI Platform" class="project-image" loading="lazy">
+              <span class="project-badge-overlay">AI &amp; Full Stack</span>
             </div>
-            <div class="project-tech">
-              <span>Next.js 16</span> • <span>React 19</span> • <span>TypeScript</span>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">Interview Brain</h3>
             </div>
-          </a>
+            
+            <p class="project-desc">
+              AI-powered interview preparation suite featuring real-time code execution challenges, markdown study notes, and intelligent concept breakdown.
+            </p>
 
-          <!-- Project 2 -->
-          <a href="https://github.com/AbhavThakur/GrowthOS" target="_blank" class="project-card reveal cursor-hover"
-            aria-label="View GrowthOS project">
-            <div class="project-top">
-              <div class="project-content">
-                <h3 class="project-title">GrowthOS</h3>
-                <p class="project-desc">Operating System for Growth. Data visualizations and AI-driven insights for scaling platforms.</p>
-              </div>
-              <div class="project-arrow"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            <div class="project-tech-pills">
+              <span class="tech-pill">Next.js 16</span>
+              <span class="tech-pill">React 19</span>
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">AI Engine</span>
             </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://interview-brain-one.vercel.app/prep" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/AbhavThakur/interview-brain" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>Code</span>
+                </a>
+              </div>
+              <span class="project-details-btn">Details ↗</span>
+            </div>
+          </div>
+
+          <!-- Project 2: GrowthOS -->
+          <div class="project-card reveal" data-category="systems" data-project-id="growthos" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
             <div class="project-image-wrapper">
-              <img src="assets/growthos.png" alt="GrowthOS Dashboard" class="project-image" loading="lazy">
+              <img src="assets/growthos.png" alt="GrowthOS Platform" class="project-image" loading="lazy">
+              <span class="project-badge-overlay">Analytics OS</span>
             </div>
-            <div class="project-tech">
-              <span>React 19</span> • <span>Vite</span> • <span>ESM</span>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">GrowthOS</h3>
             </div>
-          </a>
+            
+            <p class="project-desc">
+              Operating System for platform growth. High-throughput data visualizations and AI-driven growth forecasting for scaling modern SaaS products.
+            </p>
 
-          <!-- Project 3 -->
-          <a href="https://caselog-book.vercel.app/" target="_blank" class="project-card reveal cursor-hover"
-             data-tilt data-tilt-max="8" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.08">
-            <div class="project-top">
-              <div class="project-content">
-                <h3>CaseLog</h3>
-                <p>Mobile-first web app for doctors to log patient cases from admission to discharge.</p>
-              </div>
-              <div class="project-arrow"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            <div class="project-tech-pills">
+              <span class="tech-pill">React 19</span>
+              <span class="tech-pill">Vite</span>
+              <span class="tech-pill">ESM</span>
+              <span class="tech-pill">Data Visualizations</span>
             </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://github.com/AbhavThakur/GrowthOS" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub Repository</span>
+                </a>
+              </div>
+              <span class="project-details-btn">Details ↗</span>
+            </div>
+          </div>
+
+          <!-- Project 3: CaseLog -->
+          <div class="project-card reveal" data-category="mobile" data-project-id="caselog" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
             <div class="project-image-wrapper">
               <img src="assets/caselog.png" alt="CaseLog Doctor Patient Dashboard" class="project-image" loading="lazy">
+              <span class="project-badge-overlay">Mobile First &amp; Healthcare</span>
             </div>
-            <div class="project-tech">
-              <span>React 19</span> • <span>Vite</span> • <span>TypeScript</span>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">CaseLog</h3>
             </div>
-          </a>
+            
+            <p class="project-desc">
+              Mobile-first clinical application for doctors and medical teams to log, track, and collaborate on patient admissions, diagnoses, and discharge plans.
+            </p>
 
-          <!-- Project 4 -->
-          <a href="https://wealthos-three.vercel.app" target="_blank" class="project-card reveal cursor-hover"
-             data-tilt data-tilt-max="8" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.08">
-            <div class="project-top">
-              <div class="project-content">
-                <h3>WealthOS</h3>
-                <p>Wealth management dashboard with portfolio tracking and investment analytics.</p>
+            <div class="project-tech-pills">
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">React 19</span>
+              <span class="tech-pill">Vite</span>
+              <span class="tech-pill">Mobile-First UI</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://caselog-book.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/AbhavThakur/CaseLog" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>Code</span>
+                </a>
               </div>
-              <div class="project-arrow"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+              <span class="project-details-btn">Details ↗</span>
             </div>
+          </div>
+
+          <!-- Project 4: WealthOS -->
+          <div class="project-card reveal" data-category="systems" data-project-id="wealthos" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
             <div class="project-image-wrapper">
-              <img src="assets/wealthos.png" alt="WealthOS Portfolio Analytics" class="project-image" loading="lazy">
+              <img src="assets/wealthos.png" alt="WealthOS Investment Dashboard" class="project-image" loading="lazy">
+              <span class="project-badge-overlay">Fintech &amp; Wealth</span>
             </div>
-            <div class="project-tech">
-              <span>React 19</span> • <span>Vite 8</span> • <span>ESM</span>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">WealthOS</h3>
             </div>
-          </a>
+            
+            <p class="project-desc">
+              Comprehensive wealth management dashboard engineered with real-time portfolio balance tracking, asset allocation visualizer, and investment metrics.
+            </p>
+
+            <div class="project-tech-pills">
+              <span class="tech-pill">React 19</span>
+              <span class="tech-pill">Vite 8</span>
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">Fintech UI</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://wealthos-three.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/AbhavThakur/wealthos" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>Code</span>
+                </a>
+              </div>
+              <span class="project-details-btn">Details ↗</span>
+            </div>
+          </div>
+
+          <!-- Project 5: Career-Ops -->
+          <div class="project-card reveal" data-category="ai-fullstack" data-project-id="career-ops" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
+            <div class="project-image-wrapper">
+              <img src="assets/career-ops.png" alt="Career-Ops AI Job Search System" class="project-image" loading="lazy">
+              <span class="project-badge-overlay">AI Intelligence</span>
+            </div>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">Career-Ops</h3>
+            </div>
+            
+            <p class="project-desc">
+              AI-powered job search automation platform built on Claude Code. Features 14 specialized agent skill modes, Go dashboard, PDF generator, and batch pipeline.
+            </p>
+
+            <div class="project-tech-pills">
+              <span class="tech-pill">Claude Code</span>
+              <span class="tech-pill">Go Backend</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">Agentic AI</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://github.com/AbhavThakur/career-ops" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub Repository</span>
+                </a>
+              </div>
+              <span class="project-details-btn">Details ↗</span>
+            </div>
+          </div>
+
+          <!-- Project 6: Wardrobe-View & Web Ecosystem -->
+          <div class="project-card reveal" data-category="systems" data-project-id="wardrobe-view" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
+            <div class="project-image-wrapper">
+              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1E293B, #0F172A); font-size: 3.5rem;">
+                👔 🎨
+              </div>
+              <span class="project-badge-overlay">Interactive App</span>
+            </div>
+            
+            <div class="project-meta-top">
+              <h3 class="project-title">Wardrobe-View &amp; Catalog</h3>
+            </div>
+            
+            <p class="project-desc">
+              Interactive virtual wardrobe organizer and styling assistant with real-time visual categorization, tag filtering, and rapid outfit combinations.
+            </p>
+
+            <div class="project-tech-pills">
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">HTML5 Canvas</span>
+              <span class="tech-pill">REST APIs</span>
+              <span class="tech-pill">CSS Modern</span>
+            </div>
+
+            <div class="project-footer-actions">
+              <div class="project-links">
+                <a href="https://github.com/AbhavThakur/Wardrobe-View" target="_blank" rel="noopener noreferrer" class="project-link-btn" onclick="event.stopPropagation();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>Code</span>
+                </a>
+              </div>
+              <span class="project-details-btn">Details ↗</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ════════════ 1. INTERACTIVE MOBILE APP SIMULATOR ════════════ -->
+      <section class="section" id="mobile-lab">
+        <div class="section-header reveal">
+          <span class="section-tag">Interactive Mobile Lab</span>
+          <h2 class="section-title">Live Mobile Experience Simulator</h2>
+          <p class="section-desc">Test real mobile architectures and interface modules directly on an interactive device mockup.</p>
+        </div>
+
+        <div class="mobile-sim-section reveal">
+          <!-- Left Controls -->
+          <div class="sim-info-side">
+            <h3 style="font-size: 1.5rem; font-weight: 800;">Switch Interactive Screen:</h3>
+            <div class="sim-nav-pills">
+              <button class="sim-nav-btn active" data-screen="bestbuy">
+                <div class="sim-btn-left">
+                  <div class="sim-btn-icon">🛒</div>
+                  <div>
+                    <div class="sim-btn-title">Best Buy Consumer Flow</div>
+                    <div class="sim-btn-sub">Performance Debugger &amp; First-Click Latency</div>
+                  </div>
+                </div>
+                <span>⚡ Active</span>
+              </button>
+
+              <button class="sim-nav-btn" data-screen="interview">
+                <div class="sim-btn-left">
+                  <div class="sim-btn-icon">🧠</div>
+                  <div>
+                    <div class="sim-btn-title">Interview Brain Code Runner</div>
+                    <div class="sim-btn-sub">Real-Time Mobile Syntax &amp; AI Breakdown</div>
+                  </div>
+                </div>
+                <span>Preview</span>
+              </button>
+
+              <button class="sim-nav-btn" data-screen="caselog">
+                <div class="sim-btn-left">
+                  <div class="sim-btn-icon">🏥</div>
+                  <div>
+                    <div class="sim-btn-title">CaseLog Doctor Patient Chart</div>
+                    <div class="sim-btn-sub">Offline-First Triage &amp; Clinical Logging</div>
+                  </div>
+                </div>
+                <span>Preview</span>
+              </button>
+
+              <button class="sim-nav-btn" data-screen="wealthos">
+                <div class="sim-btn-left">
+                  <div class="sim-btn-icon">📈</div>
+                  <div>
+                    <div class="sim-btn-title">WealthOS Portfolio Visualizer</div>
+                    <div class="sim-btn-sub">Multi-Asset Allocation &amp; Return Metrics</div>
+                  </div>
+                </div>
+                <span>Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Phone Chassis Mockup -->
+          <div class="phone-mockup-wrapper" data-tilt data-tilt-max="4">
+            <div class="phone-device">
+              <div class="phone-screen">
+                <div class="phone-island">
+                  <div class="island-wave-bars">
+                    <span class="i-bar"></span>
+                    <span class="i-bar"></span>
+                    <span class="i-bar"></span>
+                  </div>
+                  <span style="font-size: 0.55rem; color: #38BDF8; font-weight: 700; letter-spacing: 0.05em;">HERMES JIT</span>
+                  <div class="island-camera"></div>
+                </div>
+
+                <div class="phone-status-bar">
+                  <span>9:41</span>
+                  <span>5G 􀋦 100%</span>
+                </div>
+
+                <div class="phone-screen-body">
+                  
+                  <!-- Screen 1: Best Buy -->
+                  <div class="phone-screen-view active" id="phone-screen-bestbuy">
+                    <div class="app-header-mini">
+                      <span class="app-title-mini">Best Buy Mobile</span>
+                      <span class="fps-badge" id="sim-fps">60.0 FPS</span>
+                    </div>
+
+                    <!-- Live Oscillating CPU Waveform -->
+                    <div class="phone-card-mini">
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+                        <span style="font-size: 0.68rem; color: #94A3B8; font-weight:700;">⚡ LIVE CPU WAVEFORM</span>
+                        <span class="live-dot-pulse"></span>
+                      </div>
+                      <div class="mini-chart-wrap">
+                        <svg class="cpu-wave-svg" viewBox="0 0 160 36" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                              <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.6"/>
+                              <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.0"/>
+                            </linearGradient>
+                          </defs>
+                          <path class="wave-path" d="M0,18 Q20,4 40,18 T80,18 T120,18 T160,18 L160,36 L0,36 Z" fill="url(#waveGrad)"/>
+                          <path class="wave-stroke" d="M0,18 Q20,4 40,18 T80,18 T120,18 T160,18" fill="none" stroke="#38BDF8" stroke-width="2"/>
+                        </svg>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #fff; margin-top: 6px;">
+                        <span>First Click Latency</span>
+                        <span style="color: #10B981;">18ms (Optimal)</span>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #fff; margin-top: 2px;">
+                        <span>Hermes Memory Pool</span>
+                        <span style="color: #38BDF8;">32.4 MB</span>
+                      </div>
+                    </div>
+
+                    <div class="phone-card-mini" style="background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.25);">
+                      <div style="font-weight: 700; font-size: 0.82rem; color: #fff;">Consumer Checkout Flow</div>
+                      <div style="font-size: 0.7rem; color: #94A3B8; margin-top: 2px;">Zero re-render memoization active</div>
+                      <button class="phone-btn-mini" onclick="simulateMobileClick('bestbuy')">Simulate Native Action</button>
+                    </div>
+
+                    <div class="phone-card-mini" style="display:flex; justify-content:space-between; align-items:center;">
+                      <span style="font-size: 0.7rem; color: #94A3B8;">Crash Free Rate</span>
+                      <strong style="color: #10B981; font-size:0.8rem;">99.98%</strong>
+                    </div>
+                  </div>
+
+                  <!-- Screen 2: Interview Brain -->
+                  <div class="phone-screen-view" id="phone-screen-interview">
+                    <div class="app-header-mini">
+                      <span class="app-title-mini">Interview Brain</span>
+                      <span class="fps-badge">AI Active</span>
+                    </div>
+                    <div class="phone-card-mini">
+                      <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size: 0.72rem; color: #38BDF8; font-weight: 700;">Challenge: Two Sum</span>
+                        <span style="font-size:0.65rem; color:#10B981; background:rgba(16,185,129,0.15); padding:1px 6px; border-radius:4px;">O(N)</span>
+                      </div>
+                      <pre style="font-family: monospace; font-size: 0.62rem; color: #94A3B8; margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border:1px solid rgba(255,255,255,0.06);">const map = new Map();
+for(let i=0; i&lt;nums.length; i++) {
+  if(map.has(target - nums[i]))
+    return [map.get(target-nums[i]), i];
+}</pre>
+                      <div style="margin-top:6px; font-size:0.68rem; color:#10B981; display:flex; align-items:center; gap:4px;">
+                        <span>✓</span><span>Test suite passed (2ms)</span>
+                      </div>
+                      <button class="phone-btn-mini" onclick="simulateMobileClick('interview')">Run Test Suite</button>
+                    </div>
+                  </div>
+
+                  <!-- Screen 3: CaseLog -->
+                  <div class="phone-screen-view" id="phone-screen-caselog">
+                    <div class="app-header-mini">
+                      <span class="app-title-mini">CaseLog MD</span>
+                      <span class="fps-badge">Sync: OK</span>
+                    </div>
+                    <div class="phone-card-mini">
+                      <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div style="font-weight: 700; font-size: 0.82rem; color: #fff;">Patient #8942 — Triage</div>
+                        <span style="font-size:0.65rem; color:#F59E0B; background:rgba(245,158,11,0.15); padding:1px 6px; border-radius:4px;">Cardiology</span>
+                      </div>
+                      
+                      <!-- Live Cardiac Pulse Line -->
+                      <div class="ecg-monitor-wrap" style="margin: 8px 0; background:rgba(0,0,0,0.3); border-radius:6px; padding:4px; overflow:hidden;">
+                        <svg class="ecg-svg" viewBox="0 0 160 28" preserveAspectRatio="none">
+                          <path class="ecg-path" d="M0,14 L35,14 L40,4 L45,24 L50,10 L55,16 L60,14 L160,14" fill="none" stroke="#10B981" stroke-width="2"/>
+                        </svg>
+                      </div>
+
+                      <div style="font-size: 0.72rem; color: #10B981;">● Cardiac Rate: 72 bpm (Normal)</div>
+                      <button class="phone-btn-mini" onclick="simulateMobileClick('caselog')">Log Clinical Note</button>
+                    </div>
+                  </div>
+
+                  <!-- Screen 4: WealthOS -->
+                  <div class="phone-screen-view" id="phone-screen-wealthos">
+                    <div class="app-header-mini">
+                      <span class="app-title-mini">WealthOS</span>
+                      <span class="fps-badge">+14.2%</span>
+                    </div>
+                    <div class="phone-card-mini">
+                      <div style="font-size: 0.68rem; color: #94A3B8;">Total Portfolio</div>
+                      <div style="font-size: 1.25rem; font-weight: 800; color: #fff; margin: 2px 0;">$142,850.00</div>
+                      <div style="font-size: 0.72rem; color: #10B981;">▲ +$18,420 (YTD)</div>
+                      
+                      <!-- Live Stock Area Chart -->
+                      <div class="mini-chart-wrap" style="margin-top:6px;">
+                        <svg class="stock-svg" viewBox="0 0 160 36" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="stockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                              <stop offset="0%" stop-color="#10B981" stop-opacity="0.6"/>
+                              <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"/>
+                            </linearGradient>
+                          </defs>
+                          <path class="stock-path-area" d="M0,28 Q30,22 60,14 T110,8 T160,4 L160,36 L0,36 Z" fill="url(#stockGrad)"/>
+                          <path class="stock-path-stroke" d="M0,28 Q30,22 60,14 T110,8 T160,4" fill="none" stroke="#10B981" stroke-width="2"/>
+                        </svg>
+                      </div>
+
+                      <button class="phone-btn-mini" onclick="simulateMobileClick('wealthos')">Rebalance Assets</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════ 2. INTERACTIVE ARCHITECTURE & CODE PLAYGROUND ════════════ -->
+      <section class="section" id="code-lab">
+        <div class="section-header reveal">
+          <span class="section-tag">Production Code Patterns</span>
+          <h2 class="section-title">Architecture &amp; Code Inspector</h2>
+          <p class="section-desc">Explore battle-tested React Native &amp; TypeScript code implementations used in high-traffic production environments.</p>
+        </div>
+
+        <div class="code-playground-card reveal">
+          <div class="code-playground-header">
+            <div class="code-window-dots">
+              <span class="win-dot red"></span>
+              <span class="win-dot yellow"></span>
+              <span class="win-dot green"></span>
+            </div>
+
+            <div class="code-tabs">
+              <button class="code-tab-btn active" data-snippet="profiler">usePerformanceProfiler.ts</button>
+              <button class="code-tab-btn" data-snippet="bridge">NativeTurboBridge.swift</button>
+              <button class="code-tab-btn" data-snippet="hermes">HermesMemoryMonitor.ts</button>
+            </div>
+
+            <button class="copy-code-btn" id="copy-snippet-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy Code</span>
+            </button>
+          </div>
+
+          <div class="code-editor-content">
+            <!-- Snippet 1 -->
+            <pre class="code-snippet-block active" id="code-profiler"><code><span class="syn-com">/**
+ * usePerformanceProfiler.ts
+ * Standalone Mobile Render Profiler for React Native
+ * Measures first-click latency &amp; eliminates bottleneck re-renders.
+ */</span>
+<span class="syn-kw">import</span> { useEffect, useRef } <span class="syn-kw">from</span> <span class="syn-str">'react'</span>;
+
+<span class="syn-kw">export function</span> <span class="syn-fn">usePerformanceProfiler</span>(<span class="syn-type">componentName</span>: <span class="syn-type">string</span>) {
+  <span class="syn-kw">const</span> renderCount = <span class="syn-fn">useRef</span>(<span class="syn-num">0</span>);
+  <span class="syn-kw">const</span> startTime = <span class="syn-fn">useRef</span>(performance.<span class="syn-fn">now</span>());
+
+  renderCount.current += <span class="syn-num">1</span>;
+
+  <span class="syn-fn">useEffect</span>(() =&gt; {
+    <span class="syn-kw">const</span> duration = performance.<span class="syn-fn">now</span>() - startTime.current;
+    
+    <span class="syn-com">// Emit telemetry if render threshold exceeded (&gt;16.6ms frame budget)</span>
+    <span class="syn-kw">if</span> (duration &gt; <span class="syn-num">16.6</span>) {
+      console.<span class="syn-fn">warn</span>(<span class="syn-str">`[PerfAlert] ⚠️ ${componentName} dropped a frame: ${duration.toFixed(2)}ms (Render #${renderCount.current})`</span>);
+    }
+  });
+
+  <span class="syn-kw">return</span> { renderCount: renderCount.current };
+}</code></pre>
+
+            <!-- Snippet 2 -->
+            <pre class="code-snippet-block" id="code-bridge"><code><span class="syn-com">// NativeTurboBridge.swift
+// High-performance Swift TurboModule for React Native JSI Bridge</span>
+<span class="syn-kw">import</span> Foundation
+<span class="syn-kw">import</span> React
+
+<span class="syn-kw">@objc(NativeTurboBridge)</span>
+<span class="syn-kw">public class</span> <span class="syn-type">NativeTurboBridge</span>: <span class="syn-type">NSObject</span> {
+  
+  <span class="syn-kw">@objc</span>
+  <span class="syn-kw">public func</span> <span class="syn-fn">dispatchHapticFeedback</span>(<span class="syn-type">_ style</span>: <span class="syn-type">String</span>, resolve: <span class="syn-type">RCTPromiseResolveBlock</span>, reject: <span class="syn-type">RCTPromiseRejectBlock</span>) {
+    <span class="syn-kw">DispatchQueue</span>.main.async {
+      <span class="syn-kw">let</span> generator = <span class="syn-type">UIImpactFeedbackGenerator</span>(style: .medium)
+      generator.prepare()
+      generator.impactOccurred()
+      resolve(<span class="syn-kw">true</span>)
+    }
+  }
+  
+  <span class="syn-kw">@objc</span>
+  <span class="syn-kw">public static func</span> <span class="syn-fn">requiresMainQueueSetup</span>() -&gt; <span class="syn-type">Bool</span> {
+    <span class="syn-kw">return false</span>
+  }
+}</code></pre>
+
+            <!-- Snippet 3 -->
+            <pre class="code-snippet-block" id="code-hermes"><code><span class="syn-com">/**
+ * HermesMemoryMonitor.ts
+ * Real-time heap inspection &amp; garbage collection management
+ */</span>
+<span class="syn-kw">export class</span> <span class="syn-type">HermesMemoryMonitor</span> {
+  <span class="syn-kw">private static</span> thresholdMB = <span class="syn-num">80</span>;
+
+  <span class="syn-kw">static</span> <span class="syn-fn">checkHeapUsage</span>(): <span class="syn-type">void</span> {
+    <span class="syn-kw">if</span> (global.HermesInternal?.<span class="syn-fn">getInstrumentedStats</span>) {
+      <span class="syn-kw">const</span> stats = global.HermesInternal.<span class="syn-fn">getInstrumentedStats</span>();
+      <span class="syn-kw">const</span> allocatedMB = stats.js_allocated_bytes / (<span class="syn-num">1024</span> * <span class="syn-num">1024</span>);
+      
+      <span class="syn-kw">if</span> (allocatedMB &gt; <span class="syn-kw">this</span>.thresholdMB) {
+        <span class="syn-com">// Trigger non-blocking generational GC</span>
+        global.gc?.();
+      }
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════ 3. GITHUB CONTRIBUTIONS HEATMAP & ACTIVITY ════════════ -->
+      <section class="section" id="github-activity">
+        <div class="section-header reveal">
+          <span class="section-tag">Open Source &amp; Velocity</span>
+          <h2 class="section-title">GitHub Activity Matrix</h2>
+          <p class="section-desc">Live contribution activity, commits, and open-source contributions across public repositories.</p>
+        </div>
+
+        <div class="github-activity-section reveal" data-tilt data-tilt-max="3">
+          <div class="heatmap-header">
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 800;">580+ Contributions in 2026</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Verified activity on <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: underline;">github.com/AbhavThakur</a></p>
+            </div>
+
+            <!-- Snake Game Toolbar & Controls -->
+          <div class="snake-controller-bar">
+            <div class="snake-status-badge">
+              <span class="snake-indicator-dot"></span>
+              <span id="snake-mode-label">🐍 Cyber Snake: Auto Hunting Stars</span>
+            </div>
+            <div class="snake-score-pill">
+              <span>⭐ Stars Eaten:</span>
+              <strong id="snake-eaten-count">0</strong>
+            </div>
+            <div class="snake-actions">
+              <button class="snake-btn" id="snake-toggle-play-btn" title="Toggle Manual Arrow Keys Control">
+                <span>🎮 Take Control (Keys)</span>
+              </button>
+              <button class="snake-btn-icon" id="snake-reset-btn" title="Respawn Snake">
+                <span>🔄</span>
+              </button>
+            </div>
+          </div>
+
+            <div class="heatmap-stats-row">
+              <div class="heatmap-stat-item">
+                <span class="heatmap-stat-num">52</span>
+                <span class="heatmap-stat-label">Weeks Active</span>
+              </div>
+              <div class="heatmap-stat-item">
+                <span class="heatmap-stat-num">24</span>
+                <span class="heatmap-stat-label">Day Streak</span>
+              </div>
+              <div class="heatmap-stat-item">
+                <span class="heatmap-stat-num">48+</span>
+                <span class="heatmap-stat-label">Merged PRs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heatmap Grid (Rendered by JS with Snake Layer) -->
+          <div class="heatmap-grid-scroll">
+            <div class="heatmap-grid" id="github-heatmap-grid">
+              <!-- Dynamically populated 52 weeks x 7 days -->
+            </div>
+          </div>
+
+          <div class="heatmap-legend">
+            <span>Less</span>
+            <span class="heat-cell level-0"></span>
+            <span class="heat-cell level-1"></span>
+            <span class="heat-cell level-2"></span>
+            <span class="heat-cell level-3"></span>
+            <span class="heat-cell level-4"></span>
+            <span>More</span>
+          </div>
+
+          <!-- Languages breakdown -->
+          <div class="github-languages-bar">
+            <div class="lang-segment" style="width: 55%; background: #3178C6;" title="TypeScript (55%)"></div>
+            <div class="lang-segment" style="width: 25%; background: #F1E05A;" title="JavaScript (25%)"></div>
+            <div class="lang-segment" style="width: 10%; background: #F05138;" title="Swift (10%)"></div>
+            <div class="lang-segment" style="width: 6%; background: #A97BFF;" title="Kotlin (6%)"></div>
+            <div class="lang-segment" style="width: 4%; background: #E34C26;" title="HTML/CSS (4%)"></div>
+          </div>
+
+          <div class="lang-legend-row">
+            <div class="lang-legend-item"><span class="lang-dot" style="background: #3178C6;"></span><span>TypeScript 55%</span></div>
+            <div class="lang-legend-item"><span class="lang-dot" style="background: #F1E05A;"></span><span>JavaScript 25%</span></div>
+            <div class="lang-legend-item"><span class="lang-dot" style="background: #F05138;"></span><span>Swift 10%</span></div>
+            <div class="lang-legend-item"><span class="lang-dot" style="background: #A97BFF;"></span><span>Kotlin 6%</span></div>
+            <div class="lang-legend-item"><span class="lang-dot" style="background: #E34C26;"></span><span>HTML/CSS 4%</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════ SKILLS MATRIX SECTION ════════════ -->
+      <section class="section" id="skills">
+        <div class="section-header reveal">
+          <span class="section-tag">Technical Arsenal</span>
+          <h2 class="section-title">Core Skills &amp; Proficiencies</h2>
+          <p class="section-desc">Extensive hands-on experience building mission-critical mobile and web applications.</p>
+        </div>
+
+        <div class="skills-container">
+          
+          <!-- Category 1 -->
+          <div class="skill-category-card reveal" data-tilt data-tilt-max="5">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">📱</div>
+              <div>
+                <h3 class="skill-cat-title">Mobile &amp; Native</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Core Specialization</span>
+              </div>
+            </div>
+            
+            <div class="skill-items-list">
+              <div class="skill-item">
+                <div class="skill-item-header"><span>React Native</span><span class="skill-pct-val" data-skill-pct="95">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>iOS &amp; Swift Native Bridge</span><span class="skill-pct-val" data-skill-pct="85">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Android &amp; Kotlin Bridge</span><span class="skill-pct-val" data-skill-pct="85">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Hermes &amp; JSI Architecture</span><span class="skill-pct-val" data-skill-pct="90">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Expo &amp; Bare Workflows</span><span class="skill-pct-val" data-skill-pct="92">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="skill-category-card reveal" data-tilt data-tilt-max="5">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">🌐</div>
+              <div>
+                <h3 class="skill-cat-title">Frontend &amp; Web</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Modern Web Ecosystem</span>
+              </div>
+            </div>
+            
+            <div class="skill-items-list">
+              <div class="skill-item">
+                <div class="skill-item-header"><span>TypeScript / JavaScript (ESNext)</span><span class="skill-pct-val" data-skill-pct="95">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>React 19 &amp; Next.js 16</span><span class="skill-pct-val" data-skill-pct="92">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>State (Zustand, Redux, RTK)</span><span class="skill-pct-val" data-skill-pct="90">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Vanilla CSS &amp; Animations</span><span class="skill-pct-val" data-skill-pct="94">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="94%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>TailwindCSS &amp; Design Systems</span><span class="skill-pct-val" data-skill-pct="88">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="skill-category-card reveal" data-tilt data-tilt-max="5">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">⚡</div>
+              <div>
+                <h3 class="skill-cat-title">Backend &amp; Cloud</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Services &amp; APIs</span>
+              </div>
+            </div>
+            
+            <div class="skill-items-list">
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Node.js &amp; Express</span><span class="skill-pct-val" data-skill-pct="88">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Firebase (Auth, Firestore, FCM)</span><span class="skill-pct-val" data-skill-pct="92">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>RESTful APIs &amp; GraphQL</span><span class="skill-pct-val" data-skill-pct="90">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>PostgreSQL &amp; Prisma ORM</span><span class="skill-pct-val" data-skill-pct="82">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>WebSockets &amp; Web Audio API</span><span class="skill-pct-val" data-skill-pct="85">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="skill-category-card reveal" data-tilt data-tilt-max="5">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">🛠️</div>
+              <div>
+                <h3 class="skill-cat-title">DevOps &amp; Quality</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Scale &amp; Reliability</span>
+              </div>
+            </div>
+            
+            <div class="skill-items-list">
+              <div class="skill-item">
+                <div class="skill-item-header"><span>App Performance Profiling</span><span class="skill-pct-val" data-skill-pct="94">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="94%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Memory Leak Debugging</span><span class="skill-pct-val" data-skill-pct="92">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>CI/CD (Fastlane, GitHub Actions)</span><span class="skill-pct-val" data-skill-pct="88">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Jest &amp; React Native Testing</span><span class="skill-pct-val" data-skill-pct="86">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="86%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-item-header"><span>Agentic AI &amp; LLM Workflows</span><span class="skill-pct-val" data-skill-pct="85">0%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"><span class="skill-bar-bulb"></span></div></div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>
@@ -229,66 +1065,387 @@
       <!-- ════════════ EXPERIENCE SECTION ════════════ -->
       <section class="section" id="experience">
         <div class="section-header reveal">
-          <h2 class="section-title">Experience</h2>
-          <p class="section-subtitle">My professional journey.</p>
+          <span class="section-tag">Career Trajectory</span>
+          <h2 class="section-title">Professional Experience</h2>
+          <p class="section-desc">Delivering tangible business outcomes, architectural stability, and user experience delight.</p>
         </div>
 
-        <div class="timeline-container">
-          <div class="timeline-line"></div>
-          
-          <div class="timeline-item reveal cursor-hover">
-            <div class="timeline-node"></div>
-            <div class="timeline-date">2024 — Present</div>
-            <div class="timeline-content">
-              <h3>Software Engineer II (SDE-2)</h3>
-              <h4>Best Buy Digital</h4>
-              <p>Led end-to-end delivery of 4 major features. Built a standalone Performance Debug Library adopted across the Consumer App, achieving measurable first-click speed enhancements and engagement lifts.</p>
-              <div class="exp-badges">
-                <span class="exp-badge">🏆 Hackathon Winner</span>
-                <span class="exp-badge">⭐ Director Recognition</span>
+        <div class="timeline-section">
+          <div class="timeline-track"></div>
+
+          <!-- Role 1: Best Buy Digital -->
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Software Development Engineer II (SDE-2)</h3>
+                  <div class="timeline-company">Best Buy Digital · Bengaluru, India</div>
+                </div>
+                <span class="timeline-period">2024 — Present</span>
+              </div>
+              
+              <div class="timeline-body">
+                <ul>
+                  <li>Owned end-to-end technical delivery of 4 flagship mobile features across consumer checkout, product discovery, and account flows.</li>
+                  <li>Architected and deployed a custom <strong>Performance Debug Library</strong> adopted across cross-functional mobile pods, eliminating critical bottleneck re-renders and reducing first-click latency.</li>
+                  <li>Collaborated closely with Product, UX, and Native Platform teams to guarantee 99.9% crash-free sessions across both iOS and Android release channels.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-badges">
+                <span class="timeline-badge gold">🏆 Hackathon Winner</span>
+                <span class="timeline-badge gold">⭐ Director Recognition Award</span>
+                <span class="timeline-badge">React Native</span>
+                <span class="timeline-badge">Performance Profiling</span>
+                <span class="timeline-badge">Enterprise Scale</span>
               </div>
             </div>
           </div>
 
-          <div class="timeline-item reveal cursor-hover">
-            <div class="timeline-node"></div>
-            <div class="timeline-date">2022 — 2024</div>
-            <div class="timeline-content">
-              <h3>Software Engineer</h3>
-              <h4>Impelsys</h4>
-              <p>Led major React Native version upgrades and native module migrations. Implemented Firebase Cloud Messaging infrastructure and optimized component architecture to reduce re-renders.</p>
+          <!-- Role 2: Impelsys -->
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Software Engineer</h3>
+                  <div class="timeline-company">Impelsys · Bengaluru, India</div>
+                </div>
+                <span class="timeline-period">2022 — 2024</span>
+              </div>
+              
+              <div class="timeline-body">
+                <ul>
+                  <li>Headed major React Native core upgrades across production repositories, maintaining backwards compatibility with native legacy bridges.</li>
+                  <li>Engineered robust push notification pipeline utilizing Firebase Cloud Messaging (FCM) with custom deep-link routing.</li>
+                  <li>Conducted rigorous code reviews, automated unit testing with Jest, and instituted mobile performance profiling standards.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-badges">
+                <span class="timeline-badge">React Native Upgrade</span>
+                <span class="timeline-badge">FCM Infrastructure</span>
+                <span class="timeline-badge">Native Modules</span>
+                <span class="timeline-badge">TypeScript</span>
+              </div>
             </div>
           </div>
 
-          <div class="timeline-item reveal cursor-hover">
-            <div class="timeline-node"></div>
-            <div class="timeline-date">2021 — 2022</div>
-            <div class="timeline-content">
-              <h3>Mobile Application Developer</h3>
-              <h4>ClinicSpots</h4>
-              <p>Built and shipped a healthcare Q&A app from scratch in React Native to the Google Play Store. Owned full architecture and REST API integration.</p>
+          <!-- Role 3: ClinicSpots -->
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Mobile Application Developer</h3>
+                  <div class="timeline-company">ClinicSpots · Mumbai, India</div>
+                </div>
+                <span class="timeline-period">2021 — 2022</span>
+              </div>
+              
+              <div class="timeline-body">
+                <ul>
+                  <li>Built and deployed healthcare Q&amp;A mobile application from ground zero to the Google Play Store.</li>
+                  <li>Engineered REST API integration layers with offline persistence, multi-language localization, and instant query resolution workflows.</li>
+                  <li>Partnered directly with founders to iterate on UX feedback, elevating 30-day user retention metrics.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-badges">
+                <span class="timeline-badge">0 to 1 Mobile App</span>
+                <span class="timeline-badge">Google Play Store Launch</span>
+                <span class="timeline-badge">REST APIs</span>
+                <span class="timeline-badge">Healthcare Tech</span>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      <!-- ════════════ CONTACT BENTO ════════════ -->
-      <section class="bento-contact reveal cursor-hover" id="contact"
-               data-tilt data-tilt-max="4" data-tilt-speed="1000" data-tilt-glare="true" data-tilt-max-glare="0.1">
-        <div class="contact-cta">
-          <h2>Let's build something<br>amazing together.</h2>
-          <p>Currently open for new opportunities.</p>
-          <a href="mailto:abhav.thakur25@gmail.com" class="btn btn-primary btn-large" data-magnetic>Say Hello</a>
+      <!-- ════════════ CONTACT BENTO SECTION ════════════ -->
+      <section class="section" id="contact">
+        <div class="section-header center reveal">
+          <span class="section-tag">Let's Connect</span>
+          <h2 class="section-title">Ready to build something impactful?</h2>
+          <p class="section-desc">Whether you have a full-time senior mobile opportunity, an architectural question, or an exciting project in mind, I'd love to chat.</p>
+        </div>
+
+        <div class="contact-bento reveal">
+          
+          <!-- Contact Info Card -->
+          <div class="contact-info-card">
+            <div>
+              <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem;">Contact Information</h3>
+              <p style="color: var(--text-secondary); font-size: 0.95rem;">Drop me a note directly or reach out on any of my channels.</p>
+              
+              <div class="contact-direct-items">
+                <div class="contact-direct-item">
+                  <div class="contact-icon-box">📧</div>
+                  <div>
+                    <div class="contact-item-title">Email</div>
+                    <div class="contact-item-val">abhav.thakur25@gmail.com</div>
+                    <button class="copy-email-btn" id="copy-email-btn" title="Copy email address">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span>Copy to clipboard</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="contact-direct-item">
+                  <div class="contact-icon-box">📍</div>
+                  <div>
+                    <div class="contact-item-title">Location</div>
+                    <div class="contact-item-val">Bengaluru, Karnataka, India</div>
+                  </div>
+                </div>
+
+                <div class="contact-direct-item">
+                  <div class="contact-icon-box">💼</div>
+                  <div>
+                    <div class="contact-item-title">Availability</div>
+                    <div class="contact-item-val">Open for SDE-2 / Senior Mobile roles</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-socials" style="padding-top: 1.5rem;">
+              <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+              <a href="https://linkedin.com/in/abhavthakur" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="mailto:abhav.thakur25@gmail.com" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form Card -->
+          <div class="contact-form-card">
+            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.25rem;">Send a direct message</h3>
+            
+            <form class="contact-form" id="contact-form" onsubmit="event.preventDefault(); handleContactSubmit();">
+              <div class="form-group">
+                <label for="form-name" class="form-label">Your Name</label>
+                <input type="text" id="form-name" class="form-input" placeholder="e.g. Sarah Connor" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">Your Email</label>
+                <input type="email" id="form-email" class="form-input" placeholder="e.g. sarah@techcorp.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-message" class="form-label">Message</label>
+                <textarea id="form-message" class="form-textarea" placeholder="Hi Abhav, let's talk about..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="align-self: flex-start; padding: 0.85rem 2rem;">
+                <span>Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+
         </div>
       </section>
 
+      <!-- ════════════ FOOTER ════════════ -->
       <footer class="footer">
-        <p>© 2026 Abhav Thakur. Built from scratch.</p>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <span>•</span>
+          <a href="#projects">Projects</a>
+          <span>•</span>
+          <a href="#mobile-lab">Mobile Lab</a>
+          <span>•</span>
+          <a href="#code-lab">Architecture</a>
+          <span>•</span>
+          <a href="#github-activity">GitHub</a>
+          <span>•</span>
+          <a href="#skills">Skills</a>
+          <span>•</span>
+          <a href="#experience">Experience</a>
+          <span>•</span>
+          <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span>•</span>
+          <a href="https://linkedin.com/in/abhavthakur" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+        <p>© 2026 Abhav Thakur. Crafted with modern web standards and 60fps animations.</p>
       </footer>
+
     </main>
   </div>
 
-  <!-- Vanilla Tilt (3D Tilt Card Library) -->
+  <!-- ════════════ FLOATING TERMINAL LAUNCHER PILL ════════════ -->
+  <button class="floating-term-launcher" id="open-term-btn" aria-label="Open Interactive Terminal" title="Developer Terminal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+    <span>Terminal Mode (CLI)</span>
+  </button>
+
+  <!-- ════════════ INTERACTIVE DEVELOPER TERMINAL MODAL ════════════ -->
+  <div class="terminal-modal-backdrop" id="terminal-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="code-window-dots">
+          <span class="win-dot red" id="term-close-dot" style="cursor: pointer;" title="Close Terminal"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+        </div>
+        <div class="terminal-title">abhav@portfolio-v2.6:~ (zsh)</div>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">Type 'help' for commands</div>
+      </div>
+
+      <div class="terminal-body" id="term-output">
+        <div class="term-line success">Welcome to Abhav Thakur's Interactive Portfolio CLI v2.6.0! 🚀</div>
+        <div class="term-line dim">Type 'help' to see all available commands. Try 'sudo hire abhav' or 'skills'.</div>
+        <div class="term-line">--------------------------------------------------</div>
+      </div>
+
+      <div class="term-input-row">
+        <span class="term-prompt">abhav@dev:~$</span>
+        <input type="text" id="term-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ COMMAND PALETTE (CMD+K) ════════════ -->
+  <div class="cmd-palette-backdrop" id="cmd-palette" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="cmd-palette-box">
+      <div class="cmd-input-wrapper">
+        <svg class="cmd-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmd-input" class="cmd-input" placeholder="Type a command or search projects..." autocomplete="off">
+        <span class="kbd-shortcut">ESC to close</span>
+      </div>
+      
+      <div class="cmd-results-list" id="cmd-results">
+        <div class="cmd-group-label">Navigation</div>
+        <div class="cmd-item" data-action="nav" data-target="#about">
+          <div class="cmd-item-left"><span>👤</span><span>About &amp; Overview</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#projects">
+          <div class="cmd-item-left"><span>⚡</span><span>Featured Projects</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#mobile-lab">
+          <div class="cmd-item-left"><span>📱</span><span>Interactive Mobile Simulator</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#code-lab">
+          <div class="cmd-item-left"><span>💻</span><span>Architecture &amp; Code Inspector</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#github-activity">
+          <div class="cmd-item-left"><span>🟩</span><span>GitHub Contribution Heatmap</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#skills">
+          <div class="cmd-item-left"><span>🛠️</span><span>Skills &amp; Technologies</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#experience">
+          <div class="cmd-item-left"><span>💼</span><span>Experience &amp; Best Buy</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+        <div class="cmd-item" data-action="nav" data-target="#contact">
+          <div class="cmd-item-left"><span>📫</span><span>Contact &amp; Let's Talk</span></div>
+          <span class="kbd-shortcut">↵</span>
+        </div>
+
+        <div class="cmd-group-label">Quick Actions</div>
+        <div class="cmd-item" data-action="open-term">
+          <div class="cmd-item-left"><span>⌨️</span><span>Launch Developer Terminal (CLI)</span></div>
+          <span class="kbd-shortcut">CLI</span>
+        </div>
+        <div class="cmd-item" data-action="matrix">
+          <div class="cmd-item-left"><span>🕶️</span><span>Cyberpunk Matrix Code Rain</span></div>
+          <span class="kbd-shortcut">Matrix</span>
+        </div>
+        <div class="cmd-item" data-action="stress-test">
+          <div class="cmd-item-left"><span>💥</span><span>Particle Physics Stress Test</span></div>
+          <span class="kbd-shortcut">60 FPS</span>
+        </div>
+        <div class="cmd-item" data-action="copy-email">
+          <div class="cmd-item-left"><span>📋</span><span>Copy Email Address</span></div>
+          <span class="kbd-shortcut">abhav.thakur25@gmail.com</span>
+        </div>
+        <div class="cmd-item" data-action="toggle-theme">
+          <div class="cmd-item-left"><span>🌓</span><span>Toggle Dark / Light Theme</span></div>
+          <span class="kbd-shortcut">Theme</span>
+        </div>
+        <div class="cmd-item" data-action="toggle-sound">
+          <div class="cmd-item-left"><span>🔊</span><span>Toggle Sound Effects (FX)</span></div>
+          <span class="kbd-shortcut">Audio</span>
+        </div>
+        <div class="cmd-item" data-action="open-url" data-url="https://github.com/AbhavThakur">
+          <div class="cmd-item-left"><span>🐙</span><span>Open GitHub Profile (@AbhavThakur)</span></div>
+          <span class="kbd-shortcut">External</span>
+        </div>
+        <div class="cmd-item" data-action="open-url" data-url="https://linkedin.com/in/abhavthakur">
+          <div class="cmd-item-left"><span>🔗</span><span>Open LinkedIn Profile</span></div>
+          <span class="kbd-shortcut">External</span>
+        </div>
+      </div>
+
+      <div class="cmd-footer">
+        <span>Navigation: <kbd class="kbd-shortcut">↑</kbd> <kbd class="kbd-shortcut">↓</kbd></span>
+        <span>Select: <kbd class="kbd-shortcut">Enter</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ PROJECT DETAILS MODAL ════════════ -->
+  <div class="modal-backdrop" id="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Project Modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div id="modal-dynamic-body">
+        <!-- Injected dynamically by index.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ FLOATING TELEMETRY HUD ════════════ -->
+  <div class="system-telemetry-hud" id="system-hud" title="Live System Telemetry & Engine Diagnostics">
+    <div class="hud-item status-live">
+      <span class="hud-dot pulse-green"></span>
+      <span class="hud-val">Available for SDE-2 / Lead</span>
+    </div>
+    <div class="hud-divider"></div>
+    <div class="hud-item">
+      <span class="hud-label">FPS</span>
+      <span class="hud-val" id="hud-fps">60.0</span>
+    </div>
+    <div class="hud-divider"></div>
+    <div class="hud-item">
+      <span class="hud-label">ENGINE</span>
+      <span class="hud-val accent">Hermes / V8</span>
+    </div>
+    <div class="hud-divider"></div>
+    <button class="hud-action-btn" id="hud-stress-btn" title="Run Interactive Particle Shockwave">
+      <span>💥 Stress Test</span>
+    </button>
+  </div>
+
+  <!-- ════════════ MATRIX CODE RAIN CANVAS ════════════ -->
+  <canvas id="matrix-canvas"></canvas>
+  <button id="matrix-exit-btn" class="matrix-exit-btn" aria-label="Exit Matrix Mode">✕ Exit Matrix Mode</button>
+
+  <!-- ════════════ HARDWARE ACCELERATED CUSTOM CURSOR ════════════ -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+
+  <!-- ════════════ TOAST NOTIFICATIONS CONTAINER ════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- External 3D Tilt Library & Vanilla JS Logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
   <script src="index.js"></script>
 </body>
