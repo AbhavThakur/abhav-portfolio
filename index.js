@@ -615,6 +615,22 @@ function initProjectFilters() {
    10. PROJECT DETAILS MODAL ENGINE
    ────────────────────────────────────────────────────────────────────────── */
 const PROJECT_DATABASE = {
+  'mobile-perf-sdk': {
+    title: 'Mobile Performance Debug & Observability SDK',
+    subtitle: 'Zero-Config 3-Layer Runtime Profiling Platform (Best Buy Consumer App)',
+    image: null,
+    metrics: [
+      { val: '<18ms', label: 'First-Click Latency' },
+      { val: '60 FPS', label: 'CADisplayLink Native' },
+      { val: '0 ANR', label: 'Looper Watchdog' }
+    ],
+    overview: 'Standalone, zero-config mobile observability SDK adopted org-wide across the Best Buy Consumer App. Eliminated subjective performance debates and prevented regressions reaching production by providing in-app, real-device telemetry without requiring tethered dev machines.',
+    architecture: 'Designed a 3-layer architecture: React HUD overlay with 1-line hooks (useScreenTTFD, useScrollPerformance) -> typed TypeScript bridge wrappers (FrameRateNative, ANRWatchdogNative) with batched payloads (~500ms) over NativeEventEmitter -> low-level native modules in Swift (CADisplayLink, Darwin task_info) and Java (Choreographer, onTrimMemory, main-thread Looper ANR watchdog). Features 1-tap telemetry ingestion into Dynatrace & Sentry. Honored with Director-Level Recognition (Q4 FY26).',
+    techStack: ['React Native', 'Swift (iOS)', 'Java (Android)', 'TypeScript', 'CADisplayLink', 'Choreographer', 'Dynatrace', 'Sentry'],
+    liveUrl: '#mobile-lab',
+    githubUrl: 'https://github.com/AbhavThakur'
+  },
+
   'interview-brain': {
     title: 'Interview Brain',
     subtitle: 'AI-Powered Full Stack Interview Preparation Platform',
@@ -1249,6 +1265,12 @@ function initTerminalMode() {
     const main = parts[0];
 
     switch(main) {
+      case 'resume':
+      case 'cv':
+        printLine("📄 Opening Abhav Thakur's Resume (PDF)...", 'success');
+        window.open('assets/Abhav_Thakur_Resume.pdf', '_blank');
+        break;
+
       case 'help':
         printLine('Available commands:', 'success');
         printLine('  <span style="color:#fff">about</span>        - Background &amp; summary');
@@ -1260,6 +1282,7 @@ function initTerminalMode() {
         printLine('  <span style="color:#fff">benchmark</span>    - Run JIT CPU &amp; Memory throughput test');
         printLine('  <span style="color:#fff">particles</span>    - Spawn 40-particle kinetic burst');
         printLine('  <span style="color:#fff">sudo hire abhav</span> - Open hiring communication channel');
+        printLine("  <span style=\"color:#fff\">resume</span>        - Open Abhav Thakur's 1-Page PDF Resume", 'success');
         printLine('  <span style="color:#fff">cat resume.txt</span> - Print structured resume');
         printLine('  <span style="color:#fff">theme [dark|light]</span> - Switch theme');
         printLine('  <span style="color:#fff">sound [on|off]</span> - Toggle sound effects');
@@ -1317,10 +1340,12 @@ function initTerminalMode() {
 
       case 'cat':
         if (parts[1] === 'resume.txt' || parts[1] === 'resume') {
-          printLine('=== ABHAV THAKUR — RESUME SUMMARY ===', 'success');
-          printLine('Role: Senior Mobile Engineer (SDE-2) | Email: abhav.thakur25@gmail.com');
-          printLine('Location: Bengaluru, India | GitHub: github.com/AbhavThakur');
-          printLine('Highlights: 5+ years experience building mobile apps reaching 1M+ active users.');
+          printLine('=== ABHAV THAKUR — SENIOR MOBILE PLATFORM ENGINEER ===', 'success');
+          printLine('Role: SDE-2 @ Best Buy Digital | Scale: Top-25 US App Store (~13.3k daily installs)');
+          printLine('Impact: 1.7s faster first-click, +23% engagement, 3-layer Mobile Observability SDK');
+          printLine('Native: Swift (CADisplayLink), Java (Choreographer, Looper ANR), batched TS bridge');
+          printLine('Awards: Director-Level Recognition (Q4 FY26), Innovation Week Hackathon Winner (FY26)');
+          printLine('📄 PDF Ready: Type "resume" in this terminal or check assets/Abhav_Thakur_Resume.pdf');
         } else {
           printLine(`cat: ${parts[1] || 'file'}: No such file or directory. Try 'cat resume.txt'`, 'dim');
         }

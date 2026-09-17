@@ -3015,3 +3015,24 @@ html.js-ready .reveal.visible {
     display: none;
   }
 }
+
+/* ─── Header Resume CTA Button ─── */
+.header-resume-btn {
+  padding: 0.44rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  gap: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+.header-resume-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+@media (max-width: 640px) {
+  .header-resume-btn {
+    display: none;
+  }
+}
