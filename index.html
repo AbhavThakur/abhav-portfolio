@@ -47,7 +47,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css?v=2.4">
 </head>
 <body>
 
@@ -75,6 +75,7 @@
       <nav class="nav-links" aria-label="Main Navigation">
         <a href="#about" class="nav-link active">About</a>
         <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
@@ -93,17 +94,30 @@
           <svg class="icon-sound-muted" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
 
+        <!-- Netflix Who's Watching Profile Switcher -->
+        <button class="profile-switch-btn" id="open-whos-watching-btn" aria-label="Switch Viewer Profile" title="Switch Viewer Profile (Recruiter / Tech Lead / Founder)">
+          <span class="profile-switch-dot"></span>
+          <span class="profile-switch-label" id="active-profile-label">Who's Watching?</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+
         <!-- Theme Toggle -->
         <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
           <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </button>
 
-        <!-- Resume Download CTA -->
-        <a href="assets/Abhav_Thakur_Resume.pdf" target="_blank" download="Abhav_Thakur_Resume.pdf" class="btn btn-secondary header-resume-btn" title="Download Resume (PDF)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          <span>Resume</span>
-        </a>
+        <!-- Resume Action Group: View + Download -->
+        <div class="header-resume-group">
+          <a href="assets/Abhav_Thakur_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-resume-action btn-resume-view" title="View Resume in New Tab">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Resume</span>
+          </a>
+          <a href="assets/Abhav_Thakur_Resume.pdf" download="Abhav_Thakur_Resume.pdf" class="btn-resume-action btn-resume-dl" title="Download Resume (PDF)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>PDF</span>
+          </a>
+        </div>
 
         <!-- Direct CTA -->
         <a href="#contact" class="btn btn-primary header-cta-btn">
@@ -118,57 +132,170 @@
       <!-- ════════════ BENTO HERO SECTION ════════════ -->
       <section class="bento-grid" id="about">
         
-        <!-- Profile Bento Card (Left Tall) -->
-        <div class="bento-card card-profile" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.1">
-          <div>
-            <div class="profile-avatar-wrapper">
-              <img src="assets/IMG_20220731_113921.jpg" alt="Abhav Thakur" class="profile-avatar-img" loading="eager">
-              <div class="profile-verified-badge" title="Verified Senior Mobile Engineer">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </div>
+        <!-- Profile Bento Card (Left Tall) — 3D Flipping Developer Pass -->
+        <div class="bento-card card-profile dev-pass-card" id="dev-pass-card" data-tilt data-tilt-max="4" data-tilt-glare="true" data-tilt-max-glare="0.12">
+          
+          <!-- Lanyard Clip & Ribbon Header -->
+          <div class="dev-pass-lanyard-mount">
+            <div class="dev-pass-clip">
+              <span class="clip-ring"></span>
+              <span class="clip-carabiner"></span>
             </div>
-
-            <h1 class="profile-name">Abhav Thakur</h1>
-            
-            <div class="profile-status-pill">
-              <span class="pulse-dot"></span>
-              <span>Available for high-impact roles</span>
-            </div>
-
-            <div class="profile-bio-list">
-              <div class="bio-item">
-                <span class="bio-item-icon">📍</span>
-                <span>Bengaluru, India</span>
-              </div>
-              <div class="bio-item">
-                <span class="bio-item-icon">💼</span>
-                <span><strong>SDE-2</strong> @ Best Buy Digital</span>
-              </div>
-              <div class="bio-item">
-                <span class="bio-item-icon">🎓</span>
-                <span>VIT University Alumnus</span>
-              </div>
-              <div class="bio-item">
-                <span class="bio-item-icon">⚡</span>
-                <span>React Native &amp; Full Stack Architecture</span>
-              </div>
-              <div class="bio-item">
-                <span class="bio-item-icon">🏍️</span>
-                <span>Motorbiking · Running · Badminton</span>
-              </div>
+            <div class="dev-pass-ribbon">
+              <span>WWDC · APPLE &amp; ANDROID ARCHITECT 2026</span>
             </div>
           </div>
 
-          <div class="profile-socials">
-            <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub (@AbhavThakur)">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </a>
-            <a href="https://linkedin.com/in/abhavthakur" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" title="LinkedIn Profile">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a href="mailto:abhav.thakur25@gmail.com" aria-label="Email Abhav Thakur" title="Send Email">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </a>
+          <div class="dev-pass-flipper" id="dev-pass-flipper">
+            <!-- ─── FRONT FACE ─── -->
+            <div class="dev-pass-face dev-pass-front">
+              <div class="dev-pass-hologram-shimmer"></div>
+              
+              <div class="dev-pass-front-content">
+                <div class="profile-avatar-wrapper">
+                  <img src="assets/IMG_20220731_113921.jpg" alt="Abhav Thakur" class="profile-avatar-img" loading="eager">
+                  <div class="profile-verified-badge" title="Verified Senior Mobile Engineer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                </div>
+
+                <div class="dev-pass-header-info">
+                  <h1 class="profile-name">Abhav Thakur</h1>
+                  <div class="dev-pass-clearance-tag">
+                    <span class="clearance-badge">CLEARANCE: LEVEL 2</span>
+                    <span class="clearance-dept">BEST BUY DIGITAL</span>
+                  </div>
+                </div>
+                
+                <div class="profile-status-pill">
+                  <span class="pulse-dot"></span>
+                  <span>Available for High-Impact Roles</span>
+                </div>
+
+                <div class="profile-bio-list">
+                  <div class="bio-item">
+                    <span class="bio-item-icon">📍</span>
+                    <span>Bengaluru, India</span>
+                  </div>
+                  <div class="bio-item">
+                    <span class="bio-item-icon">💼</span>
+                    <span><strong>SDE-2</strong> @ Best Buy Digital</span>
+                  </div>
+                  <div class="bio-item">
+                    <span class="bio-item-icon">⚡</span>
+                    <span>React Native &amp; Full Stack Architecture</span>
+                  </div>
+                  <div class="bio-item">
+                    <span class="bio-item-icon">🎓</span>
+                    <span>VIT University Alumnus</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dev-pass-front-footer">
+                <div class="profile-socials">
+                  <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub (@AbhavThakur)">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  </a>
+                  <a href="https://linkedin.com/in/abhavthakur" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" title="LinkedIn Profile">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                  <a href="mailto:abhav.thakur25@gmail.com" aria-label="Email Abhav Thakur" title="Send Email">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  </a>
+                </div>
+
+                <button class="btn-flip-pass" id="btn-flip-to-back" type="button" title="Flip to inspect NFC chip & credentials">
+                  <span>↺ Flip Pass / NFC</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- ─── BACK FACE ─── -->
+            <div class="dev-pass-face dev-pass-back">
+              <div class="dev-pass-hologram-shimmer"></div>
+
+              <div class="dev-pass-back-content">
+                <!-- Smart Chip Graphic -->
+                <div class="dev-pass-smart-chip">
+                  <div class="chip-contacts">
+                    <span class="chip-line"></span>
+                    <span class="chip-core">NFC 60FPS</span>
+                    <span class="chip-line"></span>
+                  </div>
+                  <div class="chip-label">SECURE ENCLAVE AUTHENTICATED</div>
+                </div>
+
+                <!-- Architectural Specs -->
+                <div class="dev-pass-specs-grid">
+                  <div class="pass-spec-item">
+                    <span class="spec-label">RUNTIME ENGINE</span>
+                    <span class="spec-val">Hermes JSI C++</span>
+                  </div>
+                  <div class="pass-spec-item">
+                    <span class="spec-label">NEW ARCHITECTURE</span>
+                    <span class="spec-val">Fabric + TurboModules</span>
+                  </div>
+                  <div class="pass-spec-item">
+                    <span class="spec-label">NATIVE BRIDGES</span>
+                    <span class="spec-val">Swift (iOS) · Kotlin (Android)</span>
+                  </div>
+                  <div class="pass-spec-item">
+                    <span class="spec-label">PRODUCTION SCALE</span>
+                    <span class="spec-val">1M+ Shoppers · 99.98% Crash-Free</span>
+                  </div>
+                </div>
+
+                <!-- Stylized Developer QR Code & Barcode -->
+                <div class="dev-pass-codes">
+                  <div class="dev-pass-qr-wrap" title="Scan to open Abhav's GitHub">
+                    <svg viewBox="0 0 100 100" class="dev-pass-qr-svg">
+                      <rect width="100" height="100" fill="#0B132B" rx="8"/>
+                      <rect x="8" y="8" width="28" height="28" fill="#38BDF8" rx="4"/>
+                      <rect x="14" y="14" width="16" height="16" fill="#0B132B" rx="2"/>
+                      <rect x="18" y="18" width="8" height="8" fill="#38BDF8" rx="1"/>
+                      <rect x="64" y="8" width="28" height="28" fill="#38BDF8" rx="4"/>
+                      <rect x="70" y="14" width="16" height="16" fill="#0B132B" rx="2"/>
+                      <rect x="74" y="18" width="8" height="8" fill="#38BDF8" rx="1"/>
+                      <rect x="8" y="64" width="28" height="28" fill="#38BDF8" rx="4"/>
+                      <rect x="14" y="70" width="16" height="16" fill="#0B132B" rx="2"/>
+                      <rect x="18" y="74" width="8" height="8" fill="#38BDF8" rx="1"/>
+                      <rect x="42" y="12" width="6" height="6" fill="#A855F7"/>
+                      <rect x="50" y="20" width="6" height="6" fill="#38BDF8"/>
+                      <rect x="42" y="30" width="6" height="6" fill="#10B981"/>
+                      <rect x="52" y="38" width="6" height="6" fill="#38BDF8"/>
+                      <rect x="64" y="44" width="6" height="6" fill="#A855F7"/>
+                      <rect x="78" y="52" width="6" height="6" fill="#38BDF8"/>
+                      <rect x="44" y="52" width="6" height="6" fill="#38BDF8"/>
+                      <rect x="44" y="66" width="6" height="6" fill="#10B981"/>
+                      <rect x="54" y="74" width="6" height="6" fill="#38BDF8"/>
+                      <rect x="70" y="74" width="6" height="6" fill="#A855F7"/>
+                      <rect x="80" y="82" width="6" height="6" fill="#38BDF8"/>
+                      <circle cx="50" cy="50" r="10" fill="#0E172A" stroke="#38BDF8" stroke-width="2"/>
+                      <text x="50" y="54" font-size="10" font-weight="900" text-anchor="middle" fill="#38BDF8" font-family="sans-serif">A</text>
+                    </svg>
+                    <span class="qr-caption">SCAN TO VERIFY</span>
+                  </div>
+
+                  <div class="dev-pass-barcode-wrap">
+                    <div class="dev-pass-barcode-lines">
+                      <span class="b-line w1"></span><span class="b-line w3"></span><span class="b-line w2"></span>
+                      <span class="b-line w1"></span><span class="b-line w4"></span><span class="b-line w2"></span>
+                      <span class="b-line w3"></span><span class="b-line w1"></span><span class="b-line w2"></span>
+                      <span class="b-line w4"></span><span class="b-line w1"></span><span class="b-line w3"></span>
+                      <span class="b-line w2"></span><span class="b-line w1"></span><span class="b-line w4"></span>
+                    </div>
+                    <span class="barcode-text">ID: AT-SDE2-RN-BLR</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dev-pass-back-footer">
+                <button class="btn-flip-pass active" id="btn-flip-to-front" type="button">
+                  <span>↺ Flip to Front Pass</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -196,6 +323,22 @@
           </div>
 
           <div class="headline-actions">
+            <!-- 30s Architecture Tour Button (from Video 1's Talking Hero concept) -->
+            <button class="btn btn-tour btn-large" id="btn-architecture-tour" type="button" title="Watch 30s Interactive Architecture Tour">
+              <div class="tour-wave-icon">
+                <span class="t-bar"></span>
+                <span class="t-bar"></span>
+                <span class="t-bar"></span>
+              </div>
+              <span>30s Arch Tour</span>
+            </button>
+
+            <!-- The Screenplay Hollywood Resume Trigger (from Video 2) -->
+            <button class="btn btn-secondary btn-large btn-screenplay-trigger" id="btn-open-screenplay" type="button" title="Read The Full Story as an Official Screenplay">
+              <span style="font-family: var(--font-mono); font-size: 0.95rem;">🎬</span>
+              <span>The Screenplay</span>
+            </button>
+
             <a href="assets/Abhav_Thakur_Resume.pdf" target="_blank" download="Abhav_Thakur_Resume.pdf" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, #2563EB, #0284C7); box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               <span>Get Resume (PDF)</span>
@@ -203,10 +346,6 @@
             <a href="#projects" class="btn btn-secondary btn-large">
               <span>Explore Projects</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-            <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
-              <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              <span>GitHub</span>
             </a>
           </div>
         </div>
@@ -295,15 +434,456 @@
           <p class="section-desc">Engineering scalable mobile architectures, AI-integrated platforms, and developer tooling.</p>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="project-filters reveal">
+        <!-- ─── Netflix-Style Cinematic Spotlight Billboard (Inspired by Video 2) ─── -->
+        <div class="cinema-spotlight-card reveal" id="cinema-spotlight" data-tilt data-tilt-max="3">
+          <div class="spotlight-backdrop-glow"></div>
+          <div class="spotlight-content">
+            <div class="spotlight-badge-row">
+              <span class="spotlight-top-badge">
+                <span class="badge-fire">🔥</span> #1 FEATURED MOBILE ARCHITECTURE
+              </span>
+              <span class="spotlight-meta-chip">★★★★★ 4.9 App Store</span>
+              <span class="spotlight-meta-chip">1M+ Active Shoppers</span>
+              <span class="spotlight-meta-chip">Hermes JSI 60 FPS</span>
+            </div>
+
+            <h3 class="spotlight-title">Mobile Performance Debug SDK</h3>
+            <p class="spotlight-desc">
+              Org-wide 3-layer mobile observability engine engineered for Best Buy. Features real-time CADisplayLink (iOS) &amp; Choreographer (Android) frame pacing, zero-overhead Hermes JSI C++ bridges, and background Looper ANR watchdog telemetry.
+            </p>
+
+            <div class="spotlight-tech-stack">
+              <span class="tech-pill">React Native</span>
+              <span class="tech-pill">Swift (iOS 18)</span>
+              <span class="tech-pill">Kotlin (Android 15)</span>
+              <span class="tech-pill">Hermes JSI</span>
+              <span class="tech-pill">Dynatrace APM</span>
+              <span class="tech-pill">Sentry Tracing</span>
+            </div>
+
+            <div class="spotlight-actions">
+              <button class="btn btn-spotlight-play" id="btn-spotlight-modal" type="button" data-project-id="mobile-perf-sdk" onclick="openProjectModal('mobile-perf-sdk')" title="View Full Architecture Breakdown">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span>Architecture Specs</span>
+              </button>
+              <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" class="btn btn-spotlight-subtle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span>GitHub Source</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="spotlight-visual">
+            <div class="spotlight-device-preview">
+              <div class="spotlight-screen-mini">
+                <div class="mini-status-bar"><span>9:41</span><span>60.0 FPS</span></div>
+                <div class="mini-chart-bars">
+                  <span class="m-bar h1"></span><span class="m-bar h2"></span><span class="m-bar h3"></span>
+                  <span class="m-bar h4"></span><span class="m-bar h3"></span><span class="m-bar h5"></span>
+                  <span class="m-bar h2"></span><span class="m-bar h4"></span><span class="m-bar h5"></span>
+                </div>
+                <div class="mini-telemetry-badge">HERMES JSI ⚡ 0.4ms</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Projects View Mode Switcher ─── -->
+        <div class="projects-view-toggle-wrap reveal">
+          <div class="projects-view-pills">
+            <button class="proj-view-btn active" id="btn-view-workstation" data-proj-view="workstation">
+              <span class="btn-icon">🗂️</span>
+              <span>Horizontal Workstation</span>
+            </button>
+            <button class="proj-view-btn" id="btn-view-netflix" data-proj-view="netflix">
+              <span class="btn-icon">🎬</span>
+              <span>Streaming Shelves</span>
+            </button>
+            <button class="proj-view-btn" id="btn-view-grid" data-proj-view="grid">
+              <span class="btn-icon">⊞</span>
+              <span>Classic Grid</span>
+            </button>
+          </div>
+          <span class="proj-view-hint">Interactive expandable drawers &amp; live architectural telemetry</span>
+        </div>
+
+        <!-- ─── Horizontal Workstation Accordion (Reel 1 Lohitha Damisetti Inspiration) ─── -->
+        <div class="horizontal-workstation-container reveal" id="horizontal-workstation">
+          <div class="workstation-subhead">
+            <span class="subhead-badge">REEL 01 SHOWCASE</span>
+            <h3 class="workstation-title">Things I've <span class="title-serif">built.</span></h3>
+            <p class="workstation-desc">Hover or tap any panel to slide open its live telemetry, architectural breakdown, and code.</p>
+          </div>
+
+          <div class="workstation-accordion" id="workstation-accordion">
+            <!-- Panel 1: Best Buy Observability SDK (Active) -->
+            <div class="workstation-panel active" data-panel="1" data-project-id="mobile-perf-sdk">
+              <div class="panel-spine">
+                <span class="spine-num">01</span>
+                <span class="spine-title">Mobile Observability SDK</span>
+                <span class="spine-icon">+</span>
+              </div>
+              <div class="panel-expanded-content">
+                <div class="panel-info-side">
+                  <div class="panel-cat-tag">TELEMETRY &amp; RUNTIME PERF · PRODUCTION GRADE</div>
+                  <h4 class="panel-proj-name">Mobile Observability &amp; ANR Watchdog SDK</h4>
+                  <p class="panel-proj-desc">
+                    Enterprise performance observability engine shipped in Best Buy's flagship shopping app. Real-time CADisplayLink on iOS and Android Looper monitoring dispatching to Dynatrace &amp; Sentry with sub-millisecond JSI overhead.
+                  </p>
+                  <div class="panel-metrics-row">
+                    <div class="p-gauge"><span class="p-num">60 FPS</span><span class="p-txt">Target Pacing</span></div>
+                    <div class="p-gauge"><span class="p-num">99.98%</span><span class="p-txt">Crash-Free</span></div>
+                    <div class="p-gauge"><span class="p-num">&lt;0.5ms</span><span class="p-txt">JSI Bridge</span></div>
+                  </div>
+                  <div class="panel-chips-row">
+                    <span>React Native</span><span>Swift</span><span>Kotlin</span><span>Hermes JSI</span>
+                  </div>
+                  <div class="panel-actions-row">
+                    <button class="btn btn-primary" onclick="openProjectModal('mobile-perf-sdk')">Architecture Specs ↗</button>
+                    <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Source Code ↗</a>
+                  </div>
+                </div>
+                <div class="panel-preview-side">
+                  <div class="doc-scan-card">
+                    <div class="doc-header"><span>SDK_DIAGNOSTICS.JSON</span><span class="doc-pill live">LIVE</span></div>
+                    <div class="doc-gauge-ring">
+                      <div class="ring-circle"><span class="ring-val">99.8</span><span class="ring-sub">HEALTH</span></div>
+                    </div>
+                    <div class="doc-lines-sim">
+                      <div class="d-line w90"></div>
+                      <div class="d-line w75"></div>
+                      <div class="d-line w60"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 2: Interview Brain -->
+            <div class="workstation-panel" data-panel="2" data-project-id="interview-brain">
+              <div class="panel-spine">
+                <span class="spine-num">02</span>
+                <span class="spine-title">Interview Brain AI</span>
+                <span class="spine-icon">+</span>
+              </div>
+              <div class="panel-expanded-content">
+                <div class="panel-info-side">
+                  <div class="panel-cat-tag">FULL-STACK AI &amp; NEXT.JS 16 · REACT 19</div>
+                  <h4 class="panel-proj-name">Interview Brain AI Platform</h4>
+                  <p class="panel-proj-desc">
+                    Intelligent technical interview preparation engine featuring real-time code evaluation, syntax sandboxing, and multimodal conversational AI breakdown.
+                  </p>
+                  <div class="panel-metrics-row">
+                    <div class="p-gauge"><span class="p-num">React 19</span><span class="p-txt">Concurrent</span></div>
+                    <div class="p-gauge"><span class="p-num">100%</span><span class="p-txt">TypeScript</span></div>
+                    <div class="p-gauge"><span class="p-num">Zustand</span><span class="p-txt">Reactive</span></div>
+                  </div>
+                  <div class="panel-chips-row">
+                    <span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Tailwind</span>
+                  </div>
+                  <div class="panel-actions-row">
+                    <button class="btn btn-primary" onclick="openProjectModal('interview-brain')">AI Architecture ↗</button>
+                    <a href="https://interview-brain-one.vercel.app/prep" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Live Demo ↗</a>
+                  </div>
+                </div>
+                <div class="panel-preview-side">
+                  <div class="doc-scan-card">
+                    <div class="doc-header"><span>CODE_RUNNER_SANDBOX</span><span class="doc-pill">READY</span></div>
+                    <div class="doc-gauge-ring"><div class="ring-circle"><span class="ring-val">A+</span><span class="ring-sub">SCORE</span></div></div>
+                    <div class="doc-lines-sim"><div class="d-line w80"></div><div class="d-line w95"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 3: GrowthOS -->
+            <div class="workstation-panel" data-panel="3" data-project-id="growthos">
+              <div class="panel-spine">
+                <span class="spine-num">03</span>
+                <span class="spine-title">GrowthOS Analytics</span>
+                <span class="spine-icon">+</span>
+              </div>
+              <div class="panel-expanded-content">
+                <div class="panel-info-side">
+                  <div class="panel-cat-tag">ENTERPRISE PLATFORM &amp; GROWTH OPS</div>
+                  <h4 class="panel-proj-name">GrowthOS Platform &amp; Analytics OS</h4>
+                  <p class="panel-proj-desc">
+                    Executive growth operations platform tracking multi-channel funnels, acquisition cohorts, and retention curves.
+                  </p>
+                  <div class="panel-metrics-row">
+                    <div class="p-gauge"><span class="p-num">Sub-20ms</span><span class="p-txt">Query</span></div>
+                    <div class="p-gauge"><span class="p-num">Multi-Series</span><span class="p-txt">Charts</span></div>
+                  </div>
+                  <div class="panel-chips-row">
+                    <span>TypeScript</span><span>React</span><span>Analytics</span>
+                  </div>
+                  <div class="panel-actions-row">
+                    <a href="https://github.com/AbhavThakur/GrowthOS" target="_blank" rel="noopener noreferrer" class="btn btn-primary">GitHub Repository ↗</a>
+                  </div>
+                </div>
+                <div class="panel-preview-side">
+                  <div class="doc-scan-card">
+                    <div class="doc-header"><span>KPI_FUNNEL_TELEMETRY</span><span class="doc-pill">SYNCED</span></div>
+                    <div class="doc-gauge-ring"><div class="ring-circle"><span class="ring-val">+23%</span><span class="ring-sub">GROWTH</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 4: CaseLog Clinical App -->
+            <div class="workstation-panel" data-panel="4" data-project-id="caselog">
+              <div class="panel-spine">
+                <span class="spine-num">04</span>
+                <span class="spine-title">CaseLog Healthcare</span>
+                <span class="spine-icon">+</span>
+              </div>
+              <div class="panel-expanded-content">
+                <div class="panel-info-side">
+                  <div class="panel-cat-tag">CLINICAL HEALTHCARE &amp; OFFLINE MOBILE</div>
+                  <h4 class="panel-proj-name">CaseLog Doctor-Patient Chart</h4>
+                  <p class="panel-proj-desc">
+                    Mobile clinical logging platform for surgeons and medical residents. Offline-first triage, structured case documentation, and doctor collaboration.
+                  </p>
+                  <div class="panel-metrics-row">
+                    <div class="p-gauge"><span class="p-num">Offline</span><span class="p-txt">First</span></div>
+                    <div class="p-gauge"><span class="p-num">HIPAA</span><span class="p-txt">Ready</span></div>
+                  </div>
+                  <div class="panel-chips-row">
+                    <span>React 19</span><span>TypeScript</span><span>Vite</span>
+                  </div>
+                  <div class="panel-actions-row">
+                    <button class="btn btn-primary" onclick="openProjectModal('caselog')">System Specs ↗</button>
+                    <a href="https://caselog-book.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Live App ↗</a>
+                  </div>
+                </div>
+                <div class="panel-preview-side">
+                  <div class="doc-scan-card">
+                    <div class="doc-header"><span>PATIENT_TRIAGE_SYNC</span><span class="doc-pill">ENCRYPTED</span></div>
+                    <div class="doc-gauge-ring"><div class="ring-circle"><span class="ring-val">100%</span><span class="ring-sub">OFFLINE</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Netflix-Style Streaming Category Shelves ─── -->
+        <div class="streaming-shelves-container" id="streaming-shelves-container" style="display: none;">
+          
+          <!-- Shelf 1: Mobile Platform & Core Flagships -->
+          <div class="stream-shelf reveal">
+            <div class="stream-shelf-header">
+              <div class="shelf-title-wrap">
+                <span class="shelf-emoji">📱</span>
+                <h3 class="shelf-title">App Store Flagships &amp; Native Mobile Systems</h3>
+                <span class="shelf-badge">PRODUCTION GRADE</span>
+              </div>
+              <div class="shelf-nav-arrows">
+                <button class="shelf-arrow-btn shelf-prev" data-target="shelf-mobile" aria-label="Previous">‹</button>
+                <button class="shelf-arrow-btn shelf-next" data-target="shelf-mobile" aria-label="Next">›</button>
+              </div>
+            </div>
+
+            <div class="stream-shelf-track" id="shelf-mobile">
+              <!-- Item 1: Mobile Perf SDK -->
+              <div class="stream-card" data-project-id="mobile-perf-sdk">
+                <div class="stream-card-media stream-media-sdk">
+                  <div class="media-icon-big">⚡ 📱</div>
+                  <span class="stream-badge-top">Top Telemetry</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="openProjectModal('mobile-perf-sdk')" title="View Architecture Specs ↗">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ 99.98% Crash-Free · 60 FPS</div>
+                  <h4 class="stream-card-title">Mobile Performance Debug SDK</h4>
+                  <p class="stream-card-sub">CADisplayLink, Hermes JSI &amp; Looper ANR Watchdog</p>
+                  <div class="stream-card-chips">
+                    <span>React Native</span><span>Swift</span><span>Kotlin</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: CaseLog Clinical App -->
+              <div class="stream-card" data-project-id="caselog">
+                <div class="stream-card-media">
+                  <img src="assets/caselog.png" alt="CaseLog" class="stream-img" loading="lazy">
+                  <span class="stream-badge-top">Healthcare</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="openProjectModal('caselog')" title="View Architecture Specs ↗">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Offline-First Sync · Clinical Triage</div>
+                  <h4 class="stream-card-title">CaseLog Doctor-Patient Chart</h4>
+                  <p class="stream-card-sub">Mobile clinical tracking, diagnosis &amp; collaboration</p>
+                  <div class="stream-card-chips">
+                    <span>TypeScript</span><span>React 19</span><span>Vite</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: Best Buy Checkout & Commerce Flow -->
+              <div class="stream-card" data-project-id="bestbuy-commerce">
+                <div class="stream-card-media stream-media-cart">
+                  <div class="media-icon-big">🛒 💳</div>
+                  <span class="stream-badge-top">1M+ MAU</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="openProjectModal('bestbuy-commerce')" title="View Architecture Specs ↗">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Retail Commerce · High Scale</div>
+                  <h4 class="stream-card-title">Best Buy Commerce Funnel</h4>
+                  <p class="stream-card-sub">High-conversion checkout &amp; order tracking</p>
+                  <div class="stream-card-chips">
+                    <span>React Native</span><span>Redux</span><span>Hermes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shelf 2: AI Platforms & Full-Stack Systems -->
+          <div class="stream-shelf reveal">
+            <div class="stream-shelf-header">
+              <div class="shelf-title-wrap">
+                <span class="shelf-emoji">⚡</span>
+                <h3 class="shelf-title">AI Platforms &amp; Modern Full-Stack Workflows</h3>
+                <span class="shelf-badge">NEXT.JS 16 &amp; REACT 19</span>
+              </div>
+              <div class="shelf-nav-arrows">
+                <button class="shelf-arrow-btn shelf-prev" data-target="shelf-ai" aria-label="Previous">‹</button>
+                <button class="shelf-arrow-btn shelf-next" data-target="shelf-ai" aria-label="Next">›</button>
+              </div>
+            </div>
+
+            <div class="stream-shelf-track" id="shelf-ai">
+              <!-- Item 1: Interview Brain -->
+              <div class="stream-card" data-project-id="interview-brain">
+                <div class="stream-card-media">
+                  <img src="assets/interview-brain.png" alt="Interview Brain" class="stream-img" loading="lazy">
+                  <span class="stream-badge-top">AI Engine</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="openProjectModal('interview-brain')" title="View Architecture Specs ↗">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Real-time Runner · Intelligent Breakdown</div>
+                  <h4 class="stream-card-title">Interview Brain AI Platform</h4>
+                  <p class="stream-card-sub">Interactive code challenges &amp; system architecture</p>
+                  <div class="stream-card-chips">
+                    <span>Next.js 16</span><span>React 19</span><span>TypeScript</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: GrowthOS -->
+              <div class="stream-card" data-project-id="growthos">
+                <div class="stream-card-media">
+                  <img src="assets/growthos.png" alt="GrowthOS" class="stream-img" loading="lazy">
+                  <span class="stream-badge-top">Analytics OS</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="window.open('https://github.com/AbhavThakur/GrowthOS', '_blank')" title="View GitHub">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Predictive Modeling · High Throughput</div>
+                  <h4 class="stream-card-title">GrowthOS Intelligence Suite</h4>
+                  <p class="stream-card-sub">AI-driven SaaS growth forecasting &amp; metrics</p>
+                  <div class="stream-card-chips">
+                    <span>React 19</span><span>Vite</span><span>ESM Visualizer</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: Wardrobe-View -->
+              <div class="stream-card" data-project-id="wardrobe-view">
+                <div class="stream-card-media stream-media-wardrobe">
+                  <div class="media-icon-big">👔 🎨</div>
+                  <span class="stream-badge-top">Interactive</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="window.open('https://github.com/AbhavThakur/Wardrobe-View', '_blank')" title="View GitHub">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Styling Canvas · Tag Engine</div>
+                  <h4 class="stream-card-title">Wardrobe-View &amp; Catalog</h4>
+                  <p class="stream-card-sub">Virtual wardrobe organizer &amp; styling assistant</p>
+                  <div class="stream-card-chips">
+                    <span>JavaScript</span><span>Canvas</span><span>CSS Modern</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shelf 3: Fintech & Core Platforms -->
+          <div class="stream-shelf reveal">
+            <div class="stream-shelf-header">
+              <div class="shelf-title-wrap">
+                <span class="shelf-emoji">📈</span>
+                <h3 class="shelf-title">Fintech Systems &amp; Developer Infrastructure</h3>
+                <span class="shelf-badge">MISSION CRITICAL</span>
+              </div>
+              <div class="shelf-nav-arrows">
+                <button class="shelf-arrow-btn shelf-prev" data-target="shelf-fintech" aria-label="Previous">‹</button>
+                <button class="shelf-arrow-btn shelf-next" data-target="shelf-fintech" aria-label="Next">›</button>
+              </div>
+            </div>
+
+            <div class="stream-shelf-track" id="shelf-fintech">
+              <!-- Item 1: WealthOS -->
+              <div class="stream-card" data-project-id="wealthos">
+                <div class="stream-card-media">
+                  <img src="assets/wealthos.png" alt="WealthOS" class="stream-img" loading="lazy">
+                  <span class="stream-badge-top">Fintech</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="openProjectModal('wealthos')" title="View Architecture Specs ↗">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Real-time Portfolio · Multi-Asset</div>
+                  <h4 class="stream-card-title">WealthOS Investment Platform</h4>
+                  <p class="stream-card-sub">Asset allocation visualizer &amp; return metrics</p>
+                  <div class="stream-card-chips">
+                    <span>React 19</span><span>Vite 8</span><span>TypeScript</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: CloudKitchen Platform -->
+              <div class="stream-card" data-project-id="cloudkitchen">
+                <div class="stream-card-media stream-media-cloudkitchen">
+                  <div class="media-icon-big">🍳 📦</div>
+                  <span class="stream-badge-top">Operations</span>
+                  <div class="stream-card-overlay">
+                    <button class="stream-quick-play" onclick="window.open('https://github.com/AbhavThakur/CloudKitchen', '_blank')" title="View GitHub">↗</button>
+                  </div>
+                </div>
+                <div class="stream-card-info">
+                  <div class="stream-card-rating">★★★★★ Kitchen Workflow · Microservices</div>
+                  <h4 class="stream-card-title">CloudKitchen Operations</h4>
+                  <p class="stream-card-sub">Multi-brand order fulfillment &amp; inventory dispatch</p>
+                  <div class="stream-card-chips">
+                    <span>Full Stack</span><span>REST APIs</span><span>Node.js</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Filter Tabs (For Grid View) -->
+        <div class="project-filters reveal" id="project-filters" style="display: none;">
           <button class="filter-btn active" data-filter="all">All Projects (7)</button>
           <button class="filter-btn" data-filter="mobile">Mobile &amp; Healthcare</button>
           <button class="filter-btn" data-filter="ai-fullstack">AI &amp; Full Stack</button>
           <button class="filter-btn" data-filter="systems">Dashboards &amp; Tools</button>
         </div>
 
-        <div class="projects-grid">
+        <div class="projects-grid" id="projects-grid" style="display: none;">
           <!-- Project 0: Mobile Performance Debug SDK -->
           <div class="project-card reveal" data-category="mobile" data-project-id="mobile-perf-sdk" data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.08">
             <div class="project-image-wrapper">
@@ -561,418 +1141,233 @@
         </div>
       </section>
 
-      <!-- ════════════ 1. INTERACTIVE MOBILE APP SIMULATOR ════════════ -->
-      <section class="section" id="mobile-lab">
-        <div class="section-header reveal">
-          <span class="section-tag">Interactive Mobile Lab</span>
-          <h2 class="section-title">Live Mobile Experience Simulator</h2>
-          <p class="section-desc">Test real mobile architectures and interface modules directly on an interactive device mockup.</p>
-        </div>
-
-        <div class="mobile-sim-section reveal">
-          <!-- Left Controls -->
-          <div class="sim-info-side">
-            <h3 style="font-size: 1.5rem; font-weight: 800;">Switch Interactive Screen:</h3>
-            <div class="sim-nav-pills">
-              <button class="sim-nav-btn active" data-screen="bestbuy">
-                <div class="sim-btn-left">
-                  <div class="sim-btn-icon">🛒</div>
-                  <div>
-                    <div class="sim-btn-title">Best Buy Consumer Flow</div>
-                    <div class="sim-btn-sub">Performance Debugger &amp; First-Click Latency</div>
-                  </div>
-                </div>
-                <span>⚡ Active</span>
-              </button>
-
-              <button class="sim-nav-btn" data-screen="interview">
-                <div class="sim-btn-left">
-                  <div class="sim-btn-icon">🧠</div>
-                  <div>
-                    <div class="sim-btn-title">Interview Brain Code Runner</div>
-                    <div class="sim-btn-sub">Real-Time Mobile Syntax &amp; AI Breakdown</div>
-                  </div>
-                </div>
-                <span>Preview</span>
-              </button>
-
-              <button class="sim-nav-btn" data-screen="caselog">
-                <div class="sim-btn-left">
-                  <div class="sim-btn-icon">🏥</div>
-                  <div>
-                    <div class="sim-btn-title">CaseLog Doctor Patient Chart</div>
-                    <div class="sim-btn-sub">Offline-First Triage &amp; Clinical Logging</div>
-                  </div>
-                </div>
-                <span>Preview</span>
-              </button>
-
-              <button class="sim-nav-btn" data-screen="wealthos">
-                <div class="sim-btn-left">
-                  <div class="sim-btn-icon">📈</div>
-                  <div>
-                    <div class="sim-btn-title">WealthOS Portfolio Visualizer</div>
-                    <div class="sim-btn-sub">Multi-Asset Allocation &amp; Return Metrics</div>
-                  </div>
-                </div>
-                <span>Preview</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Right Phone Chassis Mockup -->
-          <div class="phone-mockup-wrapper" data-tilt data-tilt-max="4">
-            <div class="phone-device">
-              <div class="phone-screen">
-                <div class="phone-island">
-                  <div class="island-wave-bars">
-                    <span class="i-bar"></span>
-                    <span class="i-bar"></span>
-                    <span class="i-bar"></span>
-                  </div>
-                  <span style="font-size: 0.55rem; color: #38BDF8; font-weight: 700; letter-spacing: 0.05em;">HERMES JIT</span>
-                  <div class="island-camera"></div>
-                </div>
-
-                <div class="phone-status-bar">
-                  <span>9:41</span>
-                  <span>5G 􀋦 100%</span>
-                </div>
-
-                <div class="phone-screen-body">
-                  
-                  <!-- Screen 1: Best Buy -->
-                  <div class="phone-screen-view active" id="phone-screen-bestbuy">
-                    <div class="app-header-mini">
-                      <span class="app-title-mini">Best Buy Mobile</span>
-                      <span class="fps-badge" id="sim-fps">60.0 FPS</span>
-                    </div>
-
-                    <!-- Live Oscillating CPU Waveform -->
-                    <div class="phone-card-mini">
-                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
-                        <span style="font-size: 0.68rem; color: #94A3B8; font-weight:700;">⚡ LIVE CPU WAVEFORM</span>
-                        <span class="live-dot-pulse"></span>
-                      </div>
-                      <div class="mini-chart-wrap">
-                        <svg class="cpu-wave-svg" viewBox="0 0 160 36" preserveAspectRatio="none">
-                          <defs>
-                            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                              <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.6"/>
-                              <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.0"/>
-                            </linearGradient>
-                          </defs>
-                          <path class="wave-path" d="M0,18 Q20,4 40,18 T80,18 T120,18 T160,18 L160,36 L0,36 Z" fill="url(#waveGrad)"/>
-                          <path class="wave-stroke" d="M0,18 Q20,4 40,18 T80,18 T120,18 T160,18" fill="none" stroke="#38BDF8" stroke-width="2"/>
-                        </svg>
-                      </div>
-                      <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #fff; margin-top: 6px;">
-                        <span>First Click Latency</span>
-                        <span style="color: #10B981;">18ms (Optimal)</span>
-                      </div>
-                      <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #fff; margin-top: 2px;">
-                        <span>Hermes Memory Pool</span>
-                        <span style="color: #38BDF8;">32.4 MB</span>
-                      </div>
-                    </div>
-
-                    <div class="phone-card-mini" style="background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.25);">
-                      <div style="font-weight: 700; font-size: 0.82rem; color: #fff;">Consumer Checkout Flow</div>
-                      <div style="font-size: 0.7rem; color: #94A3B8; margin-top: 2px;">Zero re-render memoization active</div>
-                      <button class="phone-btn-mini" onclick="simulateMobileClick('bestbuy')">Simulate Native Action</button>
-                    </div>
-
-                    <div class="phone-card-mini" style="display:flex; justify-content:space-between; align-items:center;">
-                      <span style="font-size: 0.7rem; color: #94A3B8;">Crash Free Rate</span>
-                      <strong style="color: #10B981; font-size:0.8rem;">99.98%</strong>
-                    </div>
-                  </div>
-
-                  <!-- Screen 2: Interview Brain -->
-                  <div class="phone-screen-view" id="phone-screen-interview">
-                    <div class="app-header-mini">
-                      <span class="app-title-mini">Interview Brain</span>
-                      <span class="fps-badge">AI Active</span>
-                    </div>
-                    <div class="phone-card-mini">
-                      <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size: 0.72rem; color: #38BDF8; font-weight: 700;">Challenge: Two Sum</span>
-                        <span style="font-size:0.65rem; color:#10B981; background:rgba(16,185,129,0.15); padding:1px 6px; border-radius:4px;">O(N)</span>
-                      </div>
-                      <pre style="font-family: monospace; font-size: 0.62rem; color: #94A3B8; margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border:1px solid rgba(255,255,255,0.06);">const map = new Map();
-for(let i=0; i&lt;nums.length; i++) {
-  if(map.has(target - nums[i]))
-    return [map.get(target-nums[i]), i];
-}</pre>
-                      <div style="margin-top:6px; font-size:0.68rem; color:#10B981; display:flex; align-items:center; gap:4px;">
-                        <span>✓</span><span>Test suite passed (2ms)</span>
-                      </div>
-                      <button class="phone-btn-mini" onclick="simulateMobileClick('interview')">Run Test Suite</button>
-                    </div>
-                  </div>
-
-                  <!-- Screen 3: CaseLog -->
-                  <div class="phone-screen-view" id="phone-screen-caselog">
-                    <div class="app-header-mini">
-                      <span class="app-title-mini">CaseLog MD</span>
-                      <span class="fps-badge">Sync: OK</span>
-                    </div>
-                    <div class="phone-card-mini">
-                      <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div style="font-weight: 700; font-size: 0.82rem; color: #fff;">Patient #8942 — Triage</div>
-                        <span style="font-size:0.65rem; color:#F59E0B; background:rgba(245,158,11,0.15); padding:1px 6px; border-radius:4px;">Cardiology</span>
-                      </div>
-                      
-                      <!-- Live Cardiac Pulse Line -->
-                      <div class="ecg-monitor-wrap" style="margin: 8px 0; background:rgba(0,0,0,0.3); border-radius:6px; padding:4px; overflow:hidden;">
-                        <svg class="ecg-svg" viewBox="0 0 160 28" preserveAspectRatio="none">
-                          <path class="ecg-path" d="M0,14 L35,14 L40,4 L45,24 L50,10 L55,16 L60,14 L160,14" fill="none" stroke="#10B981" stroke-width="2"/>
-                        </svg>
-                      </div>
-
-                      <div style="font-size: 0.72rem; color: #10B981;">● Cardiac Rate: 72 bpm (Normal)</div>
-                      <button class="phone-btn-mini" onclick="simulateMobileClick('caselog')">Log Clinical Note</button>
-                    </div>
-                  </div>
-
-                  <!-- Screen 4: WealthOS -->
-                  <div class="phone-screen-view" id="phone-screen-wealthos">
-                    <div class="app-header-mini">
-                      <span class="app-title-mini">WealthOS</span>
-                      <span class="fps-badge">+14.2%</span>
-                    </div>
-                    <div class="phone-card-mini">
-                      <div style="font-size: 0.68rem; color: #94A3B8;">Total Portfolio</div>
-                      <div style="font-size: 1.25rem; font-weight: 800; color: #fff; margin: 2px 0;">$142,850.00</div>
-                      <div style="font-size: 0.72rem; color: #10B981;">▲ +$18,420 (YTD)</div>
-                      
-                      <!-- Live Stock Area Chart -->
-                      <div class="mini-chart-wrap" style="margin-top:6px;">
-                        <svg class="stock-svg" viewBox="0 0 160 36" preserveAspectRatio="none">
-                          <defs>
-                            <linearGradient id="stockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                              <stop offset="0%" stop-color="#10B981" stop-opacity="0.6"/>
-                              <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"/>
-                            </linearGradient>
-                          </defs>
-                          <path class="stock-path-area" d="M0,28 Q30,22 60,14 T110,8 T160,4 L160,36 L0,36 Z" fill="url(#stockGrad)"/>
-                          <path class="stock-path-stroke" d="M0,28 Q30,22 60,14 T110,8 T160,4" fill="none" stroke="#10B981" stroke-width="2"/>
-                        </svg>
-                      </div>
-
-                      <button class="phone-btn-mini" onclick="simulateMobileClick('wealthos')">Rebalance Assets</button>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="phone-home-indicator"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ════════════ 2. INTERACTIVE ARCHITECTURE & CODE PLAYGROUND ════════════ -->
-      <section class="section" id="code-lab">
-        <div class="section-header reveal">
-          <span class="section-tag">Production Code Patterns</span>
-          <h2 class="section-title">Architecture &amp; Code Inspector</h2>
-          <p class="section-desc">Explore battle-tested React Native &amp; TypeScript code implementations used in high-traffic production environments.</p>
-        </div>
-
-        <div class="code-playground-card reveal">
-          <div class="code-playground-header">
-            <div class="code-window-dots">
-              <span class="win-dot red"></span>
-              <span class="win-dot yellow"></span>
-              <span class="win-dot green"></span>
-            </div>
-
-            <div class="code-tabs">
-              <button class="code-tab-btn active" data-snippet="profiler">usePerformanceProfiler.ts</button>
-              <button class="code-tab-btn" data-snippet="bridge">NativeTurboBridge.swift</button>
-              <button class="code-tab-btn" data-snippet="hermes">HermesMemoryMonitor.ts</button>
-            </div>
-
-            <button class="copy-code-btn" id="copy-snippet-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span>Copy Code</span>
-            </button>
-          </div>
-
-          <div class="code-editor-content">
-            <!-- Snippet 1 -->
-            <pre class="code-snippet-block active" id="code-profiler"><code><span class="syn-com">/**
- * usePerformanceProfiler.ts
- * Standalone Mobile Render Profiler for React Native
- * Measures first-click latency &amp; eliminates bottleneck re-renders.
- */</span>
-<span class="syn-kw">import</span> { useEffect, useRef } <span class="syn-kw">from</span> <span class="syn-str">'react'</span>;
-
-<span class="syn-kw">export function</span> <span class="syn-fn">usePerformanceProfiler</span>(<span class="syn-type">componentName</span>: <span class="syn-type">string</span>) {
-  <span class="syn-kw">const</span> renderCount = <span class="syn-fn">useRef</span>(<span class="syn-num">0</span>);
-  <span class="syn-kw">const</span> startTime = <span class="syn-fn">useRef</span>(performance.<span class="syn-fn">now</span>());
-
-  renderCount.current += <span class="syn-num">1</span>;
-
-  <span class="syn-fn">useEffect</span>(() =&gt; {
-    <span class="syn-kw">const</span> duration = performance.<span class="syn-fn">now</span>() - startTime.current;
-    
-    <span class="syn-com">// Emit telemetry if render threshold exceeded (&gt;16.6ms frame budget)</span>
-    <span class="syn-kw">if</span> (duration &gt; <span class="syn-num">16.6</span>) {
-      console.<span class="syn-fn">warn</span>(<span class="syn-str">`[PerfAlert] ⚠️ ${componentName} dropped a frame: ${duration.toFixed(2)}ms (Render #${renderCount.current})`</span>);
-    }
-  });
-
-  <span class="syn-kw">return</span> { renderCount: renderCount.current };
-}</code></pre>
-
-            <!-- Snippet 2 -->
-            <pre class="code-snippet-block" id="code-bridge"><code><span class="syn-com">// NativeTurboBridge.swift
-// High-performance Swift TurboModule for React Native JSI Bridge</span>
-<span class="syn-kw">import</span> Foundation
-<span class="syn-kw">import</span> React
-
-<span class="syn-kw">@objc(NativeTurboBridge)</span>
-<span class="syn-kw">public class</span> <span class="syn-type">NativeTurboBridge</span>: <span class="syn-type">NSObject</span> {
-  
-  <span class="syn-kw">@objc</span>
-  <span class="syn-kw">public func</span> <span class="syn-fn">dispatchHapticFeedback</span>(<span class="syn-type">_ style</span>: <span class="syn-type">String</span>, resolve: <span class="syn-type">RCTPromiseResolveBlock</span>, reject: <span class="syn-type">RCTPromiseRejectBlock</span>) {
-    <span class="syn-kw">DispatchQueue</span>.main.async {
-      <span class="syn-kw">let</span> generator = <span class="syn-type">UIImpactFeedbackGenerator</span>(style: .medium)
-      generator.prepare()
-      generator.impactOccurred()
-      resolve(<span class="syn-kw">true</span>)
-    }
-  }
-  
-  <span class="syn-kw">@objc</span>
-  <span class="syn-kw">public static func</span> <span class="syn-fn">requiresMainQueueSetup</span>() -&gt; <span class="syn-type">Bool</span> {
-    <span class="syn-kw">return false</span>
-  }
-}</code></pre>
-
-            <!-- Snippet 3 -->
-            <pre class="code-snippet-block" id="code-hermes"><code><span class="syn-com">/**
- * HermesMemoryMonitor.ts
- * Real-time heap inspection &amp; garbage collection management
- */</span>
-<span class="syn-kw">export class</span> <span class="syn-type">HermesMemoryMonitor</span> {
-  <span class="syn-kw">private static</span> thresholdMB = <span class="syn-num">80</span>;
-
-  <span class="syn-kw">static</span> <span class="syn-fn">checkHeapUsage</span>(): <span class="syn-type">void</span> {
-    <span class="syn-kw">if</span> (global.HermesInternal?.<span class="syn-fn">getInstrumentedStats</span>) {
-      <span class="syn-kw">const</span> stats = global.HermesInternal.<span class="syn-fn">getInstrumentedStats</span>();
-      <span class="syn-kw">const</span> allocatedMB = stats.js_allocated_bytes / (<span class="syn-num">1024</span> * <span class="syn-num">1024</span>);
-      
-      <span class="syn-kw">if</span> (allocatedMB &gt; <span class="syn-kw">this</span>.thresholdMB) {
-        <span class="syn-com">// Trigger non-blocking generational GC</span>
-        global.gc?.();
-      }
-    }
-  }
-}</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <!-- ════════════ 3. GITHUB CONTRIBUTIONS HEATMAP & ACTIVITY ════════════ -->
-      <section class="section" id="github-activity">
-        <div class="section-header reveal">
-          <span class="section-tag">Open Source &amp; Velocity</span>
-          <h2 class="section-title">GitHub Activity Matrix</h2>
-          <p class="section-desc">Live contribution activity, commits, and open-source contributions across public repositories.</p>
-        </div>
-
-        <div class="github-activity-section reveal" data-tilt data-tilt-max="3">
-          <div class="heatmap-header">
-            <div>
-              <h3 style="font-size: 1.3rem; font-weight: 800;">580+ Contributions in 2026</h3>
-              <p style="font-size: 0.85rem; color: var(--text-muted);">Verified activity on <a href="https://github.com/AbhavThakur" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: underline;">github.com/AbhavThakur</a></p>
-            </div>
-
-            <!-- Snake Game Toolbar & Controls -->
-          <div class="snake-controller-bar">
-            <div class="snake-status-badge">
-              <span class="snake-indicator-dot"></span>
-              <span id="snake-mode-label">🐍 Cyber Snake: Auto Hunting Stars</span>
-            </div>
-            <div class="snake-score-pill">
-              <span>⭐ Stars Eaten:</span>
-              <strong id="snake-eaten-count">0</strong>
-            </div>
-            <div class="snake-actions">
-              <button class="snake-btn" id="snake-toggle-play-btn" title="Toggle Manual Arrow Keys Control">
-                <span>🎮 Take Control (Keys)</span>
-              </button>
-              <button class="snake-btn-icon" id="snake-reset-btn" title="Respawn Snake">
-                <span>🔄</span>
-              </button>
-            </div>
-          </div>
-
-            <div class="heatmap-stats-row">
-              <div class="heatmap-stat-item">
-                <span class="heatmap-stat-num">52</span>
-                <span class="heatmap-stat-label">Weeks Active</span>
-              </div>
-              <div class="heatmap-stat-item">
-                <span class="heatmap-stat-num">24</span>
-                <span class="heatmap-stat-label">Day Streak</span>
-              </div>
-              <div class="heatmap-stat-item">
-                <span class="heatmap-stat-num">48+</span>
-                <span class="heatmap-stat-label">Merged PRs</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Heatmap Grid (Rendered by JS with Snake Layer) -->
-          <div class="heatmap-grid-scroll">
-            <div class="heatmap-grid" id="github-heatmap-grid">
-              <!-- Dynamically populated 52 weeks x 7 days -->
-            </div>
-          </div>
-
-          <div class="heatmap-legend">
-            <span>Less</span>
-            <span class="heat-cell level-0"></span>
-            <span class="heat-cell level-1"></span>
-            <span class="heat-cell level-2"></span>
-            <span class="heat-cell level-3"></span>
-            <span class="heat-cell level-4"></span>
-            <span>More</span>
-          </div>
-
-          <!-- Languages breakdown -->
-          <div class="github-languages-bar">
-            <div class="lang-segment" style="width: 55%; background: #3178C6;" title="TypeScript (55%)"></div>
-            <div class="lang-segment" style="width: 25%; background: #F1E05A;" title="JavaScript (25%)"></div>
-            <div class="lang-segment" style="width: 10%; background: #F05138;" title="Swift (10%)"></div>
-            <div class="lang-segment" style="width: 6%; background: #A97BFF;" title="Kotlin (6%)"></div>
-            <div class="lang-segment" style="width: 4%; background: #E34C26;" title="HTML/CSS (4%)"></div>
-          </div>
-
-          <div class="lang-legend-row">
-            <div class="lang-legend-item"><span class="lang-dot" style="background: #3178C6;"></span><span>TypeScript 55%</span></div>
-            <div class="lang-legend-item"><span class="lang-dot" style="background: #F1E05A;"></span><span>JavaScript 25%</span></div>
-            <div class="lang-legend-item"><span class="lang-dot" style="background: #F05138;"></span><span>Swift 10%</span></div>
-            <div class="lang-legend-item"><span class="lang-dot" style="background: #A97BFF;"></span><span>Kotlin 6%</span></div>
-            <div class="lang-legend-item"><span class="lang-dot" style="background: #E34C26;"></span><span>HTML/CSS 4%</span></div>
-          </div>
-        </div>
-      </section>
 
       <!-- ════════════ SKILLS MATRIX SECTION ════════════ -->
       <section class="section" id="skills">
         <div class="section-header reveal">
           <span class="section-tag">Technical Arsenal</span>
           <h2 class="section-title">Core Skills &amp; Proficiencies</h2>
-          <p class="section-desc">Extensive hands-on experience building mission-critical mobile and web applications.</p>
+          <p class="section-desc">Interactive Periodic Table of Mobile Architecture and Engineering proficiencies.</p>
         </div>
 
-        <div class="skills-container">
+        <!-- ─── Skills View Mode Switcher (Inspired by Video 1) ─── -->
+        <div class="skills-view-toggle-bar reveal">
+          <div class="skills-view-pill-group">
+            <button class="view-pill-btn active" id="btn-view-periodic" data-skills-view="periodic">
+              <span class="view-pill-icon">⚛</span>
+              <span>Periodic Table of Mobile</span>
+            </button>
+            <button class="view-pill-btn" id="btn-view-matrix" data-skills-view="matrix">
+              <span class="view-pill-icon">📊</span>
+              <span>Proficiency Matrix</span>
+            </button>
+          </div>
+          
+          <div class="periodic-category-legend">
+            <span class="cat-pill pill-mc"><span class="cat-dot"></span> Mobile Core &amp; Bridges</span>
+            <span class="cat-pill pill-fe"><span class="cat-dot"></span> Frontend &amp; Web</span>
+            <span class="cat-pill pill-ar"><span class="cat-dot"></span> State &amp; Architecture</span>
+            <span class="cat-pill pill-op"><span class="cat-dot"></span> DevOps &amp; APM</span>
+          </div>
+        </div>
+
+        <!-- ─── Periodic Table Interactive Container ─── -->
+        <div class="periodic-skills-wrapper reveal" id="periodic-skills-wrapper">
+          
+          <!-- Element Inspector Telemetry HUD -->
+          <div class="element-inspector-hud" id="element-inspector-hud">
+            <div class="inspector-header">
+              <div class="element-symbol-large cat-mc" id="insp-symbol">Rn</div>
+              <div class="inspector-titles">
+                <div class="insp-name" id="insp-name">React Native</div>
+                <div class="insp-category" id="insp-category">Mobile Core &amp; Native Engine</div>
+              </div>
+              <div class="insp-stat-chip">
+                <span class="insp-stat-val" id="insp-mastery">95%</span>
+                <span class="insp-stat-label">Production Mastery</span>
+              </div>
+            </div>
+
+            <div class="inspector-body">
+              <p class="insp-desc" id="insp-desc">
+                Core specialization: Fabric Renderer, TurboModules, New Architecture v0.76+, JSI C++ bridges, and high-performance cross-platform mobile app development.
+              </p>
+              <div class="insp-meta-row">
+                <div class="insp-meta-item">
+                  <span class="insp-meta-label">PRODUCTION USAGE</span>
+                  <span class="insp-meta-val" id="insp-usage">5+ Years · Best Buy Digital Core Commerce</span>
+                </div>
+                <div class="insp-meta-item">
+                  <span class="insp-meta-label">KEY HIGHLIGHT</span>
+                  <span class="insp-meta-val" id="insp-highlight">Zero-bridge direct C++ JSI invocation &amp; 60 FPS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Periodic Grid of Elements -->
+          <div class="periodic-table-grid" id="periodic-table-grid">
+            <!-- Mobile Core Group -->
+            <button class="periodic-cell cat-mc active" data-symbol="Rn" data-name="React Native" data-atomic="01" data-cat="Mobile Core &amp; Native Engine" data-mastery="95%" data-usage="5+ Years · Best Buy Digital" data-desc="Fabric Renderer, TurboModules, New Architecture v0.76+, JSI C++ direct bridges, and cross-platform UI." data-highlight="Zero-bridge direct C++ JSI invocation &amp; 60 FPS">
+              <span class="atomic-num">01</span>
+              <span class="atomic-sym">Rn</span>
+              <span class="atomic-name">React Native</span>
+              <span class="atomic-wt">95%</span>
+            </button>
+
+            <button class="periodic-cell cat-mc" data-symbol="Sw" data-name="Swift (iOS)" data-atomic="02" data-cat="Mobile Core &amp; Native Engine" data-mastery="88%" data-usage="4+ Years · iOS 18 &amp; Native Modules" data-desc="Custom Native Modules, CADisplayLink 60fps tracking, Instruments CPU/Memory profiling, and Swift bridges." data-highlight="Hardware CADisplayLink synchronization">
+              <span class="atomic-num">02</span>
+              <span class="atomic-sym">Sw</span>
+              <span class="atomic-name">Swift (iOS)</span>
+              <span class="atomic-wt">88%</span>
+            </button>
+
+            <button class="periodic-cell cat-mc" data-symbol="Kt" data-name="Kotlin (Android)" data-atomic="03" data-cat="Mobile Core &amp; Native Engine" data-mastery="86%" data-usage="4+ Years · Android 15 &amp; Choreographer" data-desc="Android JNI bindings, Choreographer frame callbacks, Looper watchdog for ANRs, and Kotlin Coroutines." data-highlight="Main-thread Looper watchdog">
+              <span class="atomic-num">03</span>
+              <span class="atomic-sym">Kt</span>
+              <span class="atomic-name">Kotlin (Android)</span>
+              <span class="atomic-wt">86%</span>
+            </button>
+
+            <button class="periodic-cell cat-mc" data-symbol="He" data-name="Hermes JSI" data-atomic="04" data-cat="Mobile Core &amp; Native Engine" data-mastery="92%" data-usage="4+ Years · Low-Latency Mobile Runtime" data-desc="Hermes bytecode ahead-of-time compilation, memory heap profiling, and C++ JSI host objects." data-highlight="Direct C++ host object execution">
+              <span class="atomic-num">04</span>
+              <span class="atomic-sym">He</span>
+              <span class="atomic-name">Hermes JSI</span>
+              <span class="atomic-wt">92%</span>
+            </button>
+
+            <button class="periodic-cell cat-mc" data-symbol="Jsi" data-name="C++ JSI Bridge" data-atomic="05" data-cat="Mobile Core &amp; Native Engine" data-mastery="85%" data-usage="3+ Years · High-Throughput Telemetry" data-desc="Zero-serialization C++ host objects for microsecond-level dispatch between JS and native C++ layer." data-highlight="Microsecond-level direct dispatch">
+              <span class="atomic-num">05</span>
+              <span class="atomic-sym">Jsi</span>
+              <span class="atomic-name">C++ JSI</span>
+              <span class="atomic-wt">85%</span>
+            </button>
+
+            <button class="periodic-cell cat-mc" data-symbol="Ex" data-name="Expo Ecosystem" data-atomic="06" data-cat="Mobile Core &amp; Native Engine" data-mastery="92%" data-usage="4+ Years · EAS &amp; Config Plugins" data-desc="Expo Bare workflow, Config Plugins, EAS Cloud build pipelines, and OTA updates." data-highlight="Continuous EAS delivery &amp; native plugins">
+              <span class="atomic-num">06</span>
+              <span class="atomic-sym">Ex</span>
+              <span class="atomic-name">Expo</span>
+              <span class="atomic-wt">92%</span>
+            </button>
+
+            <!-- Frontend Group -->
+            <button class="periodic-cell cat-fe" data-symbol="Ts" data-name="TypeScript" data-atomic="07" data-cat="Frontend &amp; Web Runtimes" data-mastery="95%" data-usage="5+ Years · Strict Architecture" data-desc="Strict typing, type-level generics, discriminated unions, and end-to-end type safety across mobile &amp; web." data-highlight="Type-safe navigation &amp; API contracts">
+              <span class="atomic-num">07</span>
+              <span class="atomic-sym">Ts</span>
+              <span class="atomic-name">TypeScript</span>
+              <span class="atomic-wt">95%</span>
+            </button>
+
+            <button class="periodic-cell cat-fe" data-symbol="R19" data-name="React 19" data-atomic="08" data-cat="Frontend &amp; Web Runtimes" data-mastery="92%" data-usage="Active Production · Next-Gen UI" data-desc="React 19 Hooks, useActionState, Server Components, React Compiler, and Suspense streaming." data-highlight="React Compiler automatic memoization">
+              <span class="atomic-num">08</span>
+              <span class="atomic-sym">R19</span>
+              <span class="atomic-name">React 19</span>
+              <span class="atomic-wt">92%</span>
+            </button>
+
+            <button class="periodic-cell cat-fe" data-symbol="Nx" data-name="Next.js 16" data-atomic="09" data-cat="Frontend &amp; Web Runtimes" data-mastery="90%" data-usage="Interview Brain &amp; Portals" data-desc="App Router, Server Actions, Incremental Static Regeneration, and Edge API deployment." data-highlight="Edge streaming &amp; ISR caching">
+              <span class="atomic-num">09</span>
+              <span class="atomic-sym">Nx</span>
+              <span class="atomic-name">Next.js 16</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+
+            <button class="periodic-cell cat-fe" data-symbol="V8" data-name="Vite 8" data-atomic="10" data-cat="Frontend &amp; Web Runtimes" data-mastery="90%" data-usage="GrowthOS, CaseLog, WealthOS" data-desc="Lightning ESM bundling, sub-second HMR, rollup optimizations, and client build pipelines." data-highlight="Sub-100ms instant module reload">
+              <span class="atomic-num">10</span>
+              <span class="atomic-sym">V8</span>
+              <span class="atomic-name">Vite 8</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+
+            <button class="periodic-cell cat-fe" data-symbol="Nd" data-name="Node.js" data-atomic="11" data-cat="Frontend &amp; Web Runtimes" data-mastery="88%" data-usage="Enterprise Backend Services" data-desc="Event loop concurrency, high-throughput Express REST services, middleware security, and JWT auth." data-highlight="Non-blocking asynchronous I/O">
+              <span class="atomic-num">11</span>
+              <span class="atomic-sym">Nd</span>
+              <span class="atomic-name">Node.js</span>
+              <span class="atomic-wt">88%</span>
+            </button>
+
+            <!-- State & Architecture Group -->
+            <button class="periodic-cell cat-ar" data-symbol="Zs" data-name="Zustand" data-atomic="12" data-cat="State &amp; Architecture" data-mastery="94%" data-usage="Preferred Mobile State Store" data-desc="Atomic state slices, transient updates without unnecessary re-renders, and persistent mobile storage." data-highlight="Zero-boilerplate reactive selectors">
+              <span class="atomic-num">12</span>
+              <span class="atomic-sym">Zs</span>
+              <span class="atomic-name">Zustand</span>
+              <span class="atomic-wt">94%</span>
+            </button>
+
+            <button class="periodic-cell cat-ar" data-symbol="Rx" data-name="Redux Toolkit" data-atomic="13" data-cat="State &amp; Architecture" data-mastery="90%" data-usage="Best Buy Enterprise Slices" data-desc="Predictable immutable state, RTK Query automated caching, normalization, and redux-persist." data-highlight="Normalized entity caching">
+              <span class="atomic-num">13</span>
+              <span class="atomic-sym">Rx</span>
+              <span class="atomic-name">Redux / RTK</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+
+            <button class="periodic-cell cat-ar" data-symbol="Tq" data-name="TanStack Query" data-atomic="14" data-cat="State &amp; Architecture" data-mastery="92%" data-usage="Asynchronous Mobile Cache" data-desc="Stale-while-revalidate caching, optimistic updates, offline mutation queuing, and window focus refetching." data-highlight="Offline mutation rollback">
+              <span class="atomic-num">14</span>
+              <span class="atomic-sym">Tq</span>
+              <span class="atomic-name">TanStack Query</span>
+              <span class="atomic-wt">92%</span>
+            </button>
+
+            <button class="periodic-cell cat-ar" data-symbol="Cl" data-name="Clean Architecture" data-atomic="15" data-cat="State &amp; Architecture" data-mastery="95%" data-usage="Org Standard at Scale" data-desc="Separation of concerns: Domain UseCases, Data Repositories, Presentation layers, and DI patterns." data-highlight="Decoupled presentation &amp; domain logic">
+              <span class="atomic-num">15</span>
+              <span class="atomic-sym">Cl</span>
+              <span class="atomic-name">Clean Arch</span>
+              <span class="atomic-wt">95%</span>
+            </button>
+
+            <button class="periodic-cell cat-ar" data-symbol="Sq" data-name="SQLite / WatermelonDB" data-atomic="16" data-cat="State &amp; Architecture" data-mastery="88%" data-usage="CaseLog Clinical Offline Sync" data-desc="Local SQLite database, reactive relational queries, multi-threaded sync, and schema migrations." data-highlight="Multi-threaded offline SQLite sync">
+              <span class="atomic-num">16</span>
+              <span class="atomic-sym">Sq</span>
+              <span class="atomic-name">SQLite DB</span>
+              <span class="atomic-wt">88%</span>
+            </button>
+
+            <!-- DevOps & Observability Group -->
+            <button class="periodic-cell cat-op" data-symbol="Dy" data-name="Dynatrace Telemetry" data-atomic="17" data-cat="Observability &amp; APM" data-mastery="90%" data-usage="Production Monitoring @ Best Buy" data-desc="Distributed tracing, first-click response latency, automated ANR detection, and 500ms batched telemetry." data-highlight="500ms batched background telemetry">
+              <span class="atomic-num">17</span>
+              <span class="atomic-sym">Dy</span>
+              <span class="atomic-name">Dynatrace</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+
+            <button class="periodic-cell cat-op" data-symbol="Se" data-name="Sentry APM" data-atomic="18" data-cat="Observability &amp; APM" data-mastery="88%" data-usage="Crash &amp; Performance Breadcrumbs" data-desc="Native stack trace symbolication, dSYM/ProGuard mapping, breadcrumbs tracking, and release health." data-highlight="Automatic dSYM symbolication">
+              <span class="atomic-num">18</span>
+              <span class="atomic-sym">Se</span>
+              <span class="atomic-name">Sentry</span>
+              <span class="atomic-wt">88%</span>
+            </button>
+
+            <button class="periodic-cell cat-op" data-symbol="Fs" data-name="Firebase &amp; FCM" data-atomic="19" data-cat="Observability &amp; APM" data-mastery="92%" data-usage="Mobile Notifications &amp; Auth" data-desc="FCM push notification handling (background &amp; killed states), Remote Config A/B testing, and Firestore." data-highlight="Killed-state silent push payload routing">
+              <span class="atomic-num">19</span>
+              <span class="atomic-sym">Fs</span>
+              <span class="atomic-name">Firebase FCM</span>
+              <span class="atomic-wt">92%</span>
+            </button>
+
+            <button class="periodic-cell cat-op" data-symbol="Fa" data-name="Fastlane Pipelines" data-atomic="20" data-cat="Observability &amp; APM" data-mastery="88%" data-usage="Automated App Store &amp; Play Store" data-desc="Match code signing, certificates/provisioning profiles, automated TestFlight releases, and build versioning." data-highlight="Zero-touch TestFlight provisioning">
+              <span class="atomic-num">20</span>
+              <span class="atomic-sym">Fa</span>
+              <span class="atomic-name">Fastlane</span>
+              <span class="atomic-wt">88%</span>
+            </button>
+
+            <button class="periodic-cell cat-op" data-symbol="Ga" data-name="GitHub Actions" data-atomic="21" data-cat="Observability &amp; APM" data-mastery="90%" data-usage="CI/CD Build &amp; Release Matrices" data-desc="Automated linting, Jest unit tests, bundle analysis, matrix builds for iOS/Android, and semantic releases." data-highlight="Automated release gating &amp; bundle budget">
+              <span class="atomic-num">21</span>
+              <span class="atomic-sym">Ga</span>
+              <span class="atomic-name">GitHub Actions</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+
+            <button class="periodic-cell cat-op" data-symbol="Fm" data-name="Reanimated &amp; Gestures" data-atomic="22" data-cat="Observability &amp; APM" data-mastery="90%" data-usage="Fluid 60fps Micro-Interactions" data-desc="Reanimated 3, Gesture Handler, physics-based springs, and layout transitions running on the native UI thread." data-highlight="60fps native UI thread worklets">
+              <span class="atomic-num">22</span>
+              <span class="atomic-sym">Fm</span>
+              <span class="atomic-name">Reanimated</span>
+              <span class="atomic-wt">90%</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="skills-container" id="matrix-skills-container" style="display: none;">
           
           <!-- Category 1 -->
           <div class="skill-category-card reveal" data-tilt data-tilt-max="5">
@@ -1121,7 +1516,231 @@ for(let i=0; i&lt;nums.length; i++) {
           <p class="section-desc">Delivering tangible business outcomes, architectural stability, and user experience delight.</p>
         </div>
 
-        <div class="timeline-section">
+        <div class="experience-view-toggle-wrap reveal">
+          <div class="projects-view-pills">
+            <button class="proj-view-btn active" id="btn-view-seasons" data-exp-view="seasons">
+              <span class="btn-icon">📺</span>
+              <span>Seasons &amp; Episodes</span>
+            </button>
+            <button class="proj-view-btn" id="btn-view-timeline" data-exp-view="timeline">
+              <span class="btn-icon">📜</span>
+              <span>Classic Timeline</span>
+            </button>
+          </div>
+          <span class="proj-view-hint">Television-style career narrative &amp; episode breakdowns</span>
+        </div>
+
+        <!-- ─── My Journey: 5 Seasons Experience (Reel 2 Sri Sushmita Dasari Inspiration) ─── -->
+        <div class="seasons-experience-wrapper reveal" id="seasons-experience">
+          <div class="seasons-header-block">
+            <div class="seasons-header-top">
+              <span class="seasons-badge">— 5 SEASONS OF PRODUCTION IMPACT</span>
+              <div class="seasons-scroll-ctrls">
+                <button class="seasons-scroll-btn" id="btn-season-prev" aria-label="Previous Season" title="Scroll Previous Season">‹</button>
+                <button class="seasons-scroll-btn" id="btn-season-next" aria-label="Next Season" title="Scroll Next Season">›</button>
+              </div>
+            </div>
+            <h2 class="seasons-title">MY JOURNEY</h2>
+            <p class="seasons-desc">Every stage of the career, presented as a television series. Select a season to explore its technical episodes.</p>
+          </div>
+
+          <!-- Season Tabs Navigation (Chronological 1 to 5) -->
+          <div class="seasons-nav-bar" id="seasons-nav-bar">
+            <button class="season-tab-btn" data-season="1" type="button">
+              <span class="s-tab-num">SEASON 01</span>
+              <span class="s-tab-title">The Foundations (2018–2022)</span>
+            </button>
+            <button class="season-tab-btn" data-season="2" type="button">
+              <span class="s-tab-num">SEASON 02</span>
+              <span class="s-tab-title">Healthcare at Scale (2021–2022)</span>
+            </button>
+            <button class="season-tab-btn" data-season="3" type="button">
+              <span class="s-tab-num">SEASON 03</span>
+              <span class="s-tab-title">Enterprise Platform (2022–2024)</span>
+            </button>
+            <button class="season-tab-btn active" data-season="4" type="button">
+              <span class="s-tab-num">SEASON 04 <span class="season-latest-badge">LATEST</span></span>
+              <span class="s-tab-title">Building Real Products (2024–Pres)</span>
+            </button>
+            <button class="season-tab-btn" data-season="5" type="button">
+              <span class="s-tab-num">SEASON 05</span>
+              <span class="s-tab-title">What's Next (2026+)</span>
+            </button>
+          </div>
+
+          <!-- Season Content Containers -->
+          <div class="season-episodes-wrap">
+            <!-- Season 4 Episodes (Best Buy Digital) -->
+            <div class="season-pane active" id="season-pane-4">
+              <div class="season-pane-meta">
+                <span class="pane-season-tag">S04 · BEST BUY DIGITAL SDE-2</span>
+                <h3 class="pane-season-heading">Building Real Products for Millions</h3>
+                <p class="pane-season-logline">Three Originals — an Observability SDK, Top-25 US App Store performance tuning, and Best Buy Hackathon victory.</p>
+              </div>
+
+              <div class="episodes-grid">
+                <div class="episode-card">
+                  <div class="episode-banner ep-red">
+                    <span class="ep-num-pill">S04 · EPISODE 01</span>
+                    <span class="ep-watermark">E01</span>
+                    <h4 class="ep-title">THE ANR WATCHDOG</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2024–2026 · Best Buy Digital</div>
+                    <p class="ep-synopsis">
+                      Architected custom CADisplayLink and Android Choreographer/Looper background thread monitor. Dispatches batched 500ms telemetry to Dynatrace/Sentry, preventing main-thread freezes.
+                    </p>
+                    <div class="ep-tech-tags">
+                      <span>Swift</span><span>Java</span><span>Choreographer</span><span>Looper</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="episode-card">
+                  <div class="episode-banner ep-cyan">
+                    <span class="ep-num-pill">S04 · EPISODE 02</span>
+                    <span class="ep-watermark">E02</span>
+                    <h4 class="ep-title">THE ARCHITECT</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2025 · App Store Scale</div>
+                    <p class="ep-synopsis">
+                      Built the Ambiguous Query (AMQ) engine with category clustering and batched analytics; reduced first-click latency by 1.7s and delivered +23% engagement lift across consumer flows.
+                    </p>
+                    <div class="ep-tech-tags">
+                      <span>React Native</span><span>Hermes JSI</span><span>Redux</span><span>Fabric</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="episode-card">
+                  <div class="episode-banner ep-gold">
+                    <span class="ep-num-pill">S04 · EPISODE 03</span>
+                    <span class="ep-watermark">E03</span>
+                    <h4 class="ep-title">THE TRIUMPH</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">Q4 FY26 · Recognition</div>
+                    <p class="ep-synopsis">
+                      Awarded 1st Place in Best Buy Innovation Week Hackathon and honored with Director-Level Recognition for mobile performance infrastructure excellence.
+                    </p>
+                    <div class="ep-tech-tags">
+                      <span>Hackathon Winner</span><span>Director Award</span><span>99.85% Crash-Free</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Season 3 Episodes (Impelsys) -->
+            <div class="season-pane" id="season-pane-3">
+              <div class="season-pane-meta">
+                <span class="pane-season-tag">S03 · IMPELSYS SOFTWARE ENGINEER</span>
+                <h3 class="pane-season-heading">Enterprise Monorepo Overhaul</h3>
+                <p class="pane-season-logline">Upgraded legacy systems, activated modern Hermes bytecode, and scaled push infrastructure.</p>
+              </div>
+              <div class="episodes-grid">
+                <div class="episode-card">
+                  <div class="episode-banner ep-blue">
+                    <span class="ep-num-pill">S03 · EPISODE 01</span>
+                    <span class="ep-watermark">E01</span>
+                    <h4 class="ep-title">THE UPGRADE</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2022–2023 · Impelsys</div>
+                    <p class="ep-synopsis">Overhauled monolithic React Native 0.59 to 0.69, re-architecting iOS CocoaPods and AndroidX Gradle builds with Hermes engine integration.</p>
+                    <div class="ep-tech-tags"><span>React Native</span><span>Hermes</span><span>CocoaPods</span><span>Gradle</span></div>
+                  </div>
+                </div>
+                <div class="episode-card">
+                  <div class="episode-banner ep-purple">
+                    <span class="ep-num-pill">S03 · EPISODE 02</span>
+                    <span class="ep-watermark">E02</span>
+                    <h4 class="ep-title">PUSH AT SCALE</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2023–2024 · Notifications</div>
+                    <p class="ep-synopsis">Architected enterprise Firebase Cloud Messaging (FCM) infrastructure with background/killed state intent routing and priority channel management.</p>
+                    <div class="ep-tech-tags"><span>FCM</span><span>Background Tasks</span><span>TypeScript</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Season 2 Episodes (ClinicSpots) -->
+            <div class="season-pane" id="season-pane-2">
+              <div class="season-pane-meta">
+                <span class="pane-season-tag">S02 · CLINICSPOTS HEALTHCARE</span>
+                <h3 class="pane-season-heading">Healthcare at Scale &amp; Play Store Launch</h3>
+                <p class="pane-season-logline">From empty directory to Google Play Store production app.</p>
+              </div>
+              <div class="episodes-grid">
+                <div class="episode-card">
+                  <div class="episode-banner ep-green">
+                    <span class="ep-num-pill">S02 · EPISODE 01</span>
+                    <span class="ep-watermark">E01</span>
+                    <h4 class="ep-title">THE LAUNCH</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2021–2022 · Play Store</div>
+                    <p class="ep-synopsis">Shipped 0-to-1 healthcare Q&amp;A platform to Google Play Store with offline persistence and multi-lingual medical triage.</p>
+                    <div class="ep-tech-tags"><span>0-to-1 Mobile</span><span>Play Store</span><span>REST APIs</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Season 1 Episodes (VIT University) -->
+            <div class="season-pane" id="season-pane-1">
+              <div class="season-pane-meta">
+                <span class="pane-season-tag">S01 · VIT UNIVERSITY</span>
+                <h3 class="pane-season-heading">Computer Science Foundations</h3>
+                <p class="pane-season-logline">Engineering fundamentals: operating systems, network concurrency, and algorithms.</p>
+              </div>
+              <div class="episodes-grid">
+                <div class="episode-card">
+                  <div class="episode-banner ep-purple">
+                    <span class="ep-num-pill">S01 · EPISODE 01</span>
+                    <span class="ep-watermark">E01</span>
+                    <h4 class="ep-title">THE ORIGIN</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2018–2022 · Vellore</div>
+                    <p class="ep-synopsis">B.Tech in Computer Science &amp; Engineering. Deep study of Java, OS thread scheduling, compilers, and algorithmic problem-solving.</p>
+                    <div class="ep-tech-tags"><span>DSA</span><span>OS Internals</span><span>Java</span><span>VIT</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Season 5 Episodes (What's Next) -->
+            <div class="season-pane" id="season-pane-5">
+              <div class="season-pane-meta">
+                <span class="pane-season-tag">S05 · THE NEXT CHAPTER</span>
+                <h3 class="pane-season-heading">Your High-Growth Engineering Team</h3>
+                <p class="pane-season-logline">Looking for a Senior Mobile Engineer or Full-Stack Lead to build world-class products? Let's connect.</p>
+              </div>
+              <div class="episodes-grid">
+                <div class="episode-card">
+                  <div class="episode-banner ep-gold">
+                    <span class="ep-num-pill">S05 · EPISODE 01</span>
+                    <span class="ep-watermark">E01</span>
+                    <h4 class="ep-title">THE COLLABORATION</h4>
+                  </div>
+                  <div class="episode-body">
+                    <div class="ep-year-badge">2026+ · Available Now</div>
+                    <p class="ep-synopsis">Ready to ship ultra-fast, 60fps mobile architectures, lead cross-platform engineering teams, and drive exceptional customer engagement.</p>
+                    <div class="ep-tech-tags">
+                      <a href="#contact" class="btn btn-primary" style="margin-top: 0.5rem; display: inline-flex;">Initiate Conversation ↗</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-section" id="classic-timeline-section" style="display: none;">
           <div class="timeline-track"></div>
 
           <!-- Role 1: Best Buy Digital -->
@@ -1455,6 +2074,294 @@ for(let i=0; i&lt;nums.length; i++) {
     </div>
   </div>
 
+  <!-- ════════════ 30s ARCHITECTURE TOUR MODAL (Inspired by Video 1 Talking Hero) ════════════ -->
+  <div class="modal-backdrop" id="architecture-tour-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content tour-modal-content">
+      <button class="modal-close-btn" id="tour-close-btn" aria-label="Close Architecture Tour">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="tour-modal-header">
+        <div class="tour-audio-badge">
+          <div class="tour-live-bars">
+            <span class="t-bar"></span><span class="t-bar"></span><span class="t-bar"></span><span class="t-bar"></span><span class="t-bar"></span>
+          </div>
+          <span>DEVELOPER AUDIO BRIEFING · 30 SEC TOUR</span>
+        </div>
+        <h2 class="tour-headline">Abhav Thakur: Mobile Architecture Blueprint</h2>
+        <div class="tour-progress-bar">
+          <div class="tour-progress-fill" id="tour-progress-fill" style="width: 25%;"></div>
+        </div>
+      </div>
+
+      <div class="tour-slide-container" id="tour-slide-container">
+        <!-- Slide 1 -->
+        <div class="tour-slide active" data-slide="1">
+          <div class="tour-slide-badge">PILLAR 1 OF 4</div>
+          <h3 class="tour-slide-title">📱 Mobile Core &amp; Hermes JSI Architecture</h3>
+          <p class="tour-slide-desc">
+            Senior Mobile Engineer specializing in React Native New Architecture (Fabric + TurboModules). At Best Buy Digital, I engineer zero-serialization C++ JSI host bridges to bypass the legacy JSON asynchronous bridge, achieving direct microsecond-level dispatch.
+          </p>
+          <div class="tour-metrics-grid">
+            <div class="tour-metric-card">
+              <span class="t-val">0.4ms</span>
+              <span class="t-label">JSI Call Latency</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">Hermes</span>
+              <span class="t-label">AOT Bytecode</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">v0.76+</span>
+              <span class="t-label">New Architecture</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="tour-slide" data-slide="2">
+          <div class="tour-slide-badge">PILLAR 2 OF 4</div>
+          <h3 class="tour-slide-title">⚡ 60 FPS Pacing &amp; ANR Watchdog Engine</h3>
+          <p class="tour-slide-desc">
+            Engineered the mobile performance telemetry SDK monitoring real-time CADisplayLink on iOS and Choreographer on Android. Implemented background Looper watchdogs to intercept thread freezes before the OS triggers an ANR dialog.
+          </p>
+          <div class="tour-metrics-grid">
+            <div class="tour-metric-card">
+              <span class="t-val">60.0</span>
+              <span class="t-label">Locked Target FPS</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">&lt; 0.02%</span>
+              <span class="t-label">ANR Occurrence</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">500ms</span>
+              <span class="t-label">Batched Telemetry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="tour-slide" data-slide="3">
+          <div class="tour-slide-badge">PILLAR 3 OF 4</div>
+          <h3 class="tour-slide-title">🛒 High-Scale Production (1M+ Active Shoppers)</h3>
+          <p class="tour-slide-desc">
+            Architected critical commerce checkout funnels, biometric authentication, and offline cart sync for Best Buy. Built with modular Clean Architecture, strict TypeScript domain contracts, and deterministic state slices with Zustand and RTK.
+          </p>
+          <div class="tour-metrics-grid">
+            <div class="tour-metric-card">
+              <span class="t-val">1M+</span>
+              <span class="t-label">Active Users</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">99.98%</span>
+              <span class="t-label">Crash-Free Rate</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">Fastlane</span>
+              <span class="t-label">CI/CD Automation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="tour-slide" data-slide="4">
+          <div class="tour-slide-badge">PILLAR 4 OF 4</div>
+          <h3 class="tour-slide-title">🚀 Full-Stack AI &amp; Next-Gen Systems</h3>
+          <p class="tour-slide-desc">
+            Bridging native mobile performance with AI full-stack applications like Interview Brain and GrowthOS. Leveraging Next.js 16, React 19, and autonomous agentic workflows to build high-velocity developer tools.
+          </p>
+          <div class="tour-metrics-grid">
+            <div class="tour-metric-card">
+              <span class="t-val">Next.js 16</span>
+              <span class="t-label">App Router</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">React 19</span>
+              <span class="t-label">Server Actions</span>
+            </div>
+            <div class="tour-metric-card">
+              <span class="t-val">AI Ready</span>
+              <span class="t-label">LLM Pipelines</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tour-footer-controls">
+        <div class="tour-step-indicators">
+          <span class="step-dot active" data-step="1"></span>
+          <span class="step-dot" data-step="2"></span>
+          <span class="step-dot" data-step="3"></span>
+          <span class="step-dot" data-step="4"></span>
+        </div>
+
+        <div class="tour-nav-btns">
+          <button class="btn btn-secondary btn-sm" id="tour-btn-prev" disabled>Back</button>
+          <button class="btn btn-primary btn-sm" id="tour-btn-next">Next Pillar →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ NETFLIX-STYLE "WHO'S WATCHING?" MODAL ════════════ -->
+  <div class="whos-watching-overlay" id="whos-watching-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="whos-watching-container">
+      <div class="netflix-brand-pill">
+        <span class="n-red-pill">A SERIES</span>
+        <span class="n-brand-sub">AN INTERACTIVE DEVELOPER PRODUCTION</span>
+      </div>
+
+      <h1 class="whos-watching-title">Who's watching?</h1>
+      <p class="whos-watching-subtitle">
+        Every profile watches the same true story of Abhav Thakur — it only changes what plays first.
+      </p>
+
+      <div class="profiles-grid">
+        <!-- Profile 1: Full Series / Creator Mode -->
+        <button class="profile-card" data-persona="all" type="button">
+          <div class="profile-avatar-box avatar-main">
+            <img src="assets/IMG_20220731_113921.jpg" alt="Abhav" class="profile-img">
+            <span class="profile-corner-tag">MAIN</span>
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name-text">Abhav</h3>
+            <p class="profile-role-sub">The full series, in chronological order</p>
+          </div>
+        </button>
+
+        <!-- Profile 2: Recruiter Mode -->
+        <button class="profile-card" data-persona="recruiter" type="button">
+          <div class="profile-avatar-box avatar-recruiter">
+            <span class="profile-letter-icon">💼</span>
+            <span class="profile-corner-tag">FAST</span>
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name-text">Recruiter</h3>
+            <p class="profile-role-sub">Scale, 99.98% crash-free &amp; screenplay first</p>
+          </div>
+        </button>
+
+        <!-- Profile 3: Tech Lead / Architect Mode -->
+        <button class="profile-card" data-persona="techlead" type="button">
+          <div class="profile-avatar-box avatar-tech">
+            <span class="profile-letter-icon">&lt;/&gt;</span>
+            <span class="profile-corner-tag">DEEP</span>
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name-text">Tech Lead</h3>
+            <p class="profile-role-sub">Hermes JSI, Fabric, &amp; ANR Watchdog first</p>
+          </div>
+        </button>
+
+        <!-- Profile 4: Founder Mode -->
+        <button class="profile-card" data-persona="founder" type="button">
+          <div class="profile-avatar-box avatar-founder">
+            <span class="profile-letter-icon">⚡</span>
+            <span class="profile-corner-tag">1-MIN</span>
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name-text">Founder</h3>
+            <p class="profile-role-sub">Executive summary, 30s trailer &amp; direct chat</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="whos-watching-actions">
+        <button class="btn-skip-profile" id="btn-skip-profile" type="button">
+          <span>Enter Portfolio as Guest</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ THE SCREENPLAY (HOLLYWOOD SCRIPT RESUME MODAL) ════════════ -->
+  <div class="modal-backdrop" id="screenplay-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content screenplay-modal-content">
+      <button class="modal-close-btn" id="screenplay-close-btn" aria-label="Close Screenplay">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="screenplay-header">
+        <div class="screenplay-badge-line">
+          <span class="script-type-badge">THE SCREENPLAY · OFFICIAL SCRIPT</span>
+          <span class="script-status-badge">PRODUCTION GRADE</span>
+        </div>
+        <h2 class="screenplay-main-title">THE FULL STORY</h2>
+        <div class="screenplay-starring">STARRING: <strong>ABHAV THAKUR</strong></div>
+        <div class="screenplay-meta-ratings">
+          <div class="script-rating-box">
+            <span class="r-val">99.98%</span>
+            <span class="r-lbl">CRASH-FREE</span>
+          </div>
+          <div class="script-rating-box">
+            <span class="r-val">1M+</span>
+            <span class="r-lbl">DAILY SHOPPERS</span>
+          </div>
+          <div class="script-rating-box">
+            <span class="r-val">5</span>
+            <span class="r-lbl">SEASONS SHIPPED</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenplay-paper">
+        <div class="script-scene">
+          <div class="scene-heading">SCENE 1: BENGALURU, INDIA — BEST BUY DIGITAL SDE-2 (2024 — PRESENT)</div>
+          <p class="scene-narrative">
+            ABHAV (Senior Mobile Platform Engineer) sits at an ultra-wide terminal monitoring live Dynatrace telemetry from millions of North American shoppers across the Top-25 US App Store product.
+          </p>
+          <div class="script-dialogue">
+            <div class="char-name">ABHAV</div>
+            <div class="char-speech">
+              "We shaved 1.7 seconds off first-click latency. Ambiguous queries are clustering into high-conversion categories, and our background ANR watchdog intercepts thread freezes before the Android OS or iOS runtime ever notices."
+            </div>
+          </div>
+          <div class="scene-bullets">
+            <div>• Engineered Mobile Observability SDK in Swift (<code>CADisplayLink</code>) and Java (<code>Choreographer</code>, <code>Looper</code> ANR watchdog).</div>
+            <div>• Director-Level Recognition (Q4 FY26) · Best Buy Innovation Week Hackathon Winner (FY26).</div>
+            <div>• Shipped 48+ production PRs maintaining 99.85%+ crash-free session reliability across consumer checkout and search funnels.</div>
+          </div>
+        </div>
+
+        <div class="script-scene">
+          <div class="scene-heading">SCENE 2: ENTERPRISE OVERHAUL — IMPELSYS (2022 — 2024)</div>
+          <div class="scene-bullets">
+            <div>• Upgraded enterprise monorepo from React Native 0.59 to 0.69; rebuilt CocoaPods and AndroidX Gradle build architectures.</div>
+            <div>• Activated Hermes AOT bytecode compilation, trimming cold app launch time by ~25%.</div>
+            <div>• Enterprise Firebase Cloud Messaging with background intent routing.</div>
+          </div>
+        </div>
+
+        <div class="script-scene">
+          <div class="scene-heading">SCENE 3: ZERO TO ONE — CLINICSPOTS HEALTHCARE (2021 — 2022)</div>
+          <div class="scene-bullets">
+            <div>• Shipped 0-to-1 telemedicine consultation application directly to Google Play Store.</div>
+            <div>• Offline-first SQLite persistence and multi-lingual medical triage.</div>
+          </div>
+        </div>
+
+        <div class="script-scene">
+          <div class="scene-heading">SCENE 4: ACADEMIC ROOTS — VIT UNIVERSITY (2018 — 2022)</div>
+          <div class="scene-bullets">
+            <div>• B.Tech in Computer Science &amp; Engineering.</div>
+            <div>• Deep foundations in Data Structures, OS Threading, Distributed Systems &amp; Network Protocols.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenplay-actions">
+        <a href="assets/Abhav_Thakur_Resume.pdf" target="_blank" download="Abhav_Thakur_Resume.pdf" class="btn btn-primary btn-large">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Download Official PDF (1-Page)</span>
+        </a>
+        <a href="assets/Abhav_Thakur_Resume.pdf" target="_blank" class="btn btn-secondary btn-large">
+          <span>View PDF in New Tab ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- ════════════ PROJECT DETAILS MODAL ════════════ -->
   <div class="modal-backdrop" id="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-content">
@@ -1503,6 +2410,6 @@ for(let i=0; i&lt;nums.length; i++) {
 
   <!-- External 3D Tilt Library & Vanilla JS Logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-  <script src="index.js"></script>
+  <script src="index.js?v=2.4"></script>
 </body>
 </html>

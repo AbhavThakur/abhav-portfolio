@@ -30,13 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
   safeRun('ScrollProgressAndSpy', initScrollProgressAndSpy);
   safeRun('ProjectFilters', initProjectFilters);
   safeRun('ProjectModals', initProjectModals);
-  safeRun('MobileSimulator', initMobileSimulator);
-  safeRun('CodePlayground', initCodePlayground);
-  safeRun('GitHubHeatmap', initGitHubHeatmap);
   safeRun('SkillsAnimation', initSkillsAnimation);
   safeRun('TerminalMode', initTerminalMode);
   safeRun('CommandPalette', initCommandPalette);
   safeRun('EmailCopyAndToasts', initEmailCopyAndToasts);
+  safeRun('DevPassFlip', initDevPassFlip);
+  safeRun('StreamingShelves', initStreamingShelves);
+  safeRun('PeriodicTable', initPeriodicTable);
+  safeRun('ArchitectureTour', initArchitectureTour);
+  safeRun('WhosWatchingModal', initWhosWatchingModal);
+  safeRun('HorizontalWorkstation', initHorizontalWorkstation);
+  safeRun('SeasonsExperience', initSeasonsExperience);
+  safeRun('ScreenplayModal', initScreenplayModal);
 });
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -146,6 +151,79 @@ const SoundFX = {
       gain.connect(audioCtx.destination);
       osc.start();
       osc.stop(audioCtx.currentTime + 0.02);
+    } catch(e) {}
+  },
+  tada: () => {
+    try {
+      ensureAudioContext();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+
+      // Note 1: Deep sub-bass cello thud (~110Hz A2)
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      const filter1 = audioCtx.createBiquadFilter();
+      filter1.type = 'lowpass';
+      filter1.frequency.setValueAtTime(360, now);
+      filter1.frequency.exponentialRampToValueAtTime(100, now + 0.65);
+
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(110, now);
+      osc1.frequency.exponentialRampToValueAtTime(82.4, now + 0.65);
+      gain1.gain.setValueAtTime(0.24, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+
+      osc1.connect(filter1);
+      filter1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.72);
+
+      // Note 2: Secondary cinematic slam (~165Hz E3) + harmonic body at +0.18s
+      const slamTime = now + 0.18;
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(164.81, slamTime);
+      gain2.gain.setValueAtTime(0.28, slamTime);
+      gain2.gain.exponentialRampToValueAtTime(0.001, slamTime + 1.25);
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start(slamTime);
+      osc2.stop(slamTime + 1.3);
+
+      // Shimmering harmonic bloom (A4 + E5 octave dispersion)
+      [440, 659.25, 880].forEach((freq, idx) => {
+        const bloomOsc = audioCtx.createOscillator();
+        const bloomGain = audioCtx.createGain();
+        bloomOsc.type = 'sine';
+        bloomOsc.frequency.setValueAtTime(freq, slamTime + 0.04);
+        bloomGain.gain.setValueAtTime(0.035 / (idx + 1), slamTime + 0.04);
+        bloomGain.gain.exponentialRampToValueAtTime(0.0001, slamTime + 1.45);
+        bloomOsc.connect(bloomGain);
+        bloomGain.connect(audioCtx.destination);
+        bloomOsc.start(slamTime + 0.04);
+        bloomOsc.stop(slamTime + 1.5);
+      });
+    } catch(e) {}
+  },
+  notification: () => {
+    try {
+      ensureAudioContext();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      [587.33, 880].forEach((f, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now + i * 0.08);
+        gain.gain.setValueAtTime(0.05, now + i * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.22);
+      });
     } catch(e) {}
   }
 };
@@ -525,10 +603,7 @@ function initScrollProgressAndSpy() {
   const sectionMap = {
     'about': 'about',
     'projects': 'projects',
-    'mobile-lab': 'projects',
-    'code-lab': 'projects',
-    'github-activity': 'projects',
-    'skills': 'experience',
+    'skills': 'skills',
     'experience': 'experience',
     'contact': 'contact'
   };
@@ -788,6 +863,9 @@ function initProjectModals() {
     modalBackdrop.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  window.openProjectModal = openModal;
+  window.closeProjectModal = closeModal;
 
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
@@ -1871,3 +1949,668 @@ function triggerParticleBurst(originX, originY, count = 12) {
 }
 
 window.triggerParticleBurst = triggerParticleBurst;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   23. 3D FLIPPING APPLE & ANDROID DEVELOPER PASS CONTROLLER
+   ────────────────────────────────────────────────────────────────────────── */
+function initDevPassFlip() {
+  const flipper = document.getElementById('dev-pass-flipper');
+  const btnFlipToBack = document.getElementById('btn-flip-to-back');
+  const btnFlipToFront = document.getElementById('btn-flip-to-front');
+
+  if (!flipper) return;
+
+  let flipped = false;
+
+  function setFlip(isFlipped) {
+    flipped = isFlipped;
+    flipper.classList.toggle('flipped', flipped);
+    
+    // Play synthetic card flip sound
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) {
+      SoundFX.click();
+    }
+
+    if (flipped) {
+      if (typeof showToast === 'function') {
+        showToast('NFC Secure Credentials Inspected 🪪');
+      }
+    }
+  }
+
+  if (btnFlipToBack) {
+    btnFlipToBack.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setFlip(true);
+    });
+  }
+
+  if (btnFlipToFront) {
+    btnFlipToFront.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setFlip(false);
+    });
+  }
+
+  // Double click / tap on pass flipper to flip
+  flipper.addEventListener('dblclick', () => {
+    setFlip(!flipped);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   24. NETFLIX-STYLE STREAMING SHELVES & CINEMATIC SPOTLIGHT CONTROLLER
+   ────────────────────────────────────────────────────────────────────────── */
+function initStreamingShelves() {
+  const btnWorkstationView = document.getElementById('btn-view-workstation');
+  const btnNetflixView = document.getElementById('btn-view-netflix');
+  const btnGridView = document.getElementById('btn-view-grid');
+  const workstationContainer = document.getElementById('horizontal-workstation');
+  const streamingContainer = document.getElementById('streaming-shelves-container');
+  const cinemaSpotlight = document.getElementById('cinema-spotlight');
+  const projectsGrid = document.getElementById('projects-grid');
+  const projectFilters = document.getElementById('project-filters');
+
+  // 3-Way Project View Switcher: Workstation / Netflix / Grid
+  function switchView(view) {
+    if (btnWorkstationView) btnWorkstationView.classList.toggle('active', view === 'workstation');
+    if (btnNetflixView) btnNetflixView.classList.toggle('active', view === 'netflix');
+    if (btnGridView) btnGridView.classList.toggle('active', view === 'grid');
+
+    if (view === 'workstation') {
+      if (workstationContainer) workstationContainer.style.display = 'block';
+      if (streamingContainer) streamingContainer.style.display = 'none';
+      if (cinemaSpotlight) cinemaSpotlight.style.display = 'none';
+      if (projectsGrid) projectsGrid.style.display = 'none';
+      if (projectFilters) projectFilters.style.display = 'none';
+    } else if (view === 'netflix') {
+      if (workstationContainer) workstationContainer.style.display = 'none';
+      if (streamingContainer) streamingContainer.style.display = 'flex';
+      if (cinemaSpotlight) cinemaSpotlight.style.display = 'grid';
+      if (projectsGrid) projectsGrid.style.display = 'none';
+      if (projectFilters) projectFilters.style.display = 'none';
+    } else {
+      if (workstationContainer) workstationContainer.style.display = 'none';
+      if (streamingContainer) streamingContainer.style.display = 'none';
+      if (cinemaSpotlight) cinemaSpotlight.style.display = 'none';
+      if (projectsGrid) projectsGrid.style.display = 'grid';
+      if (projectFilters) projectFilters.style.display = 'flex';
+    }
+    localStorage.setItem('at-portfolio-proj-view', view);
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+  }
+
+  if (btnWorkstationView) btnWorkstationView.addEventListener('click', () => switchView('workstation'));
+  if (btnNetflixView) btnNetflixView.addEventListener('click', () => switchView('netflix'));
+  if (btnGridView) btnGridView.addEventListener('click', () => switchView('grid'));
+
+  // Restore saved project view if any
+  const savedProjView = localStorage.getItem('at-portfolio-proj-view');
+  if (savedProjView && (savedProjView === 'workstation' || savedProjView === 'netflix' || savedProjView === 'grid')) {
+    switchView(savedProjView);
+  }
+
+  // Shelf horizontal scroll navigation arrows
+  document.querySelectorAll('.shelf-arrow-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = btn.getAttribute('data-target');
+      const track = document.getElementById(targetId);
+      if (!track) return;
+      const isNext = btn.classList.contains('shelf-next');
+      track.scrollBy({
+        left: isNext ? 360 : -360,
+        behavior: 'smooth'
+      });
+      if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+    });
+  });
+
+  // Spotlight Run in Mobile Simulator button
+  const btnSpotlightRun = document.getElementById('btn-spotlight-run-sim');
+  if (btnSpotlightRun) {
+    btnSpotlightRun.addEventListener('click', () => {
+      handleStreamPlay('bestbuy');
+    });
+  }
+
+  // Spotlight Architecture Breakdown modal trigger
+  const btnSpotlightModal = document.getElementById('btn-spotlight-modal');
+  if (btnSpotlightModal) {
+    btnSpotlightModal.addEventListener('click', () => {
+      const projId = btnSpotlightModal.getAttribute('data-project-id') || 'mobile-perf-sdk';
+      if (typeof openProjectModal === 'function') {
+        openProjectModal(projId);
+      }
+    });
+  }
+
+  // Stream cards click handler
+  document.querySelectorAll('.stream-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a')) return;
+      const projId = card.getAttribute('data-project-id');
+      if (projId && typeof openProjectModal === 'function') {
+        openProjectModal(projId);
+      }
+    });
+  });
+}
+
+// Global handler for Quick Play button on stream cards
+function handleStreamPlay(screenKey, e) {
+  if (e) e.stopPropagation();
+
+  const mobileLabSec = document.getElementById('mobile-lab');
+  if (mobileLabSec) {
+    mobileLabSec.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  setTimeout(() => {
+    const simNavBtn = document.querySelector(`.sim-nav-btn[data-screen="${screenKey}"]`);
+    if (simNavBtn) {
+      simNavBtn.click();
+    }
+    if (typeof showToast === 'function') {
+      showToast(`📱 Running ${screenKey.toUpperCase()} in Mobile Simulator!`);
+    }
+  }, 450);
+
+  if (typeof SoundFX !== 'undefined' && SoundFX.notification) {
+    SoundFX.notification();
+  }
+}
+window.handleStreamPlay = handleStreamPlay;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   25. PERIODIC TABLE OF MOBILE ENGINEERING (SKILLS CONTROLLER)
+   ────────────────────────────────────────────────────────────────────────── */
+function initPeriodicTable() {
+  const btnPeriodic = document.getElementById('btn-view-periodic');
+  const btnMatrix = document.getElementById('btn-view-matrix');
+  const periodicWrapper = document.getElementById('periodic-skills-wrapper');
+  const matrixContainer = document.getElementById('matrix-skills-container');
+
+  // View toggle
+  function toggleSkillsView(view) {
+    if (view === 'periodic') {
+      if (btnPeriodic) btnPeriodic.classList.add('active');
+      if (btnMatrix) btnMatrix.classList.remove('active');
+      if (periodicWrapper) periodicWrapper.style.display = 'block';
+      if (matrixContainer) matrixContainer.style.display = 'none';
+    } else {
+      if (btnPeriodic) btnPeriodic.classList.remove('active');
+      if (btnMatrix) btnMatrix.classList.add('active');
+      if (periodicWrapper) periodicWrapper.style.display = 'none';
+      if (matrixContainer) matrixContainer.style.display = 'grid';
+    }
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+  }
+
+  if (btnPeriodic) btnPeriodic.addEventListener('click', () => toggleSkillsView('periodic'));
+  if (btnMatrix) btnMatrix.addEventListener('click', () => toggleSkillsView('matrix'));
+
+  // Elements & Inspector HUD
+  const inspSymbol = document.getElementById('insp-symbol');
+  const inspName = document.getElementById('insp-name');
+  const inspCategory = document.getElementById('insp-category');
+  const inspMastery = document.getElementById('insp-mastery');
+  const inspDesc = document.getElementById('insp-desc');
+  const inspUsage = document.getElementById('insp-usage');
+  const inspHighlight = document.getElementById('insp-highlight');
+
+  const cells = document.querySelectorAll('.periodic-cell');
+
+  function inspectElement(cell) {
+    cells.forEach(c => c.classList.remove('active'));
+    cell.classList.add('active');
+
+    const symbol = cell.getAttribute('data-symbol') || '';
+    const name = cell.getAttribute('data-name') || '';
+    const cat = cell.getAttribute('data-cat') || '';
+    const mastery = cell.getAttribute('data-mastery') || '';
+    const desc = cell.getAttribute('data-desc') || '';
+    const usage = cell.getAttribute('data-usage') || '';
+    const highlight = cell.getAttribute('data-highlight') || '';
+
+    // Determine category class
+    let catClass = 'cat-mc';
+    if (cell.classList.contains('cat-fe')) catClass = 'cat-fe';
+    else if (cell.classList.contains('cat-ar')) catClass = 'cat-ar';
+    else if (cell.classList.contains('cat-op')) catClass = 'cat-op';
+
+    if (inspSymbol) {
+      inspSymbol.textContent = symbol;
+      inspSymbol.className = `element-symbol-large ${catClass}`;
+    }
+    if (inspName) inspName.textContent = name;
+    if (inspCategory) inspCategory.textContent = cat;
+    if (inspMastery) inspMastery.textContent = mastery;
+    if (inspDesc) inspDesc.textContent = desc;
+    if (inspUsage) inspUsage.textContent = usage;
+    if (inspHighlight) inspHighlight.textContent = highlight;
+
+    // Synthesize subtle element tone
+    playElementTone(symbol);
+  }
+
+  cells.forEach(cell => {
+    cell.addEventListener('mouseenter', () => inspectElement(cell));
+    cell.addEventListener('click', () => inspectElement(cell));
+  });
+
+  function playElementTone(str) {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const code = str.charCodeAt(0) || 70;
+      const freq = 350 + (code % 20) * 25;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.13);
+    } catch (_) {}
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   26. 30s ARCHITECTURE TOUR & DEVELOPER BRIEFING CONTROLLER
+   ────────────────────────────────────────────────────────────────────────── */
+function initArchitectureTour() {
+  const btnTour = document.getElementById('btn-architecture-tour');
+  const modal = document.getElementById('architecture-tour-modal');
+  const closeBtn = document.getElementById('tour-close-btn');
+  const btnNext = document.getElementById('tour-btn-next');
+  const btnPrev = document.getElementById('tour-btn-prev');
+  const progressFill = document.getElementById('tour-progress-fill');
+  const slides = document.querySelectorAll('.tour-slide');
+  const stepDots = document.querySelectorAll('.tour-step-indicators .step-dot');
+
+  if (!btnTour || !modal) return;
+
+  let currentStep = 1;
+  const totalSteps = slides.length;
+
+  function openTour() {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    goToStep(1);
+    if (typeof SoundFX !== 'undefined' && SoundFX.theme) SoundFX.theme();
+  }
+
+  function closeTour() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+  }
+
+  function goToStep(step) {
+    if (step < 1 || step > totalSteps) return;
+    currentStep = step;
+
+    slides.forEach(s => s.classList.remove('active'));
+    stepDots.forEach(d => d.classList.remove('active'));
+
+    const activeSlide = document.querySelector(`.tour-slide[data-slide="${currentStep}"]`);
+    const activeDot = document.querySelector(`.tour-step-indicators .step-dot[data-step="${currentStep}"]`);
+
+    if (activeSlide) activeSlide.classList.add('active');
+    if (activeDot) activeDot.classList.add('active');
+
+    if (progressFill) {
+      progressFill.style.width = `${(currentStep / totalSteps) * 100}%`;
+    }
+
+    if (btnPrev) btnPrev.disabled = currentStep === 1;
+    if (btnNext) {
+      btnNext.textContent = currentStep === totalSteps ? 'Finish Tour 🚀' : 'Next Pillar →';
+    }
+
+    // Play synthesized briefing beep
+    playBriefingTone(currentStep);
+  }
+
+  function playBriefingTone(step) {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const freqs = [440, 554, 659, 880];
+      const freq = freqs[(step - 1) % freqs.length];
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.26);
+    } catch (_) {}
+  }
+
+  btnTour.addEventListener('click', openTour);
+  if (closeBtn) closeBtn.addEventListener('click', closeTour);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeTour();
+  });
+
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      if (currentStep === totalSteps) {
+        closeTour();
+        if (typeof showToast === 'function') showToast('Architecture Tour Complete 🚀');
+      } else {
+        goToStep(currentStep + 1);
+      }
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      goToStep(currentStep - 1);
+    });
+  }
+
+  stepDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const step = parseInt(dot.getAttribute('data-step') || '1', 10);
+      goToStep(step);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeTour();
+    if (e.key === 'ArrowRight') {
+      if (currentStep < totalSteps) goToStep(currentStep + 1);
+    }
+    if (e.key === 'ArrowLeft') {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    }
+  });
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   27. NETFLIX "WHO'S WATCHING?" PERSONA SYSTEM (Reel 2 Inspiration)
+   ────────────────────────────────────────────────────────────────────────── */
+function initWhosWatchingModal() {
+  const modal = document.getElementById('whos-watching-modal');
+  const openBtn = document.getElementById('open-whos-watching-btn');
+  const skipBtn = document.getElementById('btn-skip-profile');
+  const profileLabel = document.getElementById('active-profile-label');
+  const profileCards = document.querySelectorAll('.profile-card');
+  const profilesGrid = document.querySelector('.profiles-grid');
+
+  if (!modal) return;
+
+  function openModal() {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (typeof SoundFX !== 'undefined' && SoundFX.theme) SoundFX.theme();
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  window.openWhosWatchingModal = openModal;
+  window.closeWhosWatchingModal = closeModal;
+
+  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (skipBtn) skipBtn.addEventListener('click', () => {
+    closeModal();
+    localStorage.setItem('at-portfolio-persona', 'guest');
+    if (profileLabel) profileLabel.textContent = 'Guest';
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  const personaMeta = {
+    all: { name: 'Abhav', label: 'Abhav (Full Series)' },
+    recruiter: { name: 'Recruiter', label: 'Recruiter' },
+    techlead: { name: 'Tech Lead', label: 'Tech Lead' },
+    founder: { name: 'Founder', label: 'Founder' }
+  };
+
+  function selectPersona(persona, cardElement) {
+    localStorage.setItem('at-portfolio-persona', persona);
+    if (profileLabel && personaMeta[persona]) {
+      profileLabel.textContent = personaMeta[persona].name;
+    }
+
+    // Play cinematic Netflix Ta-Dum chord immediately
+    if (typeof SoundFX !== 'undefined' && SoundFX.tada) {
+      SoundFX.tada();
+    }
+
+    // Trigger mobile app opening zoom animation!
+    if (profilesGrid) profilesGrid.classList.add('has-launching');
+    if (cardElement) cardElement.classList.add('launching');
+    modal.classList.add('launching-app');
+
+    // Wait for the expansion zoom animation to complete
+    setTimeout(() => {
+      closeModal();
+      modal.classList.remove('launching-app');
+      if (profilesGrid) profilesGrid.classList.remove('has-launching');
+      if (cardElement) cardElement.classList.remove('launching');
+
+      // Contextual persona-driven actions
+      if (persona === 'recruiter') {
+        if (typeof showToast === 'function') {
+          showToast('🎬 Recruiter Profile: Opening Hollywood Screenplay Resume');
+        }
+        if (typeof openScreenplayModal === 'function') {
+          openScreenplayModal();
+        }
+      } else if (persona === 'techlead') {
+        if (typeof showToast === 'function') {
+          showToast('⚡ Tech Lead Profile: Inspecting Architecture Specs & Skills Arsenal');
+        }
+        const skillsSec = document.getElementById('skills');
+        if (skillsSec) skillsSec.scrollIntoView({ behavior: 'smooth' });
+      } else if (persona === 'founder') {
+        if (typeof showToast === 'function') {
+          showToast('🚀 Founder Profile: Launching 30s Architecture Tour');
+        }
+        const btnTour = document.getElementById('btn-start-arch-tour');
+        if (btnTour) btnTour.click();
+      } else {
+        if (typeof showToast === 'function') {
+          showToast('🍿 Playing Full Series: Season 1 to 5');
+        }
+        const projSec = document.getElementById('projects');
+        if (projSec) projSec.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 620);
+  }
+
+  profileCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const persona = card.getAttribute('data-persona') || 'all';
+      selectPersona(persona, card);
+    });
+  });
+
+  // Check saved persona
+  const savedPersona = localStorage.getItem('at-portfolio-persona');
+  if (savedPersona && personaMeta[savedPersona] && profileLabel) {
+    profileLabel.textContent = personaMeta[savedPersona].name;
+  }
+
+  // Always show Who's Watching screen on every initial page load
+  setTimeout(() => {
+    openModal();
+  }, 350);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   28. HORIZONTAL WORKSTATION ACCORDION (Reel 1 Lohitha Damisetti Inspiration)
+   ────────────────────────────────────────────────────────────────────────── */
+function initHorizontalWorkstation() {
+  const panels = document.querySelectorAll('.workstation-panel');
+  if (!panels.length) return;
+
+  panels.forEach(panel => {
+    const activate = () => {
+      if (panel.classList.contains('active')) return;
+      panels.forEach(p => p.classList.remove('active'));
+      panel.classList.add('active');
+      if (typeof SoundFX !== 'undefined' && SoundFX.type) SoundFX.type();
+    };
+
+    panel.addEventListener('click', activate);
+
+    // Desktop hover expansion
+    panel.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 992) {
+        activate();
+      }
+    });
+  });
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   29. SEASONS & EPISODES EXPERIENCE CONTROLLER (Reel 2 Inspiration)
+   ────────────────────────────────────────────────────────────────────────── */
+function initSeasonsExperience() {
+  const btnSeasons = document.getElementById('btn-view-seasons');
+  const btnTimeline = document.getElementById('btn-view-timeline');
+  const seasonsWrapper = document.getElementById('seasons-experience');
+  const classicTimeline = document.getElementById('classic-timeline-section');
+  const seasonTabs = document.querySelectorAll('.season-tab-btn');
+  const seasonPanes = document.querySelectorAll('.season-pane');
+  const seasonsBar = document.getElementById('seasons-nav-bar');
+  const btnPrev = document.getElementById('btn-season-prev');
+  const btnNext = document.getElementById('btn-season-next');
+
+  // Prev / Next Season Scroll Arrows
+  if (btnPrev && seasonsBar) {
+    btnPrev.addEventListener('click', () => {
+      seasonsBar.scrollBy({ left: -260, behavior: 'smooth' });
+      if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+    });
+  }
+  if (btnNext && seasonsBar) {
+    btnNext.addEventListener('click', () => {
+      seasonsBar.scrollBy({ left: 260, behavior: 'smooth' });
+      if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+    });
+  }
+
+  // Smooth mousewheel horizontal scroll on desktop
+  if (seasonsBar) {
+    seasonsBar.addEventListener('wheel', (e) => {
+      if (e.deltaY !== 0 && Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        e.preventDefault();
+        seasonsBar.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
+
+  // Toggle between Seasons View and Classic Timeline View
+  function switchExpView(view) {
+    if (view === 'seasons') {
+      if (btnSeasons) btnSeasons.classList.add('active');
+      if (btnTimeline) btnTimeline.classList.remove('active');
+      if (seasonsWrapper) seasonsWrapper.style.display = 'block';
+      if (classicTimeline) classicTimeline.style.display = 'none';
+    } else {
+      if (btnSeasons) btnSeasons.classList.remove('active');
+      if (btnTimeline) btnTimeline.classList.add('active');
+      if (seasonsWrapper) seasonsWrapper.style.display = 'none';
+      if (classicTimeline) classicTimeline.style.display = 'block';
+    }
+    localStorage.setItem('at-portfolio-exp-view', view);
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+  }
+
+  if (btnSeasons) btnSeasons.addEventListener('click', () => switchExpView('seasons'));
+  if (btnTimeline) btnTimeline.addEventListener('click', () => switchExpView('timeline'));
+
+  // Season Tab Selection
+  seasonTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const seasonNum = tab.getAttribute('data-season');
+      seasonTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      seasonPanes.forEach(p => p.classList.remove('active'));
+      const targetPane = document.getElementById(`season-pane-${seasonNum}`);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+
+      // Smoothly ensure active tab is in view
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+
+      if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+    });
+  });
+
+  // Restore saved experience view if any
+  const savedExpView = localStorage.getItem('at-portfolio-exp-view');
+  if (savedExpView && (savedExpView === 'seasons' || savedExpView === 'timeline')) {
+    switchExpView(savedExpView);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   30. THE SCREENPLAY (HOLLYWOOD SCRIPT RESUME MODAL)
+   ────────────────────────────────────────────────────────────────────────── */
+function initScreenplayModal() {
+  const modal = document.getElementById('screenplay-modal');
+  const btnOpen = document.getElementById('btn-open-screenplay');
+  const btnClose = document.getElementById('screenplay-close-btn');
+
+  if (!modal) return;
+
+  function openScreenplay() {
+    modal.classList.add('open', 'active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (typeof SoundFX !== 'undefined' && SoundFX.theme) SoundFX.theme();
+  }
+
+  function closeScreenplay() {
+    modal.classList.remove('open', 'active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (typeof SoundFX !== 'undefined' && SoundFX.click) SoundFX.click();
+  }
+
+  window.openScreenplayModal = openScreenplay;
+  window.closeScreenplayModal = closeScreenplay;
+
+  if (btnOpen) btnOpen.addEventListener('click', openScreenplay);
+  if (btnClose) btnClose.addEventListener('click', closeScreenplay);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeScreenplay();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeScreenplay();
+    }
+  });
+}
